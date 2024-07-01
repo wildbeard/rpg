@@ -15,6 +15,7 @@ var maxHp: int = baseHp:
 
 var strength: int = 5
 var intelligence: int = 5
+var wisdom: int = 5
 var dexterity: int = 5
 var speed: int = 5 # Speed
 var vitality: int = 10 # HP
