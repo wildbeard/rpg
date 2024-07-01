@@ -51,6 +51,17 @@ const abilities: Array[Dictionary] = [
 		"damage_weap_modifier": 0.25,
 		"damage_stat_modifier": [0.25,0.4],
 		"damage_stat_type": ["strength", "intelligence"]
+	},
+	{
+		"id": 4,
+		"name": "Heal",
+		"cooldown": 3,
+		"ability_type": AbilityType.HEAL,
+		"damage_type": DamageType.MAGICAL,
+		"damage_base": 8,
+		"damage_weap_modifier": 0.0,
+		"damage_stat_modifier": [0.10, 0.8],
+		"damage_stat_type": ["intelligence", "wisdom"]
 	}
 ]
 

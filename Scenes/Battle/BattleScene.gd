@@ -104,22 +104,25 @@ func _playerTurn() -> void:
 		return self._endBattle()
 
 	var abilityId: int = await %AbilitySelector.ability_selected
-
 	%AbilitySelector.visible = false
-	%TargetIndicator.visible = true
 
 	var ability: Ability = Ability.new(abilityId)
-	var dmg: int = self.player.abilityBook.useAbility(ability.id, self.currentRound)
+	var abilValue: int = self.player.abilityBook.useAbility(ability.id, self.currentRound)
 
-	%TargetIndicator.hoverTarget(idx)
-	var target: Character = await %TargetIndicator.target_selected
-	%TargetIndicator.visible = false
+	if ability.ability_type == Ability.AbilityType.HEAL:
+		self.player.getHealed(abilValue)
+		print("Player uses ability %s and heals self for %d" % [ability.name, abilValue])
+	else:
+		%TargetIndicator.visible = true
+		%TargetIndicator.hoverTarget(idx)
+		var target: Character = await %TargetIndicator.target_selected
+		%TargetIndicator.visible = false
 
-	print("Player uses ability %s and hits for %d" % [ability.name, dmg])
-	target.getHit(dmg)
+		print("Player uses ability %s and hits for %d" % [ability.name, abilValue])
+		target.getHit(abilValue)
 
-	if target.isDead:
-		remove_child(target)
+		if target.isDead:
+			remove_child(target)
 
 	self._endTurn()
 

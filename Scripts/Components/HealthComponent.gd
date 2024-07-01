@@ -8,7 +8,6 @@ signal health_changed(value: int)
 	get:
 		return max_health
 	set(val):
-		print("Setting max health to %d" % val)
 		max_health = max(1, val)
 
 @export var health: int = max_health:
@@ -29,4 +28,4 @@ func takeDamage(dmg: int) -> void:
 	self.health -= dmg
 
 func heal(val: int) -> void:
-	self.health += val
+	self.health = clamp(self.health + val, self.health, self.max_health)

@@ -19,6 +19,9 @@ func _ready() -> void:
 func getHit(dmg: int) -> void:
 	self.healthComponent.takeDamage(dmg)
 
+func getHealed(amount: int) -> void:
+	self.healthComponent.heal(amount)
+
 func _on_health_change(health: int) -> void:
 	%HPBar.value = health
 
