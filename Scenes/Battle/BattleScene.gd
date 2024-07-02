@@ -3,13 +3,22 @@ extends Node2D
 @export var player : Character
 @export var enemies : Array[Character]
 
-var characterScene: Resource = preload("res://Scenes/Character.tscn")
+var endBattleScene: PackedScene = preload("res://Scenes/UI/EndBattleModal.tscn")
+var characterScene: PackedScene = preload("res://Scenes/Character.tscn")
 var turnOrder: Array[Character]
 var currentTurn: int = 0
 var currentRound: int = 1
 
 var targetIndex: int = 0
 var currentTarget: Character = null
+
+var battleStats: Dictionary = {
+	"damage_taken": 0,
+	"damage_dealt": 0,
+	"damage_healed": 0,
+	"highest_hit": 0,
+	"xp_gained": 0,
+}
 
 func _ready() -> void:
 	self._setupPlayer()
@@ -95,13 +104,13 @@ func _playerTurn() -> void:
 	var availTargets := self.enemies.filter(func(c: Character): return !c.isDead)
 
 	if availTargets.size() == 0:
-		return self._endBattle()
+		return self._endBattle(false)
 
 	var idx: int = availTargets.find(availTargets[0])
 	
 	if idx == -1:
 		# ???
-		return self._endBattle()
+		return self._endBattle(false)
 
 	var abilityId: int = await %AbilitySelector.ability_selected
 	%AbilitySelector.visible = false
@@ -111,6 +120,7 @@ func _playerTurn() -> void:
 
 	if ability.ability_type == Ability.AbilityType.HEAL:
 		self.player.getHealed(abilValue)
+		self.battleStats.damage_healed += abilValue
 		print("Player uses ability %s and heals self for %d" % [ability.name, abilValue])
 	else:
 		%TargetIndicator.visible = true
@@ -119,6 +129,7 @@ func _playerTurn() -> void:
 		%TargetIndicator.visible = false
 
 		print("Player uses ability %s and hits for %d" % [ability.name, abilValue])
+		self.battleStats.damage_dealt += abilValue
 		target.getHit(abilValue)
 
 		if target.isDead:
@@ -132,14 +143,14 @@ func _enemyTurn(attacker: Character) -> void:
 	var abilId: int = randi_range(1,2)
 	var ability: Ability = Ability.new(abilId)
 	var dmg: int = attacker.abilityBook.useAbility(abilId, self.currentRound)
+	self.battleStats.damage_taken += dmg
 
 	print("It is the enemies turn!")
 	print("Enemy uses ability %s and hits for for %d" % [ability.name, dmg])
 	target.getHit(dmg)
 
 	if target.isDead:
-		print("Player has died!")
-		return
+		return self._endBattle(true)
 
 	await get_tree().create_timer(2).timeout
 	self._endTurn()
@@ -167,5 +178,10 @@ func _endRound() -> void:
 	self.currentTurn = 0
 	self._startRound()
 
-func _endBattle() -> void:
-	print("No more enemies to attack!")
+func _endBattle(didPlayerDie: bool) -> void:
+	if didPlayerDie:
+		print("You Died.")
+	else:
+		var scn: EndBattleModal = self.endBattleScene.instantiate()
+		scn.battleStats = self.battleStats
+		add_child(scn)

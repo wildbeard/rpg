@@ -20,6 +20,9 @@ func hoverTarget(idx: int) -> void:
 	global_position = pos
 
 func _input(event: InputEvent) -> void:
+	if !self.visible:
+		return
+
 	if event is InputEventKey && event.is_pressed():
 		if event.is_action_pressed("ui_up") || event.is_action_pressed("ui_down"):
 			self._handleEvent(event)
