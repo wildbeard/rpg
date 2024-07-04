@@ -4,6 +4,7 @@ extends Node2D
 @export var enemies : Array[Character]
 
 var endBattleScene: PackedScene = preload("res://Scenes/UI/EndBattleModal.tscn")
+var levelUpScene: PackedScene = preload("res://Scenes/UI/LevelUp.tscn")
 var characterScene: PackedScene = preload("res://Scenes/Character.tscn")
 var turnOrder: Array[Character]
 var currentTurn: int = 0
@@ -36,7 +37,11 @@ func _setupPlayer() -> void:
 	var character: Character = characterScene.instantiate()
 
 	stats.baseHp = 75
-	stats.connect("levelUp", func(): self._print("Player is now level %d!" % stats.level))
+
+	# @todo: A better way?
+	if !stats.is_connected("levelUp", self._handlePlayerLevelUp):
+		stats.connect("levelUp", self._handlePlayerLevelUp)
+
 	character.characterStats = stats
 	character.global_position = %PlayerMarker.global_position
 	character.healthComponent.health = stats.maxHp
@@ -48,6 +53,20 @@ func _setupPlayer() -> void:
 
 	self.player = character
 	add_child(character)
+
+func _handlePlayerLevelUp() -> void:
+	var scene: LevelUpScene = self.levelUpScene.instantiate()
+
+	add_child(scene)
+	self._print("Player is now level %d!" % GlobalPlayerStats.level)
+	var levelUpdates: Dictionary = await scene.confirm_choices
+
+	for key in levelUpdates.stats:
+		print("Setting %s to %d" % [key, levelUpdates.stats[key]])
+		GlobalPlayerStats[key] = levelUpdates.stats[key]
+		
+
+	remove_child(scene)
 
 func _setupEnemies() -> void:
 	var stats: CharacterStats = CharacterStats.new()

@@ -1,4 +1,7 @@
 extends Control
+class_name LevelUpScene
+
+signal confirm_choices(updates: Dictionary)
 
 var stats: PlayerStats = GlobalPlayerStats
 var _statsLocal: Dictionary = {
@@ -24,6 +27,8 @@ func _ready() -> void:
 	%XpLabel.text = "Exp: %d" % self.stats.currentXp
 	%NextLevelLabel.text = "Next Level: %d" % self.stats.xpRemaining
 	self._buildStatControls()
+
+	%ConfirmBtn.connect("button_up", self._confirmChoices)
 
 func _buildStatControls() -> void:
 	for key in self._statNameStrings:
@@ -95,3 +100,14 @@ func _getStatLabel(key: String) -> Label:
 			break
 
 	return label
+
+func _confirmChoices() -> void:
+	var updates: Dictionary = {
+		"skills": [],
+		"stats": {},
+	}
+
+	for key in self._statsLocal:
+		updates.stats[key] = self.stats[key] + self._statsLocal[key]
+
+	self.confirm_choices.emit(updates)
