@@ -18,9 +18,13 @@ var battleStats: Dictionary = {
 	"damage_healed": 0,
 	"highest_hit": 0,
 	"xp_gained": 0,
+	"xp_remaining": 0,
 }
 
 func _ready() -> void:
+	self._setup()
+	
+func _setup() -> void:
 	self._setupPlayer()
 	self._setupEnemies()
 	%TargetIndicator.enemies = self.enemies
@@ -28,20 +32,19 @@ func _ready() -> void:
 	self._startRound()
 
 func _setupPlayer() -> void:
-	var stats: CharacterStats = CharacterStats.new()
+	var stats: PlayerStats = GlobalPlayerStats
 	var character: Character = characterScene.instantiate()
 
-	stats.baseHp = 50
+	stats.baseHp = 75
+	stats.connect("levelUp", func(): self._print("Player is now level %d!" % stats.level))
 	character.characterStats = stats
 	character.global_position = %PlayerMarker.global_position
 	character.healthComponent.health = stats.maxHp
 	character.healthComponent.max_health = stats.maxHp
 	character.isEnemy = false
+	# Abilities
 	character.abilityBook = CharacterAbilityBook.new(character)
-	# Give players all abilities
-	for a in Ability.abilities:
-		var ability: Ability = Ability.new(a.id)
-		character.abilityBook.addAbility(ability)
+	character.abilityBook.addAbility(Ability.new(1))
 
 	self.player = character
 	add_child(character)
