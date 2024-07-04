@@ -14,6 +14,10 @@ config/name="Robert RPG"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalPlayerStats="*res://Scripts/PlayerStats.gd"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
