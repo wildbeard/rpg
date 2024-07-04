@@ -94,7 +94,7 @@ func _startRound() -> void:
 	return
 
 func _playerTurn() -> void:
-	print("It is the Player's turn!")
+	self._print("It is the Player's turn!")
 	# @todo: Pass in abilities
 	%AbilitySelector.visible = true
 	"""
@@ -121,19 +121,31 @@ func _playerTurn() -> void:
 	if ability.ability_type == Ability.AbilityType.HEAL:
 		self.player.getHealed(abilValue)
 		self.battleStats.damage_healed += abilValue
-		print("Player uses ability %s and heals self for %d" % [ability.name, abilValue])
+		self._print("Player uses ability %s and heals self for %d" % [ability.name, abilValue])
 	else:
 		%TargetIndicator.visible = true
 		%TargetIndicator.hoverTarget(idx)
 		var target: Character = await %TargetIndicator.target_selected
 		%TargetIndicator.visible = false
 
-		print("Player uses ability %s and hits for %d" % [ability.name, abilValue])
-		self.battleStats.damage_dealt += abilValue
-		target.getHit(abilValue)
+		var hitChance: float = self.player.getHitChance(ability.damage_type, self.player.characterStats.level - target.characterStats.level)
+		var dodgeChance: float = target.getDodgeChance(ability.damage_type, target.characterStats.level - self.player.characterStats.level)
+
+		if hitChance >= dodgeChance:
+			self._print("Player (%f) hit Enemy (%f)" % [hitChance, dodgeChance])
+			self._print("Player uses ability %s and hits for %d" % [ability.name, abilValue])
+			self.battleStats.damage_dealt += abilValue
+			target.getHit(abilValue)
+
+			if self.battleStats.highest_hit < abilValue:
+				self.battleStats.highest_hit = abilValue
+		else:
+			self._print("Player (%f) misses Enemy (%f)" % [hitChance, dodgeChance])
 
 		if target.isDead:
 			remove_child(target)
+			self.battleStats.xp_gained += target.characterStats.xpGiven
+			player.characterStats.currentXp += target.characterStats.xpGiven
 
 	self._endTurn()
 
@@ -145,8 +157,8 @@ func _enemyTurn(attacker: Character) -> void:
 	var dmg: int = attacker.abilityBook.useAbility(abilId, self.currentRound)
 	self.battleStats.damage_taken += dmg
 
-	print("It is the enemies turn!")
-	print("Enemy uses ability %s and hits for for %d" % [ability.name, dmg])
+	self._print("It is the enemies turn!")
+	self._print("Enemy uses ability %s and hits for for %d" % [ability.name, dmg])
 	target.getHit(dmg)
 
 	if target.isDead:
@@ -180,8 +192,14 @@ func _endRound() -> void:
 
 func _endBattle(didPlayerDie: bool) -> void:
 	if didPlayerDie:
-		print("You Died.")
+		self._print("You Died.")
 	else:
 		var scn: EndBattleModal = self.endBattleScene.instantiate()
+		self.battleStats.xp_remaining = GlobalPlayerStats.xpRemaining
 		scn.battleStats = self.battleStats
+		scn.connect("restart", func(): self._setup())
+		%CombatText.text = ""
 		add_child(scn)
+
+func _print(txt: String) -> void:
+	%CombatText.text = %CombatText.text + "\n%s" % txt

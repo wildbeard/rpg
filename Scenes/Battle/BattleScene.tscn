@@ -57,3 +57,10 @@ offset_left = 26.0
 offset_top = -43.0
 offset_right = 66.0
 offset_bottom = -3.0
+
+[node name="CombatText" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+offset_left = 712.0
+offset_top = 339.0
+offset_right = 1126.0
+offset_bottom = 622.0
