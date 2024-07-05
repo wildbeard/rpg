@@ -6,6 +6,7 @@ extends Node2D
 var endBattleScene: PackedScene = preload("res://Scenes/UI/EndBattleModal.tscn")
 var levelUpScene: PackedScene = preload("res://Scenes/UI/LevelUp.tscn")
 var characterScene: PackedScene = preload("res://Scenes/Character.tscn")
+var playerScene: PackedScene = preload("res://Scenes/PlayerCharacter.tscn")
 var turnOrder: Array[Character]
 var currentTurn: int = 0
 var currentRound: int = 1
@@ -33,23 +34,12 @@ func _setup() -> void:
 	self._startRound()
 
 func _setupPlayer() -> void:
-	var stats: PlayerStats = GlobalPlayerStats
-	var character: Character = characterScene.instantiate()
-
-	stats.baseHp = 75
+	var character: PlayerCharacter = playerScene.instantiate()
+	character.global_position = %PlayerMarker.global_position
 
 	# @todo: A better way?
-	if !stats.is_connected("levelUp", self._handlePlayerLevelUp):
-		stats.connect("levelUp", self._handlePlayerLevelUp)
-
-	character.characterStats = stats
-	character.global_position = %PlayerMarker.global_position
-	character.healthComponent.health = stats.maxHp
-	character.healthComponent.max_health = stats.maxHp
-	character.isEnemy = false
-	# Abilities
-	character.abilityBook = CharacterAbilityBook.new(character)
-	character.abilityBook.addAbility(Ability.new(1))
+	if !character.characterStats.is_connected("levelUp", self._handlePlayerLevelUp):
+		character.characterStats.connect("levelUp", self._handlePlayerLevelUp)
 
 	self.player = character
 	add_child(character)

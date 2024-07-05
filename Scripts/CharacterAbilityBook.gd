@@ -12,6 +12,14 @@ func _init(player: Character) -> void:
 func addAbility(ability: Ability) -> void:
 	self._abilities[ability.id] = ability
 
+func getAbilities() -> Array[Ability]:
+	var a: Array[Ability] = []
+
+	for id in self._abilities:
+		a.push_back(self._abilities[id])
+
+	return a
+
 func isAbilityOnCooldown(id: int, currRound: int) -> bool:
 	# @todo: Support cooldown reduction?
 	return self.cooldowns.has(id) && self.cooldowns[id] <= currRound
