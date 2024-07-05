@@ -107,7 +107,7 @@ func _startRound() -> void:
 
 func _playerTurn() -> void:
 	self._print("It is the Player's turn!")
-	# @todo: Pass in abilities
+	%AbilitySelector.setAbilities(self.player.abilityBook.getAbilities())
 	%AbilitySelector.visible = true
 	"""
 		If I use queue_free() in Character:_on_no_health() then this array
