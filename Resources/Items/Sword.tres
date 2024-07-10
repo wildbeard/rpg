@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dn5q4t8w1tqop"]
+
+[ext_resource type="Script" path="res://Resources/Item.gd" id="1_v140s"]
+[ext_resource type="Texture2D" uid="uid://b21maxdc6lwb7" path="res://Assets/Attack_icon.png" id="2_lnanm"]
+
+[resource]
+script = ExtResource("1_v140s")
+texture = ExtResource("2_lnanm")
+itemType = 6
+name = "Sword"
+description = "A basic sword"
+quantity = 0
+maxStack = 1
+isStackable = false

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://0o0scdlal6by"]
+
+[ext_resource type="Script" path="res://Resources/Item.gd" id="1_wny3o"]
+[ext_resource type="Texture2D" uid="uid://ctdkc2lfncgfr" path="res://Assets/Pure_essence.png" id="2_2wc22"]
+
+[resource]
+script = ExtResource("1_wny3o")
+texture = ExtResource("2_2wc22")
+itemType = 8
+name = "Pure Essence"
+description = ""
+quantity = 0
+maxStack = 99
+isStackable = true

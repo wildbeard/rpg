@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://svqhom1qdjwv"]
+
+[ext_resource type="Script" path="res://Resources/Item.gd" id="1_f8nl4"]
+[ext_resource type="Texture2D" uid="uid://dptfxl7d5f7tk" path="res://Assets/Magic_icon.png" id="2_p5lf7"]
+
+[resource]
+script = ExtResource("1_f8nl4")
+texture = ExtResource("2_p5lf7")
+itemType = 0
+quantity = 0
+isStackable = false
