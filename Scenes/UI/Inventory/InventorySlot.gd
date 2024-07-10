@@ -31,8 +31,16 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 		data.setDataEmpty()
 	else:
 		var tmp: Item = self.slotItem
-		self.setItem(data)
-		data.setItem(tmp)
+
+		if tmp == data.slotItem \
+				&& tmp.isStackable \
+				&& tmp.quantity + data.slotItem.quantity < tmp.maxStack:
+			tmp.quantity += data.slotItem.quantity
+			self.setItem(tmp)
+			data.setDataEmpty()
+		else:
+			self.setItem(data.slotItem)
+			data.setItem(tmp)
 
 func setItem(item: Item) -> void:
 	self.slotItem = item
