@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://svqhom1qdjwv"]
+[gd_resource type="Resource" script_class="Armor" load_steps=2 format=3 uid="uid://svqhom1qdjwv"]
 
-[ext_resource type="Script" path="res://Resources/Item.gd" id="1_f8nl4"]
-[ext_resource type="Texture2D" uid="uid://dptfxl7d5f7tk" path="res://Assets/Magic_icon.png" id="2_p5lf7"]
+[ext_resource type="Script" path="res://Resources/Armor.gd" id="1_opb0k"]
 
 [resource]
-script = ExtResource("1_f8nl4")
-texture = ExtResource("2_p5lf7")
-itemType = 0
+script = ExtResource("1_opb0k")
+armorType = 0
+armorValue = 10
+itemType = 8
+name = ""
+description = ""
+price = 10
 quantity = 0
+maxStack = 99
 isStackable = false
