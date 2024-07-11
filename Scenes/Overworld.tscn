@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bubxvbu66j4lx"]
+[gd_scene load_steps=11 format=3 uid="uid://bubxvbu66j4lx"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerOverworld.gd" id="1_2xi48"]
 [ext_resource type="Script" path="res://Scenes/Overworld.gd" id="1_35vxi"]
 [ext_resource type="Texture2D" uid="uid://b7dyr8p0c3lq6" path="res://Assets/white-square.png" id="2_d7pie"]
 [ext_resource type="Script" path="res://Scenes/UI/Inventory/InventoryUI.gd" id="4_b4t8v"]
 [ext_resource type="PackedScene" uid="uid://c5u0erd17k4id" path="res://Scenes/UI/Inventory/Inventory.tscn" id="4_jsg3b"]
+[ext_resource type="Resource" uid="uid://1h7b11ckcwcl" path="res://Resources/Inventory/EquipmentInventory.tres" id="4_lkmxf"]
 [ext_resource type="Resource" uid="uid://b10vlnbnwagos" path="res://Resources/Inventory/PlayerInventory.tres" id="5_67rp7"]
 [ext_resource type="PackedScene" uid="uid://ubl64gd04tjy" path="res://Scenes/UI/Inventory/InventorySlot.tscn" id="5_fo1ve"]
 [ext_resource type="Script" path="res://Scenes/UI/Inventory/EqupmentInventory.gd" id="8_ghy36"]
@@ -19,6 +20,7 @@ script = ExtResource("1_35vxi")
 position = Vector2(544, 288)
 script = ExtResource("1_2xi48")
 inventoryData = ExtResource("5_67rp7")
+equipmentData = ExtResource("4_lkmxf")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 modulate = Color(0.275667, 0.820854, 0.354144, 1)
@@ -66,14 +68,6 @@ offset_right = 92.0
 offset_bottom = 50.0
 slotType = 0
 
-[node name="Chest" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
-layout_mode = 2
-offset_left = 60.0
-offset_top = 98.0
-offset_right = 92.0
-offset_bottom = 130.0
-slotType = 2
-
 [node name="Neck" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 60.0
@@ -82,13 +76,13 @@ offset_right = 92.0
 offset_bottom = 90.0
 slotType = 1
 
-[node name="OffHand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
+[node name="Chest" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
-offset_left = 104.0
+offset_left = 60.0
 offset_top = 98.0
-offset_right = 136.0
+offset_right = 92.0
 offset_bottom = 130.0
-slotType = 7
+slotType = 2
 
 [node name="MainHand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
@@ -98,6 +92,14 @@ offset_right = 48.0
 offset_bottom = 130.0
 slotType = 6
 
+[node name="OffHand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 98.0
+offset_right = 136.0
+offset_bottom = 130.0
+slotType = 7
+
 [node name="Leg" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 60.0
@@ -106,14 +108,6 @@ offset_right = 92.0
 offset_bottom = 170.0
 slotType = 4
 
-[node name="Hand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
-layout_mode = 2
-offset_left = 16.0
-offset_top = 178.0
-offset_right = 48.0
-offset_bottom = 210.0
-slotType = 3
-
 [node name="Boot" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 60.0
@@ -121,6 +115,14 @@ offset_top = 178.0
 offset_right = 92.0
 offset_bottom = 210.0
 slotType = 5
+
+[node name="Hand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 178.0
+offset_right = 48.0
+offset_bottom = 210.0
+slotType = 3
 
 [node name="Button" type="Button" parent="."]
 offset_left = 504.0

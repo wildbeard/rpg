@@ -14,7 +14,13 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 		&& (event.button_index == MOUSE_BUTTON_MASK_LEFT || event.button_index == MOUSE_BUTTON_RIGHT) \
 		&& event.is_pressed():
-			slot_clicked.emit(get_index(), event.button_index)
+			var index: int = get_index()
+			if self.slotType != InventoryTypes.SlotType.REGULAR:
+				if index == 0:
+					index = -1
+				else:
+					index = index * -1 - 1
+			slot_clicked.emit(index, event.button_index, self)
 
 func setItem(data: SlotData) -> void:
 	self.slotData = data

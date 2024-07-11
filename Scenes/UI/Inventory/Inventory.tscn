@@ -18,6 +18,7 @@ func populateInventory(data: InventoryData) -> void:
 	for sd in data.data:
 		var slot: Slot = SlotScene.instantiate()
 		slot.slot_clicked.connect(data.onSlotClicked)
+
 		if sd:
 			slot.setItem(sd)
 

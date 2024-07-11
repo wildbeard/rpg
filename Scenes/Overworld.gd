@@ -4,6 +4,7 @@ signal switch_scene(scene: Node)
 
 @onready var player = $CharacterBody2D
 @onready var inventoryUI = $CanvasLayer/InventoryUI
+@onready var equpmentInventory = $CanvasLayer/InventoryUI/EqupmentInventory
 @onready var grabbedSlot = $CanvasLayer/InventoryUI/GrabbedSlot
 @onready var button = $Button
 
