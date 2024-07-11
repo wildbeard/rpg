@@ -83,13 +83,20 @@ func _init(id: int) -> void:
 	for key in ability:
 		self[key] = ability[key]
 
-func getAttackDamage(stats: CharacterStats) -> int:
+func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 	var base: int = self.damage_base
 	var statMod: float = 0
-	var weapMod: float = (self.damage_weap_modifier * 10)
+	var weapMod: float = 0
 	var idx: int = 0
 
 	for key in self.damage_stat_type:
 		statMod += (stats[key] * self.damage_stat_modifier[idx])
+
+	if equipment.has("mainHand") && equipment.mainHand:
+		# @todo: Support off-hand weapon?
+		weapMod = (self.damage_weap_modifier * equipment.mainHand.item.damage)
+	else:
+		# Unarmed
+		weapMod = (self.damage_weap_modifier * 5)
 
 	return ceili(base + statMod + weapMod)

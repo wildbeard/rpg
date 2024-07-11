@@ -71,3 +71,6 @@ func getHitChance(dmgType: Ability.DamageType, levelDiff: int) -> float:
 		chance += self.characterStats.intelligence * 1.3
 
 	return chance + (levelDiff * 0.5)
+
+func getEquippedItems() -> Dictionary:
+	return {}

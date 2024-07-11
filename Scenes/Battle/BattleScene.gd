@@ -48,12 +48,12 @@ func _handlePlayerLevelUp() -> void:
 	var scene: LevelUpScene = self.levelUpScene.instantiate()
 
 	add_child(scene)
-	self._print("Player is now level %d!" % GlobalPlayerStats.level)
+	self._print("Player is now level %d!" % PlayerManager.stats.level)
 	var levelUpdates: Dictionary = await scene.confirm_choices
 
 	for key in levelUpdates.stats:
 		print("Setting %s to %d" % [key, levelUpdates.stats[key]])
-		GlobalPlayerStats[key] = levelUpdates.stats[key]
+		PlayerManager.stats[key] = levelUpdates.stats[key]
 		
 
 	remove_child(scene)
@@ -207,7 +207,7 @@ func _endBattle(didPlayerDie: bool) -> void:
 		self._print("You Died.")
 	else:
 		var scn: EndBattleModal = self.endBattleScene.instantiate()
-		self.battleStats.xp_remaining = GlobalPlayerStats.xpRemaining
+		self.battleStats.xp_remaining = PlayerManager.stats.xpRemaining
 		scn.battleStats = self.battleStats
 		scn.connect("restart", func(): self._setup())
 		%CombatText.text = ""

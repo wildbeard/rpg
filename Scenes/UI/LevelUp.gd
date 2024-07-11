@@ -3,7 +3,7 @@ class_name LevelUpScene
 
 signal confirm_choices(updates: Dictionary)
 
-var stats: PlayerStats = GlobalPlayerStats
+var stats: PlayerStats = PlayerManager.stats
 var _statsLocal: Dictionary = {
 	"strength": 0,
 	"intelligence": 0,

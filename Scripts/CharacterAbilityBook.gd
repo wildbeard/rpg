@@ -31,7 +31,7 @@ func useAbility(id: int, currRound: int) -> int:
 		return 0
 
 	var ability: Ability = self._abilities[id]
-	var dmg: int = ability.getAttackDamage(self._player.characterStats)
+	var dmg: int = ability.getAttackDamage(self._player.characterStats, self._player.getEquippedItems())
 
 	if ability.cooldown:
 		self._cooldowns[id] = currRound + ability.cooldown
