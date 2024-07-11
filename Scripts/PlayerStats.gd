@@ -27,3 +27,15 @@ func getAttackPower() -> int:
 		return equipment.mainHand.item.damage
 
 	return 0
+
+func getArmorRating() -> int:
+	var equipment: Dictionary = PlayerManager.getEquippedItems()
+	var rating: int = 0
+
+	for key in equipment:
+		if key == "mainHand" || key == "offHand":
+			continue
+		if equipment[key]:
+			rating += equipment[key].item.armorValue
+
+	return rating
