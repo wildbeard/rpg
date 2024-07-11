@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bubxvbu66j4lx"]
+[gd_scene load_steps=11 format=3 uid="uid://bubxvbu66j4lx"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerOverworld.gd" id="1_2xi48"]
 [ext_resource type="Script" path="res://Scenes/Overworld.gd" id="1_35vxi"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c5u0erd17k4id" path="res://Scenes/UI/Inventory/Inventory.tscn" id="4_jsg3b"]
 [ext_resource type="Resource" uid="uid://b10vlnbnwagos" path="res://Resources/Inventory/PlayerInventory.tres" id="5_67rp7"]
 [ext_resource type="PackedScene" uid="uid://ubl64gd04tjy" path="res://Scenes/UI/Inventory/InventorySlot.tscn" id="5_fo1ve"]
+[ext_resource type="Script" path="res://Scenes/UI/Inventory/CharacterInfoUI.gd" id="6_fovy4"]
 [ext_resource type="Script" path="res://Scenes/UI/Inventory/EqupmentInventory.gd" id="8_ghy36"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw7mw"]
@@ -39,12 +40,174 @@ offset_right = 304.0
 offset_bottom = 528.0
 script = ExtResource("4_b4t8v")
 
+[node name="CharacterInfo" type="Control" parent="CanvasLayer/InventoryUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -120.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 392.0
+script = ExtResource("6_fovy4")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/InventoryUI/CharacterInfo"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 384.0
+
+[node name="Control" type="Control" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control"]
+layout_mode = 2
+offset_right = 120.0
+offset_bottom = 384.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Nameplate" type="Control" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+size_flags_stretch_ratio = 3.0
+
+[node name="Label" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Nameplate"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 106.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 12
+text = "Wild Beard"
+horizontal_alignment = 1
+
+[node name="Stats" type="Control" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="AttackStat" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 12.0
+theme_override_font_sizes/font_size = 8
+text = "Attack:"
+
+[node name="Attributes" type="Control" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -7.0
+offset_right = 102.0
+offset_bottom = 124.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
+layout_mode = 2
+
+[node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 10
+text = "Vitality:"
+
+[node name="VitalityValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
+layout_mode = 2
+
+[node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 10
+text = "Strength:"
+
+[node name="StrengthValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
+layout_mode = 2
+
+[node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 10
+text = "Intelligence:"
+
+[node name="IntelligenceValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
+layout_mode = 2
+
+[node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 10
+text = "Wisdom:"
+
+[node name="WisdomValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
+layout_mode = 2
+
+[node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 10
+text = "Dexterity:"
+
+[node name="DexterityValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+
 [node name="Inventory" parent="CanvasLayer/InventoryUI" instance=ExtResource("4_jsg3b")]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 239.0
 offset_right = 160.0
-offset_bottom = 389.0
+offset_bottom = 392.0
 
 [node name="GrabbedSlot" parent="CanvasLayer/InventoryUI" instance=ExtResource("5_fo1ve")]
 visible = false
@@ -63,65 +226,65 @@ script = ExtResource("8_ghy36")
 [node name="Head" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 60.0
-offset_top = 18.0
+offset_top = 17.0
 offset_right = 92.0
-offset_bottom = 50.0
+offset_bottom = 49.0
 slotType = 0
 
 [node name="Neck" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 60.0
-offset_top = 58.0
+offset_top = 57.0
 offset_right = 92.0
-offset_bottom = 90.0
+offset_bottom = 89.0
 slotType = 1
 
 [node name="Chest" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 60.0
-offset_top = 98.0
+offset_top = 97.0
 offset_right = 92.0
-offset_bottom = 130.0
+offset_bottom = 129.0
 slotType = 2
 
 [node name="MainHand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 16.0
-offset_top = 98.0
+offset_top = 97.0
 offset_right = 48.0
-offset_bottom = 130.0
+offset_bottom = 129.0
 slotType = 6
 
 [node name="OffHand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 104.0
-offset_top = 98.0
+offset_top = 97.0
 offset_right = 136.0
-offset_bottom = 130.0
+offset_bottom = 129.0
 slotType = 7
 
 [node name="Leg" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 60.0
-offset_top = 138.0
+offset_top = 137.0
 offset_right = 92.0
-offset_bottom = 170.0
+offset_bottom = 169.0
 slotType = 4
 
 [node name="Boot" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 60.0
-offset_top = 178.0
+offset_top = 177.0
 offset_right = 92.0
-offset_bottom = 210.0
+offset_bottom = 209.0
 slotType = 5
 
 [node name="Hand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
 offset_left = 16.0
-offset_top = 178.0
+offset_top = 177.0
 offset_right = 48.0
-offset_bottom = 210.0
+offset_bottom = 209.0
 slotType = 3
 
 [node name="Button" type="Button" parent="."]

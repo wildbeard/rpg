@@ -19,3 +19,11 @@ var xpRequired: int:
 var xpRemaining: int:
 	get:
 		return self.xpRequired - self.currentXp
+
+func getAttackPower() -> int:
+	var equipment: Dictionary = PlayerManager.getEquippedItems()
+
+	if equipment.has("mainHand") && equipment.mainHand:
+		return equipment.mainHand.item.damage
+
+	return 0
