@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=3 format=3 uid="uid://qjd3iyuph2tw"]
+
+[ext_resource type="Script" path="res://Resources/Armor.gd" id="1_pck1i"]
+[ext_resource type="Texture2D" uid="uid://n4wvhb6ec6xm" path="res://Assets/Dragon_chainbody.png" id="2_gpeym"]
+
+[resource]
+script = ExtResource("1_pck1i")
+armorType = 2
+armorValue = 30
+texture = ExtResource("2_gpeym")
+itemType = 2
+name = "Dragon Chainbody"
+description = "A series of connected metal rings."
+price = 10
+maxStack = 99
+isStackable = false
