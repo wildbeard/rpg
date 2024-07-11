@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Robert RPG"
-run/main_scene="res://Scenes/Overworld.tscn"
+run/main_scene="res://Scenes/SceneSwitcher.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 

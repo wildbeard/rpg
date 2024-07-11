@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bubxvbu66j4lx"]
+[gd_scene load_steps=10 format=3 uid="uid://bubxvbu66j4lx"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerOverworld.gd" id="1_2xi48"]
 [ext_resource type="Script" path="res://Scenes/Overworld.gd" id="1_35vxi"]
@@ -9,17 +9,23 @@
 [ext_resource type="PackedScene" uid="uid://ubl64gd04tjy" path="res://Scenes/UI/Inventory/InventorySlot.tscn" id="5_fo1ve"]
 [ext_resource type="Script" path="res://Scenes/UI/Inventory/EqupmentInventory.gd" id="8_ghy36"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yw7mw"]
+radius = 24.0
+
 [node name="Overworld" type="Node2D"]
 script = ExtResource("1_35vxi")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(544, 288)
 script = ExtResource("1_2xi48")
 inventoryData = ExtResource("5_67rp7")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 modulate = Color(0.275667, 0.820854, 0.354144, 1)
-position = Vector2(572, 317)
 texture = ExtResource("2_d7pie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_yw7mw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -115,3 +121,10 @@ offset_top = 178.0
 offset_right = 92.0
 offset_bottom = 210.0
 slotType = 5
+
+[node name="Button" type="Button" parent="."]
+offset_left = 504.0
+offset_top = 64.0
+offset_right = 604.0
+offset_bottom = 95.0
+text = "Enter Battle"
