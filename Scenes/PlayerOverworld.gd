@@ -6,7 +6,6 @@ const ACCELERATION: float = 1000.0
 const SPEED: float = 300.0
 
 @export var inventoryData: InventoryData
-@export var equipmentData: InventoryData
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
