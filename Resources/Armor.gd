@@ -1,4 +1,4 @@
-extends Item
+extends Equipment
 class_name Armor
 
 enum ArmorType {

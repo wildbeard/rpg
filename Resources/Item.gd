@@ -9,12 +9,6 @@ class_name Item
 @export_multiline var description: String
 @export var price: int = 10
 
-@export_category("Quantity & Stacking")
-@export var quantity: int = 0:
-	set(value):
-		if !isStackable:
-			quantity = 1
-		else:
-			quantity = value
+@export_category("Stacking")
 @export var maxStack: int = 99
 @export var isStackable: bool = false

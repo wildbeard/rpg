@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5u0erd17k4id"]
+
+[sub_resource type="GDScript" id="GDScript_g4i3m"]
+script/source = "extends PanelContainer
+
+const SlotScene: PackedScene = preload(\"res://Scenes/UI/Inventory/InventorySlot.tscn\")
+
+@onready var inventoryGrid = $MarginContainer/InventoryGrid
+
+func setInventoryData(data: InventoryData) -> void:
+	data.inventory_updated.connect(populateInventory)
+	self.populateInventory(data)
+
+func populateInventory(data: InventoryData) -> void:
+	for child in self.inventoryGrid.get_children():
+		child.queue_free()
+
+	for sd in data.data:
+		var slot: Slot = SlotScene.instantiate()
+		slot.slot_clicked.connect(data.onSlotClicked)
+		if sd:
+			slot.setItem(sd)
+
+		self.inventoryGrid.add_child(slot)
+"
+
+[node name="Inventory" type="PanelContainer"]
+custom_minimum_size = Vector2(150, 150)
+offset_right = 150.0
+offset_bottom = 150.0
+script = SubResource("GDScript_g4i3m")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="InventoryGrid" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+columns = 4

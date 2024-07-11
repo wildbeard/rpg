@@ -1,7 +1,11 @@
 extends CharacterBody2D
 
+signal toggle_inventory()
+
 const ACCELERATION: float = 1000.0
 const SPEED: float = 300.0
+
+@export var inventoryData: InventoryData
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -16,3 +20,7 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, ACCELERATION * delta)
 
 	move_and_slide()
+
+func _unhandled_input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("toggle_inventory"):
+		toggle_inventory.emit()
