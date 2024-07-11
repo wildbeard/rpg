@@ -33,16 +33,18 @@ shape = SubResource("CircleShape2D_yw7mw")
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 136.0
+offset_top = 128.0
+offset_right = 304.0
+offset_bottom = 528.0
 script = ExtResource("4_b4t8v")
 
 [node name="Inventory" parent="CanvasLayer/InventoryUI" instance=ExtResource("4_jsg3b")]
 layout_mode = 0
-offset_left = 999.0
-offset_top = 495.0
-offset_right = 1149.0
-offset_bottom = 645.0
+offset_left = 8.0
+offset_top = 239.0
+offset_right = 160.0
+offset_bottom = 389.0
 
 [node name="GrabbedSlot" parent="CanvasLayer/InventoryUI" instance=ExtResource("5_fo1ve")]
 visible = false
@@ -52,10 +54,10 @@ layout_mode = 0
 
 [node name="EqupmentInventory" type="Panel" parent="CanvasLayer/InventoryUI"]
 layout_mode = 0
-offset_left = 152.0
-offset_top = 222.0
-offset_right = 304.0
-offset_bottom = 448.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 160.0
+offset_bottom = 234.0
 script = ExtResource("8_ghy36")
 
 [node name="Head" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
