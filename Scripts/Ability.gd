@@ -90,13 +90,18 @@ func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 	var idx: int = 0
 
 	for key in self.damage_stat_type:
-		statMod += (stats[key] * self.damage_stat_modifier[idx])
+		var baseStat: int = stats[key]
+		var statBonus: int = stats.getEquipmentAttributes(key) if stats is PlayerStats else 0
+		statMod += ((baseStat + statBonus) * self.damage_stat_modifier[idx])
 
-	if equipment.has("mainHand") && equipment.mainHand:
-		# @todo: Support off-hand weapon?
-		weapMod = (self.damage_weap_modifier * equipment.mainHand.item.damage)
+	if stats is PlayerStats:
+		weapMod = self.damage_weap_modifier * stats.getPhysicalPower()
 	else:
-		# Unarmed
-		weapMod = (self.damage_weap_modifier * 5)
+		if equipment.has("mainHand") && equipment.mainHand:
+			# @todo: Support off-hand weapon?
+			weapMod = (self.damage_weap_modifier * equipment.mainHand.item.damage)
+		else:
+			# Unarmed
+			weapMod = (self.damage_weap_modifier * 5)
 
 	return ceili(base + statMod + weapMod)
