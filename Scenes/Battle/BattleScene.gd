@@ -107,7 +107,15 @@ func _startRound() -> void:
 
 func _playerTurn() -> void:
 	self._print("It is the Player's turn!")
-	%AbilitySelector.setAbilities(self.player.abilityBook.getAbilities())
+	var abilities: Array[Ability] = self.player.abilityBook.getAbilities()
+	var onCooldown: Array[int]
+
+	for ability in abilities:
+		if self.player.abilityBook.isAbilityOnCooldown(ability.id, self.currentRound):
+			onCooldown.push_back(ability.id)
+
+	%AbilitySelector.setAbilities(abilities)
+	%AbilitySelector.updateCooldowns(onCooldown)
 	%AbilitySelector.visible = true
 	"""
 		If I use queue_free() in Character:_on_no_health() then this array

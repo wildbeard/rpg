@@ -22,6 +22,5 @@ layout_mode = 2
 text = "Abilities:"
 
 [node name="GridContainer" type="GridContainer" parent="Outer"]
-unique_name_in_owner = true
 layout_mode = 2
 columns = 2

@@ -22,7 +22,7 @@ func getAbilities() -> Array[Ability]:
 
 func isAbilityOnCooldown(id: int, currRound: int) -> bool:
 	# @todo: Support cooldown reduction?
-	return self.cooldowns.has(id) && self.cooldowns[id] <= currRound
+	return self._cooldowns.has(id) && self._cooldowns[id] >= currRound
 
 # Returns the pre-mitigation damage or 0 if unavailable
 func useAbility(id: int, currRound: int) -> int:
