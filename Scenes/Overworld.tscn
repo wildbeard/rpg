@@ -97,15 +97,15 @@ offset_bottom = 124.0
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer"]
 layout_mode = 2
 
-[node name="Attack" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer"]
+[node name="PhysPower" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 theme_override_font_sizes/font_size = 10
-text = "Attack:"
+text = "Phys. Damage:"
 
-[node name="AttackValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer"]
+[node name="PhysPowerValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -116,15 +116,53 @@ horizontal_alignment = 2
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer"]
 layout_mode = 2
 
-[node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer2"]
+[node name="PhysDef" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 theme_override_font_sizes/font_size = 10
-text = "Defense:"
+text = "Phys. Defense:"
 
-[node name="DefenseValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer2"]
+[node name="PhysDefValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer"]
+layout_mode = 2
+
+[node name="MgkPower" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 10
+text = "Mgk. Power:"
+
+[node name="MgkPowerValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer"]
+layout_mode = 2
+
+[node name="MgkDef" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 10
+text = "Mgk. Defense:"
+
+[node name="MgkDefValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1

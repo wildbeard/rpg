@@ -20,22 +20,51 @@ var xpRemaining: int:
 	get:
 		return self.xpRequired - self.currentXp
 
-func getAttackPower() -> int:
+func getPhysicalPower() -> int:
+	return self._getEquipmentStats(true, false)
+
+func getPhysicalDef() -> int:
+	return self._getEquipmentStats(true, true)
+
+func getMagicalPower() -> int:
+	return self._getEquipmentStats(false, false)
+
+func getMagicalDef() -> int:
+	return self._getEquipmentStats(false, true)
+
+func getEquipmentAttributes(stat: String) -> int:
+	var bonus: int = 0
 	var equipment: Dictionary = PlayerManager.getEquippedItems()
-
-	if equipment.has("mainHand") && equipment.mainHand:
-		return equipment.mainHand.item.damage
-
-	return 0
-
-func getArmorRating() -> int:
-	var equipment: Dictionary = PlayerManager.getEquippedItems()
-	var rating: int = 0
 
 	for key in equipment:
-		if key == "mainHand" || key == "offHand":
+		var item: Equipment = equipment[key].item if equipment[key] else null
+
+		if !item:
 			continue
-		if equipment[key]:
-			rating += equipment[key].item.armorValue
+
+		bonus += item.statModifiers[stat]
+
+	return bonus
+
+func _getEquipmentStats(isPhysical: bool, isDef: bool) -> int:
+	var rating: int = 0
+	var equipment: Dictionary = PlayerManager.getEquippedItems()
+
+	for key in equipment:
+		var item: Equipment = equipment[key].item if equipment[key] else null
+
+		if !item:
+			continue
+
+		if isDef && item is Armor:
+			if isPhysical:
+				rating += item.physicalDefense
+			else:
+				rating += item.magicalDefense
+		elif !isDef && item is Weapon:
+			if isPhysical:
+				rating += item.physicalDamage
+			else:
+				rating += item.magicalDamage
 
 	return rating
