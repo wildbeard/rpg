@@ -5,11 +5,20 @@
 
 [resource]
 script = ExtResource("1_werdy")
+physicalDamage = 10
+magicalDamage = 1
+statModifiers = {
+"dexterity": 3,
+"intelligence": 0,
+"speed": 0,
+"strength": 3,
+"vitality": 0,
+"wisdom": 0
+}
 texture = ExtResource("2_lnanm")
 itemType = 6
 name = "Dull Sword"
 description = "A basic sword"
 price = 10
-quantity = 0
 maxStack = 1
 isStackable = false

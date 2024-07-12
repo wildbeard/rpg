@@ -8,4 +8,5 @@ enum ArmorType {
 }
 
 @export_enum("Light", "Medium", "Heavy") var armorType: int
-@export var armorValue: int = 10
+@export var physicalDefense: int = 1
+@export var magicalDefense: int = 1

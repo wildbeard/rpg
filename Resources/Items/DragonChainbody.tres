@@ -6,7 +6,16 @@
 [resource]
 script = ExtResource("1_pck1i")
 armorType = 2
-armorValue = 30
+physicalDefense = 30
+magicalDefense = -2
+statModifiers = {
+"dexterity": 0,
+"intelligence": -2,
+"speed": 0,
+"strength": 5,
+"vitality": 0,
+"wisdom": 0
+}
 texture = ExtResource("2_gpeym")
 itemType = 2
 name = "Dragon Chainbody"

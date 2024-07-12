@@ -1,4 +1,5 @@
 extends Equipment
 class_name Weapon
 
-@export var damage: int = 10
+@export var physicalDamage: int = 0
+@export var magicalDamage: int = 0

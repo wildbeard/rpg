@@ -6,7 +6,16 @@
 [resource]
 script = ExtResource("1_opb0k")
 armorType = 0
-armorValue = 10
+physicalDefense = 5
+magicalDefense = 10
+statModifiers = {
+"dexterity": 0,
+"intelligence": 5,
+"speed": 0,
+"strength": 0,
+"vitality": 0,
+"wisdom": 3
+}
 texture = ExtResource("2_212hl")
 itemType = 0
 name = "Magic Hat"
