@@ -21,16 +21,16 @@ var xpRemaining: int:
 		return self.xpRequired - self.currentXp
 
 func getPhysicalPower() -> int:
-	return self._getEquipmentStats(true, false) + self.strength
+	return self._getEquipmentStats(true, false) + self._getAdjustedStat("strength")
 
 func getPhysicalDef() -> int:
-	return self._getEquipmentStats(true, true) + ceili(self.strength * 0.75)
+	return self._getEquipmentStats(true, true) + ceili(self._getAdjustedStat("strength") * 0.75)
 
 func getMagicalPower() -> int:
-	return self._getEquipmentStats(false, false) + self.intelligence
+	return self._getEquipmentStats(false, false) + self._getAdjustedStat("intelligence")
 
 func getMagicalDef() -> int:
-	return self._getEquipmentStats(false, true) + ceili(self.intelligence * 0.75)
+	return self._getEquipmentStats(false, true) + ceili(self._getAdjustedStat("intelligence") * 0.75)
 
 func getEquipmentAttributes(stat: String) -> int:
 	var bonus: int = 0
@@ -68,3 +68,6 @@ func _getEquipmentStats(isPhysical: bool, isDef: bool) -> int:
 				rating += item.magicalDamage
 
 	return rating
+
+func _getAdjustedStat(stat: String) -> int:
+	return self.getEquipmentAttributes(stat) + self[stat]
