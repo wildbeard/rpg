@@ -48,15 +48,21 @@ func useAbility(ability: Ability, currRound: int) -> int:
 
 	var dmg: int = ability.getAttackDamage(self._player.characterStats, self._player.getEquippedItems())
 	var bonusDmg: float = 0
-	var passives: Array[Ability] = self.getPassiveAbilities()
+	"""
+		This allows passives to apply to a specific element type
+		or to a general damage type.
+		We can do a form of rudimentary "stacking" by simply adding more of the same
+		passive ability to their passive list.
+	"""
+	var passives: Array[Ability] = self.getPassiveAbilities()\
+		.filter(func(a: Ability): \
+			return a.element_type == ability.element_type \
+				|| (a.element_type == Ability.ElementType.NONE && a.damage_type == ability.damage_type)
+			)
 
 	# @todo: This isn't very well thought out and will need to be re-done
-	if passives.size():
-		print(dmg)
-		var applicable: Array[Ability] = passives.filter(func(a: Ability): return a.element_type == ability.element_type)
-
-		for a in applicable:
-			for modifier in a.damage_stat_modifier:
+	for passive in passives:
+		for modifier in passive.damage_stat_modifier:
 				bonusDmg += (dmg * (modifier/100))
 
 	if ability.cooldown:
