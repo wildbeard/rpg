@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://on5jka1dwymp"]
+
+[ext_resource type="Script" path="res://Resources/Ability.gd" id="1_ai6f5"]
+
+[resource]
+script = ExtResource("1_ai6f5")
+name = "Power Strike"
+description = "Give it the beans and strike your enemy doing more damage."
+cooldown = 1
+ability_type = 0
+damage_type = 0
+damage_base = 20
+damage_weap_modifier = 25.0
+damage_stat_type = Array[int]([0])
+damage_stat_modifier = Array[float]([50.0])

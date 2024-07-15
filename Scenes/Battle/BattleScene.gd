@@ -38,8 +38,8 @@ func _setupPlayer() -> void:
 	character.global_position = %PlayerMarker.global_position
 
 	# @todo: A better way?
-	if !character.characterStats.is_connected("levelUp", self._handlePlayerLevelUp):
-		character.characterStats.connect("levelUp", self._handlePlayerLevelUp)
+	if !PlayerManager.stats.is_connected("levelUp", self._handlePlayerLevelUp):
+		PlayerManager.stats.connect("levelUp", self._handlePlayerLevelUp)
 
 	self.player = character
 	add_child(character)
@@ -75,10 +75,8 @@ func _setupEnemies() -> void:
 		enemy.get_node("Sprite2D").modulate = Color(0.45, 0.24, 0.033)
 		enemy.abilityBook = CharacterAbilityBook.new(enemy)
 		
-		# Give enemies first two abilities
-		for i in 2:
-			var ability: Ability = Ability.new(i+1)
-			enemy.abilityBook.addAbility(ability)
+		enemy.abilityBook.addAbility(preload("res://Resources/Abilities/fireball.tres"))
+		# enemy.abilityBook.addAbility(preload("res://Resources/Abilities/slash.tres"))
 
 		self.enemies.append(enemy)
 		add_child(enemy)
@@ -107,12 +105,12 @@ func _startRound() -> void:
 
 func _playerTurn() -> void:
 	self._print("It is the Player's turn!")
-	var abilities: Array[Ability] = self.player.abilityBook.getAbilities()
+	var abilities: Array[Ability] = self.player.abilityBook.getActiveAbilities()
 	var onCooldown: Array[int]
 
 	for ability in abilities:
-		if self.player.abilityBook.isAbilityOnCooldown(ability.id, self.currentRound):
-			onCooldown.push_back(ability.id)
+		if self.player.abilityBook.isAbilityOnCooldown(ability.name, self.currentRound):
+			onCooldown.push_back(ability.name)
 
 	%AbilitySelector.setAbilities(abilities)
 	%AbilitySelector.updateCooldowns(onCooldown)
@@ -132,13 +130,13 @@ func _playerTurn() -> void:
 		# ???
 		return self._endBattle(false)
 
-	var abilityId: int = await %AbilitySelector.ability_selected
+	var abilityId = await %AbilitySelector.ability_selected
 	%AbilitySelector.visible = false
 
-	var ability: Ability = Ability.new(abilityId)
-	var abilValue: int = self.player.abilityBook.useAbility(ability.id, self.currentRound)
+	var ability: Ability = self.player.abilityBook.getAbility(abilityId)
+	var abilValue: int = self.player.abilityBook.useAbility(ability, self.currentRound)
 
-	if ability.ability_type == Ability.AbilityType.HEAL:
+	if ability.ability_type == Ability.TargetType.HEAL:
 		self.player.getHealed(abilValue)
 		self.battleStats.damage_healed += abilValue
 		self._print("Player uses ability %s and heals self for %d" % [ability.name, abilValue])
@@ -172,9 +170,13 @@ func _playerTurn() -> void:
 func _enemyTurn(attacker: Character) -> void:
 	# @todo: Pick from turn order and get a player
 	var target: Character = self.player
-	var abilId: int = randi_range(1,2)
-	var ability: Ability = Ability.new(abilId)
-	var dmg: int = attacker.abilityBook.useAbility(abilId, self.currentRound)
+	var ability: Ability = attacker.abilityBook.getActiveAbilities().pick_random()
+
+	# @todo: Fix this still has a chance the ability is on cooldown
+	if attacker.abilityBook.isAbilityOnCooldown(ability.name, self.currentRound):
+		ability = attacker.abilityBook.getActiveAbilities().filter(func(a: Ability): return a != ability).pick_random()
+
+	var dmg: int = attacker.abilityBook.useAbility(ability, self.currentRound)
 	self.battleStats.damage_taken += dmg
 
 	self._print("It is the enemies turn!")

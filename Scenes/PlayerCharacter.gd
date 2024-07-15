@@ -7,7 +7,13 @@ func _init() -> void:
 	self.isEnemy = false
 	# Abilities
 	self.abilityBook = CharacterAbilityBook.new(self)
-	self.abilityBook.addAbility(Ability.new(2))
+	self.abilityBook.addAbility(self.abilityBook.getAbility("Slash"))
+	self.abilityBook.addAbility(self.abilityBook.getAbility("Fireball"))
+	self.abilityBook.addAbility(self.abilityBook.getAbility("Fire Overload"))
+
+# @todo: Load data from a resource/json file
+func _loadPlayerData() -> void:
+	pass
 
 func getEquippedItems() -> Dictionary:
 	return PlayerManager.getEquippedItems()

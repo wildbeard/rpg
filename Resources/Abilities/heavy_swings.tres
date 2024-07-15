@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://dy3r1yyx6kl3p"]
+
+[ext_resource type="Script" path="res://Resources/Ability.gd" id="1_cg71c"]
+
+[resource]
+script = ExtResource("1_cg71c")
+name = "Heavy Blows"
+description = "Increases physical damage by 5%."
+ability_type = 1
+cooldown = 0
+target_type = 0
+damage_type = 0
+element_type = 0
+damage_base = 0
+damage_weap_modifier = 0.0
+damage_stat_type = Array[int]([0])
+damage_stat_modifier = Array[float]([5.0])

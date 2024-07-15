@@ -1,6 +1,6 @@
 extends Control
 
-signal ability_selected(id: int)
+signal ability_selected(id: String)
 
 @onready var gridContainer = $Outer/GridContainer
 
@@ -27,13 +27,13 @@ func updateCooldowns(onCooldown: Array[int]) -> void:
 
 func _addButtons(abils: Array[Ability]) -> void:
 	# @todo: This needs to be better?
-	for a in abils.filter(func(a): return !has_node("Outer/GridContainer/ability_%d" % a.id)):
+	for a in abils.filter(func(a): return !has_node("Outer/GridContainer/ability_%s" % a.name)):
 		var btn: Button = Button.new()
-		btn.name = "ability_%d" % a.id
+		btn.name = "ability_%s" % a.name
 		btn.text = a.name
-		btn.set_meta("ability_id", a.id)
-		btn.connect("pressed", func(): self._handle_button_click(a.id))
+		btn.set_meta("ability_id", a.name)
+		btn.connect("pressed", func(): self._handle_button_click(a.name))
 		self.gridContainer.add_child(btn)
 
-func _handle_button_click(abilityId: int) -> void:
+func _handle_button_click(abilityId: String) -> void:
 	ability_selected.emit(abilityId)

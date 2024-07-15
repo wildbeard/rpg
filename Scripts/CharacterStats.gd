@@ -23,3 +23,14 @@ var dexterity: int = 5
 var speed: int = 5 # Speed
 var vitality: int = 10 # HP
 
+func getPhysicalPower() -> int:
+	return self.strength
+
+func getPhysicalDef() -> int:
+	return ceili(self.strength * 0.75)
+
+func getMagicalPower() -> int:
+	return self.intelligence
+
+func getMagicalDef() -> int:
+	return ceili(self.intelligence * 0.75)
