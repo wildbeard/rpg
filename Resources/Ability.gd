@@ -77,7 +77,6 @@ func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 			baseStat = stats.getPhysicalPower()
 		else:
 			baseStat = stats.getMagicalPower()
-			print(baseStat)
 		
 		statMod += ((baseStat + statBonus) * (self.damage_stat_modifier[idx] / 100))
 
@@ -88,4 +87,4 @@ func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 		# Unarmed
 		weapMod = ((self.damage_weap_modifier / 100) * 2.5)
 
-	return ceili(base + statMod + weapMod)
+	return roundi(base + statMod + weapMod)

@@ -62,4 +62,4 @@ func useAbility(ability: Ability, currRound: int) -> int:
 	if ability.cooldown:
 		self._cooldowns[ability.name] = currRound + ability.cooldown
 
-	return dmg + ceili(bonusDmg)
+	return dmg + roundi(bonusDmg)
