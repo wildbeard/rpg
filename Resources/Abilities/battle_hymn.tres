@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://dq18sydncum3v"]
+
+[ext_resource type="Script" path="res://Resources/Ability.gd" id="1_ka8s5"]
+
+[resource]
+script = ExtResource("1_ka8s5")
+name = ""
+description = ""
+ability_type = 0
+cooldown = 0
+target_type = 0
+damage_type = 0
+element_type = 0
+damage_base = 0
+damage_weap_modifier = 0.0
+damage_stat_type = Array[int]([])
+damage_stat_modifier = Array[float]([])
