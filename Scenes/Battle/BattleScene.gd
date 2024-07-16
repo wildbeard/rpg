@@ -188,7 +188,7 @@ func _enemyTurn(attacker: Character) -> void:
 func _useAbility(ability: Ability, attacker: Character, target: Character) -> Array[int]:
 	var hits: Array[int] = []
 
-	for i in ability.numberOfHits:
+	for i in ability.number_of_hits:
 		# @todo: Roll to check for hit landing each time we gather the damage
 		hits.push_back(attacker.abilityBook.useAbility(ability, self.currentRound))
 

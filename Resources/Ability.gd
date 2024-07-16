@@ -50,9 +50,19 @@ enum ElementType {
 @export var cooldown: int
 
 ## The number of times this ability will hit the target.
-@export_range(1, 5, 1) var numberOfHits: int = 1
+@export_range(1, 5, 1) var number_of_hits: int = 1
 ## Base damage of the ability.
 @export var damage_base: int
+
+@export_category("Damage Variance")
+## Damage variance allows the ability to hit between a certain value based on its
+## primary damage stat (strength or intelligence).
+## A range of 1-120 will give up to 120% extra damage based on the weapon's damage
+## and the character's stat associated with this ability.
+@export_range(1, 50, 1) var variance_low: float = 1
+@export_range(1, 120, 1) var variance_high: float = 10
+
+@export_category("Weapon & Stat Modifier")
 ## A percentage of the weapon's damage to use.
 ## Example: If the weapon is Magical, with 15 magic damage, and this value is 25
 ## then 3.75 will be added to the total damage.
@@ -92,7 +102,7 @@ func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 		weapMod = ((self.damage_weap_modifier / 100) * weapDmg)
 		# @todo: Not sure how much I like this. This adds anywhere between 1-120% damage
 		# based off your primary stat for this attack + weapon damage modifier.
-		weapMod += (randf_range(1, 120) * stats.getAdjustedStat(weapStat))/100
+		weapMod += (randf_range(self.variance_low, self.variance_high) * stats.getAdjustedStat(weapStat))/100
 	else:
 		# @todo: Support "Unarmed"
 		weapMod = ((self.damage_weap_modifier / 100) * 1.5)
