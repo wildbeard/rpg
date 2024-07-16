@@ -34,26 +34,28 @@ enum ElementType {
 	UNHOLY,
 }
 
-const DamageStatType: Dictionary = {
-	Strength = "strength",
-	Intelligence = "intelligence",
-}
-
+@export var icon: Texture
 @export var name: String
 @export_multiline var description: String
-@export var icon: Texture
+
+@export_category("Ability Target & Damage Type")
 @export var ability_type: AbilityType
-## The amount of rounds before the ability is available for use.
-## A value of 0 is available the next round.
-@export var cooldown: int
 @export var target_type: TargetType
 @export var damage_type: DamageType
 @export var element_type: ElementType
+
+@export_category("Values")
+## The amount of rounds before the ability is available for use.
+## A value of 0 is available the next round.
+@export var cooldown: int
+
+## The number of times this ability will hit the target.
+@export_range(1, 5, 1) var numberOfHits: int = 1
 ## Base damage of the ability.
 @export var damage_base: int
 ## A percentage of the weapon's damage to use.
 ## Example: If the weapon is Magical, with 15 magic damage, and this value is 25
-## the damage value is 3.75.
+## then 3.75 will be added to the total damage.
 @export var damage_weap_modifier: float
 ## Option for which type of power to scale off of.
 ## Multiple can be picked.
