@@ -41,6 +41,7 @@ const DamageStatType: Dictionary = {
 
 @export var name: String
 @export_multiline var description: String
+@export var icon: Texture
 @export var ability_type: AbilityType
 ## The amount of rounds before the ability is available for use.
 ## A value of 0 is available the next round.
