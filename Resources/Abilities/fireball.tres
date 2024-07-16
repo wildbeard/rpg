@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://bu1c4rkejbyc0"]
+
+[ext_resource type="Script" path="res://Resources/Ability.gd" id="1_8h75v"]
+
+[resource]
+script = ExtResource("1_8h75v")
+name = "Fireball"
+description = "A cool little ball of fire."
+ability_type = 0
+cooldown = 0
+target_type = 0
+damage_type = 1
+element_type = 1
+damage_base = 15
+damage_weap_modifier = 25.0
+damage_stat_type = Array[int]([1])
+damage_stat_modifier = Array[float]([25.0])
