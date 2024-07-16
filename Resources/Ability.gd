@@ -83,6 +83,9 @@ func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 		
 		statMod += ((baseStat + statBonus) * (self.damage_stat_modifier[idx] / 100))
 
+	"""
+	# @todo: weapDmg is included in the physical/magic power calculation.
+	# Re-using the damage here only inflates the overall damage.
 	if equipment.has("mainHand") && equipment.mainHand:
 		# @todo: Support off-hand weapon?
 		var weapDmg: int = equipment.mainHand.item.physicalDamage if self.damage_type == DamageType.PHYSICAL else equipment.mainHand.item.magicalDamage
@@ -90,5 +93,6 @@ func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 	else:
 		# @todo: Support "Unarmed"
 		weapMod = ((self.damage_weap_modifier / 100) * 2.5)
+	"""
 
 	return roundi(base + statMod + weapMod)
