@@ -83,7 +83,6 @@ func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 		
 		statMod += ((baseStat + statBonus) * (self.damage_stat_modifier[idx] / 100))
 
-
 	if equipment.has("mainHand") && equipment.mainHand:
 		# @todo: Support off-hand weapon?
 		var weapDmg: int = equipment.mainHand.item.physicalDamage if self.damage_type == DamageType.PHYSICAL else equipment.mainHand.item.magicalDamage
@@ -92,7 +91,7 @@ func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 
 		weapMod = ((self.damage_weap_modifier / 100) * weapDmg)
 		# @todo: Not sure how much I like this. This adds anywhere between 1-120% damage
-		# based off your primary stat for this attack.
+		# based off your primary stat for this attack + weapon damage modifier.
 		weapMod += (randf_range(1, 120) * stats.getAdjustedStat(weapStat))/100
 	else:
 		# @todo: Support "Unarmed"
