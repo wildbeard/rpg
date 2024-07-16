@@ -20,5 +20,6 @@ itemType = 6
 name = "Dull Sword"
 description = "A basic sword"
 price = 10
+rarity = 0
 maxStack = 1
 isStackable = false

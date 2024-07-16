@@ -21,5 +21,6 @@ itemType = 0
 name = "Magic Hat"
 description = "A simple magic hat"
 price = 10
+rarity = 0
 maxStack = 99
 isStackable = false

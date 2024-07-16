@@ -21,5 +21,6 @@ itemType = 2
 name = "Dragon Chainbody"
 description = "A series of connected metal rings."
 price = 10
+rarity = 0
 maxStack = 99
 isStackable = false
