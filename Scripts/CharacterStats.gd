@@ -34,3 +34,20 @@ func getMagicalPower() -> int:
 
 func getMagicalDef() -> int:
 	return ceili(self.intelligence * 0.75)
+
+func getAdjustedStat(stat: String) -> int:
+	return self.getEquipmentAttributes(stat) + self[stat]
+
+func getEquipmentAttributes(stat: String) -> int:
+	var bonus: int = 0
+	var equipment: Dictionary = PlayerManager.getEquippedItems()
+
+	for key in equipment:
+		var item: Equipment = equipment[key].item if equipment[key] else null
+
+		if !item:
+			continue
+
+		bonus += item.statModifiers[stat]
+
+	return bonus
