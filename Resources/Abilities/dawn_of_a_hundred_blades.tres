@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://c4m51lkpoxb73"]
+
+[ext_resource type="Texture2D" uid="uid://b21maxdc6lwb7" path="res://Assets/Attack_icon.png" id="1_20vgt"]
+[ext_resource type="Script" path="res://Resources/Ability.gd" id="1_ruj3n"]
+
+[resource]
+script = ExtResource("1_ruj3n")
+name = "Dawn Of A Hundred Blades"
+description = ""
+icon = ExtResource("1_20vgt")
+ability_type = 0
+cooldown = 10
+target_type = 1
+damage_type = 0
+element_type = 0
+damage_base = 15
+damage_weap_modifier = 0.0
+damage_stat_type = Array[int]([0, 1])
+damage_stat_modifier = Array[float]([25.0, 50.0])
