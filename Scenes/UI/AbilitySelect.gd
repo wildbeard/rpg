@@ -18,7 +18,7 @@ func _ready() -> void:
 func setAbilities(abils: Array[Ability]) -> void:
 	self.abilities = abils
 
-func updateCooldowns(onCooldown: Array[int]) -> void:
+func updateCooldowns(onCooldown: Array[String]) -> void:
 	for btn in self.gridContainer.get_children():
 		if onCooldown.find(btn.get_meta("ability_id")) > -1:
 			btn.disabled = true

@@ -106,7 +106,7 @@ func _startRound() -> void:
 func _playerTurn() -> void:
 	self._print("It is the Player's turn!")
 	var abilities: Array[Ability] = self.player.abilityBook.getActiveAbilities()
-	var onCooldown: Array[int]
+	var onCooldown: Array[String]
 
 	for ability in abilities:
 		if self.player.abilityBook.isAbilityOnCooldown(ability.name, self.currentRound):
