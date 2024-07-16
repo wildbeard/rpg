@@ -134,9 +134,9 @@ func _playerTurn() -> void:
 	%AbilitySelector.visible = false
 
 	var ability: Ability = self.player.abilityBook.getAbility(abilityId)
-	var abilValue: int = self.player.abilityBook.useAbility(ability, self.currentRound)
 
 	if ability.ability_type == Ability.TargetType.HEAL:
+		var abilValue: int = self.player.abilityBook.useAbility(ability, self.currentRound)
 		self.player.getHealed(abilValue)
 		self.battleStats.damage_healed += abilValue
 		self._print("Player uses ability %s and heals self for %d" % [ability.name, abilValue])
@@ -146,19 +146,15 @@ func _playerTurn() -> void:
 		var target: Character = await %TargetIndicator.target_selected
 		%TargetIndicator.visible = false
 
-		var hitChance: float = self.player.getHitChance(ability.damage_type, self.player.characterStats.level - target.characterStats.level)
-		var dodgeChance: float = target.getDodgeChance(ability.damage_type, target.characterStats.level - self.player.characterStats.level)
+		var hits: Array[int] = self._useAbility(ability, self.player, target)
 
-		if hitChance >= dodgeChance:
-			self._print("Player (%f) hit Enemy (%f)" % [hitChance, dodgeChance])
-			self._print("Player uses ability %s and hits for %d" % [ability.name, abilValue])
-			self.battleStats.damage_dealt += abilValue
-			target.getHit(abilValue)
+		for hit in hits:
+			self._print("Player uses ability %s and hits for %d" % [ability.name, hit])
+			self.battleStats.damage_dealt += hit
+			target.getHit(hit)
 
-			if self.battleStats.highest_hit < abilValue:
-				self.battleStats.highest_hit = abilValue
-		else:
-			self._print("Player (%f) misses Enemy (%f)" % [hitChance, dodgeChance])
+			if self.battleStats.highest_hit < hit:
+				self.battleStats.highest_hit = hit
 
 		if target.isDead:
 			remove_child(target)
@@ -188,6 +184,15 @@ func _enemyTurn(attacker: Character) -> void:
 
 	await get_tree().create_timer(2).timeout
 	self._endTurn()
+
+func _useAbility(ability: Ability, attacker: Character, target: Character) -> Array[int]:
+	var hits: Array[int] = []
+
+	for i in ability.numberOfHits:
+		# @todo: Roll to check for hit landing each time we gather the damage
+		hits.push_back(attacker.abilityBook.useAbility(ability, self.currentRound))
+
+	return hits
 
 func _endTurn() -> void:
 	if self.currentTurn + 1 > self.turnOrder.size()-1:

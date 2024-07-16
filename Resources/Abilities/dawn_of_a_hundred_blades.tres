@@ -5,15 +5,16 @@
 
 [resource]
 script = ExtResource("1_ruj3n")
-name = "Dawn Of A Hundred Blades"
-description = ""
 icon = ExtResource("1_20vgt")
-ability_type = 1
-cooldown = 0
+name = "Dawn Of A Hundred Blades"
+description = "Spawns a hundred blades hitting the target multiple times."
+ability_type = 0
 target_type = 0
 damage_type = 0
 element_type = 0
-damage_base = 15
+cooldown = 3
+numberOfHits = 3
+damage_base = 8
 damage_weap_modifier = 0.0
-damage_stat_type = Array[int]([0, 1])
-damage_stat_modifier = Array[float]([25.0, 50.0])
+damage_stat_type = Array[int]([0])
+damage_stat_modifier = Array[float]([15.0])
