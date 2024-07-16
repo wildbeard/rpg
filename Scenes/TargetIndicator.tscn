@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1uqd3e03sssl"]
+
+[ext_resource type="Script" path="res://Scenes/TargetIndicator.gd" id="1_gkhet"]
+[ext_resource type="Texture2D" uid="uid://d2ydx8tyghp7o" path="res://Assets/ArrowThing.png" id="2_bte6i"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gkhet")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_bte6i")

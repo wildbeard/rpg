@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b62nk3ruoot55"]
+
+[ext_resource type="Script" path="res://Scenes/Character.gd" id="1_6r7uu"]
+[ext_resource type="Texture2D" uid="uid://b7dyr8p0c3lq6" path="res://Assets/white-square.png" id="1_ky4l0"]
+[ext_resource type="PackedScene" uid="uid://c8rkr1oeb2sxi" path="res://Scenes/HealthComponent.tscn" id="3_fs5xd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5m2sd"]
+size = Vector2(32, 32)
+
+[node name="Character" type="StaticBody2D" node_paths=PackedStringArray("healthComponent")]
+input_pickable = true
+script = ExtResource("1_6r7uu")
+healthComponent = NodePath("HealthComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.275667, 0.820854, 0.354144, 1)
+texture = ExtResource("1_ky4l0")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_fs5xd")]
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -16.0
+offset_top = -30.0
+offset_right = 16.0
+offset_bottom = 2.0
+scale = Vector2(1, 0.25)
+max_value = 10.0
+value = 2.0
+texture_under = ExtResource("1_ky4l0")
+texture_progress = ExtResource("1_ky4l0")
+tint_under = Color(0.854711, 0, 0.0941688, 1)
+tint_progress = Color(0.237216, 0.737493, 1.92523e-07, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5m2sd")
