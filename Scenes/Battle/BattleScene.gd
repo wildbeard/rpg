@@ -135,18 +135,24 @@ func _playerTurn() -> void:
 
 	var ability: Ability = self.player.abilityBook.getAbility(abilityId)
 
+	if self.player.abilityBook.isAbilityOnCooldown(abilityId, self.currentRound):
+		push_error("%s is on cooldown and shouldn't be available." % ability.name)
+		return self._endTurn()
+
 	if ability.ability_type == Ability.TargetType.HEAL:
-		var abilValue: int = self.player.abilityBook.useAbility(ability, self.currentRound)
-		self.player.getHealed(abilValue)
-		self.battleStats.damage_healed += abilValue
-		self._print("Player uses ability %s and heals self for %d" % [ability.name, abilValue])
+		var hits: Array[int] = self.player.abilityBook.useAbility(ability)
+
+		for val in hits:
+			self.player.getHealed(val)
+			self.battleStats.damage_healed += val
+			self._print("Player uses ability %s and heals self for %d" % [ability.name, val])
 	else:
 		%TargetIndicator.visible = true
 		%TargetIndicator.hoverTarget(idx)
 		var target: Character = await %TargetIndicator.target_selected
 		%TargetIndicator.visible = false
 
-		var hits: Array[int] = self._useAbility(ability, self.player, target)
+		var hits: Array[int] = self.player.abilityBook.useAbility(ability)
 
 		for hit in hits:
 			self._print("Player uses ability %s and hits for %d" % [ability.name, hit])
@@ -161,6 +167,9 @@ func _playerTurn() -> void:
 			self.battleStats.xp_gained += target.characterStats.xpGiven
 			player.characterStats.currentXp += target.characterStats.xpGiven
 
+	if ability.cooldown:
+		self.player.abilityBook.updateAbilityCooldown(abilityId, self.currentRound + ability.cooldown)
+
 	self._endTurn()
 
 func _enemyTurn(attacker: Character) -> void:
@@ -172,27 +181,20 @@ func _enemyTurn(attacker: Character) -> void:
 	if attacker.abilityBook.isAbilityOnCooldown(ability.name, self.currentRound):
 		ability = attacker.abilityBook.getActiveAbilities().filter(func(a: Ability): return a != ability).pick_random()
 
-	var dmg: int = attacker.abilityBook.useAbility(ability, self.currentRound)
-	self.battleStats.damage_taken += dmg
+	var hits: Array[int] = attacker.abilityBook.useAbility(ability)
 
-	self._print("It is the enemies turn!")
-	self._print("Enemy uses ability %s and hits for for %d" % [ability.name, dmg])
-	target.getHit(dmg)
+	for dmg in hits:
+		self.battleStats.damage_taken += dmg
+
+		self._print("It is the enemies turn!")
+		self._print("Enemy uses ability %s and hits for for %d" % [ability.name, dmg])
+		target.getHit(dmg)
 
 	if target.isDead:
 		return self._endBattle(true)
 
 	await get_tree().create_timer(2).timeout
 	self._endTurn()
-
-func _useAbility(ability: Ability, attacker: Character, target: Character) -> Array[int]:
-	var hits: Array[int] = []
-
-	for i in ability.number_of_hits:
-		# @todo: Roll to check for hit landing each time we gather the damage
-		hits.push_back(attacker.abilityBook.useAbility(ability, self.currentRound))
-
-	return hits
 
 func _endTurn() -> void:
 	if self.currentTurn + 1 > self.turnOrder.size()-1:
