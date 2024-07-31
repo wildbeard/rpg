@@ -65,22 +65,30 @@ func _setupEnemies() -> void:
 	stats.strength = 1
 
 	for e in 3:
-		var enemy: Character = characterScene.instantiate()
-		var enemyPos: Vector2 = %EnemyMarker.global_position
-		var inventory: InventoryData = InventoryData.new()
-		inventory.equipment["chest"] = load("res://Resources/Items/LeatherBody.tres")
-		enemy.inventory = inventory
+		var enemy: Character
 
+		if randi_range(0, 1) == 0:
+			enemy = load("res://Scenes/Enemies/GoblinWizard.tscn").instantiate()
+			stats.intelligence = 5
+			stats.wisdom = 5
+		else:
+			enemy = characterScene.instantiate()
+			var inventory: InventoryData = load("res://Resources/Inventory/TestEnemyInv.tres")
+			enemy.inventory = inventory
+
+		var enemyPos: Vector2 = %EnemyMarker.global_position
 		enemy.characterStats = stats
 		enemy.healthComponent.health = stats.maxHp
 		enemy.healthComponent.max_health = stats.maxHp
 		enemyPos.y = enemyPos.y + (e * 64)
 		enemy.global_position = enemyPos
-		enemy.get_node("Sprite2D").modulate = Color(0.45, 0.24, 0.033)
 		enemy.abilityBook = CharacterAbilityBook.new(enemy)
-		
-		enemy.abilityBook.addAbility(preload("res://Resources/Abilities/fireball.tres"))
-		# enemy.abilityBook.addAbility(preload("res://Resources/Abilities/slash.tres"))
+
+		if enemy is GoblinWizard:
+			enemy.abilityBook.addAbility(preload("res://Resources/Abilities/fireball.tres"))
+		else:
+			enemy.abilityBook.addAbility(preload("res://Resources/Abilities/slash.tres"))
+			enemy.get_node("Sprite2D").modulate = Color(0.45, 0.24, 0.033)
 
 		self.enemies.append(enemy)
 		add_child(enemy)

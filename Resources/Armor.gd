@@ -23,6 +23,5 @@ func _getItemDefenseWeight() -> float:
 func getDamageReduction(physical: bool = true) -> float:
 	var armorVal: float = float(self.physicalDefense if physical else self.magicalDefense)
 	var weight: float = self._getItemDefenseWeight()
-	var mit: float = armorVal / (armorVal + weight)
 
 	return (armorVal / (armorVal + self._getItemDefenseWeight()))

@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgmfk3fx0yjs"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/GoblinWizard.gd" id="1_8j4ri"]
+[ext_resource type="Texture2D" uid="uid://b7dyr8p0c3lq6" path="res://Assets/white-square.png" id="2_4x2pl"]
+[ext_resource type="Resource" uid="uid://ds7e4t6fhrjvl" path="res://Resources/Inventory/Goblin_Wizard_Noob.tres" id="2_ktlnw"]
+[ext_resource type="PackedScene" uid="uid://c8rkr1oeb2sxi" path="res://Scenes/HealthComponent.tscn" id="3_gvtl8"]
+[ext_resource type="Texture2D" uid="uid://dptfxl7d5f7tk" path="res://Assets/Magic_icon.png" id="3_t3a6w"]
+[ext_resource type="Texture2D" uid="uid://bi8gln0j7vq4n" path="res://Assets/basic-staff.png" id="5_nhiuc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5m2sd"]
+size = Vector2(32, 32)
+
+[node name="Character" type="StaticBody2D" node_paths=PackedStringArray("healthComponent")]
+input_pickable = true
+script = ExtResource("1_8j4ri")
+healthComponent = NodePath("HealthComponent")
+inventory = ExtResource("2_ktlnw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.193525, 0.793556, 0.749009, 1)
+texture = ExtResource("2_4x2pl")
+
+[node name="Hat" type="Sprite2D" parent="."]
+position = Vector2(1.78814e-07, -24)
+scale = Vector2(1.16304, 1.16304)
+texture = ExtResource("3_t3a6w")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_gvtl8")]
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -16.0
+offset_top = -30.0
+offset_right = 16.0
+offset_bottom = 2.0
+scale = Vector2(1, 0.25)
+max_value = 10.0
+value = 2.0
+texture_under = ExtResource("2_4x2pl")
+texture_progress = ExtResource("2_4x2pl")
+tint_under = Color(0.854711, 0, 0.0941688, 1)
+tint_progress = Color(0.237216, 0.737493, 1.92523e-07, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5m2sd")
+
+[node name="Weapon" type="Sprite2D" parent="."]
+position = Vector2(-13, 1)
+texture = ExtResource("5_nhiuc")
