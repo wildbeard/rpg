@@ -12,9 +12,9 @@ enum ArmorType {
 @export var magicalDefense: int = 1
 
 var _defenseWeight: Dictionary = {
-	ArmorType.LIGHT: 120.0,
-	ArmorType.MEDIUM: 110.0,
-	ArmorType.HEAVY: 95.0,
+	ArmorType.LIGHT: 175.0,
+	ArmorType.MEDIUM: 165.0,
+	ArmorType.HEAVY: 145.0,
 }
 
 func _getItemDefenseWeight() -> float:
