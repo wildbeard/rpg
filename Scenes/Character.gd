@@ -34,7 +34,11 @@ func mitigateDamage(incoming: int, damageType: Ability.DamageType) -> int:
 	var totalDef: float = 0
 
 	for key in equipment:
-		var item: Equipment = equipment[key]
+		var item = equipment[key]
+
+		# @todo: This is not the way
+		if item is SlotData:
+			item = item.item
 
 		if item is Armor:
 			totalDef += item.getDamageReduction(damageType == Ability.DamageType.PHYSICAL)

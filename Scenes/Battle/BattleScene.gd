@@ -186,13 +186,15 @@ func _enemyTurn(attacker: Character) -> void:
 	if attacker.abilityBook.isAbilityOnCooldown(ability.name, self.currentRound):
 		ability = attacker.abilityBook.getActiveAbilities().filter(func(a: Ability): return a != ability).pick_random()
 
+	self._print("It is the enemies turn!")
 	var hits: Array[int] = attacker.abilityBook.useAbility(ability)
 
-	for dmg in hits:
+	for hit in hits:
+		var dmg: int = target.mitigateDamage(hit, ability.damage_type)
+		var mitigate: int = hit - dmg
 		self.battleStats.damage_taken += dmg
 
-		self._print("It is the enemies turn!")
-		self._print("Enemy uses ability %s and hits for for %d" % [ability.name, dmg])
+		self._print("Enemy uses ability %s. Target's armor mitigates %d and hits for for %d" % [ability.name, mitigate, dmg])
 		target.getHit(dmg)
 
 	if target.isDead:
