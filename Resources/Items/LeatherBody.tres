@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=3 format=3 uid="uid://b8y1vmaqna65t"]
+
+[ext_resource type="Script" path="res://Resources/Armor.gd" id="1_2s7ds"]
+[ext_resource type="Texture2D" uid="uid://cck4njv8kv1vx" path="res://Assets/leather-body.png" id="2_25btq"]
+
+[resource]
+script = ExtResource("1_2s7ds")
+armorType = 0
+physicalDefense = 5
+magicalDefense = 3
+statModifiers = {
+"dexterity": 0,
+"intelligence": 0,
+"speed": 0,
+"strength": 0,
+"vitality": 0,
+"wisdom": 0
+}
+texture = ExtResource("2_25btq")
+itemType = 2
+name = "Leader Body"
+description = "Better than nothing."
+price = 10
+rarity = 0
+maxStack = 99
+isStackable = false
