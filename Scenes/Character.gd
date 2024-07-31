@@ -4,6 +4,7 @@ class_name Character
 @export var healthComponent: HealthComponent
 @export var isInBattle: bool = true
 @export var isEnemy: bool = true
+@export var inventory: InventoryData
 
 var isDead: bool = false
 var abilityBook: CharacterAbilityBook
@@ -73,4 +74,4 @@ func getHitChance(dmgType: Ability.DamageType, levelDiff: int) -> float:
 	return chance + (levelDiff * 0.5)
 
 func getEquippedItems() -> Dictionary:
-	return {}
+	return self.inventory.equipment
