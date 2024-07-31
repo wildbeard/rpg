@@ -36,6 +36,7 @@ func _setup() -> void:
 func _setupPlayer() -> void:
 	var character: PlayerCharacter = playerScene.instantiate()
 	character.global_position = %PlayerMarker.global_position
+	character.inventory = PlayerManager.inventory
 
 	# @todo: A better way?
 	if !PlayerManager.stats.is_connected("levelUp", self._handlePlayerLevelUp):
@@ -66,6 +67,9 @@ func _setupEnemies() -> void:
 	for e in 3:
 		var enemy: Character = characterScene.instantiate()
 		var enemyPos: Vector2 = %EnemyMarker.global_position
+		var inventory: InventoryData = InventoryData.new()
+		inventory.equipment["chest"] = load("res://Resources/Items/LeatherBody.tres")
+		enemy.inventory = inventory
 
 		enemy.characterStats = stats
 		enemy.healthComponent.health = stats.maxHp
@@ -100,8 +104,6 @@ func _startRound() -> void:
 		self._playerTurn()
 	else:
 		self._enemyTurn(attacker)
-
-	return
 
 func _playerTurn() -> void:
 	self._print("It is the Player's turn!")
@@ -155,12 +157,15 @@ func _playerTurn() -> void:
 		var hits: Array[int] = self.player.abilityBook.useAbility(ability)
 
 		for hit in hits:
-			self._print("Player uses ability %s and hits for %d" % [ability.name, hit])
-			self.battleStats.damage_dealt += hit
-			target.getHit(hit)
+			var dmg: int = target.mitigateDamage(hit, ability.damage_type)
+			var mitigated: int = hit - dmg
 
-			if self.battleStats.highest_hit < hit:
-				self.battleStats.highest_hit = hit
+			self._print("Player uses ability %s. Target's armor mitigates %d and hits for %d" % [ability.name, mitigated, dmg])
+			self.battleStats.damage_dealt += dmg
+			target.getHit(dmg)
+
+			if self.battleStats.highest_hit < dmg:
+				self.battleStats.highest_hit = dmg
 
 		if target.isDead:
 			remove_child(target)

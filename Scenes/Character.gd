@@ -28,6 +28,19 @@ func getHit(dmg: int) -> void:
 func getHealed(amount: int) -> void:
 	self.healthComponent.heal(amount)
 
+func mitigateDamage(incoming: int, damageType: Ability.DamageType) -> int:
+	var equipment: Dictionary = self.getEquippedItems()
+	var dmg: int = incoming
+	var totalDef: float = 0
+
+	for key in equipment:
+		var item: Equipment = equipment[key]
+
+		if item is Armor:
+			totalDef += item.getDamageReduction(damageType == Ability.DamageType.PHYSICAL)
+
+	return floori(dmg - (dmg * totalDef))
+
 func _on_health_change(health: int) -> void:
 	%HPBar.value = health
 
