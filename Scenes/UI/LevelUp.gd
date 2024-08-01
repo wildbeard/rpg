@@ -21,6 +21,10 @@ var _statNameStrings: Dictionary = {
 	"speed": "The Fast"
 }
 var _pointsAvail: int = 5
+var _cards: Array[Control] = []
+
+@onready var button = $Button
+@onready var _allAbilities = preload("res://Resources/Abilities.tres")
 
 func _ready() -> void:
 	%LevelLabel.text = "Level: %d" % self.stats.level
@@ -29,6 +33,35 @@ func _ready() -> void:
 	self._buildStatControls()
 
 	%ConfirmBtn.connect("button_up", self._confirmChoices)
+
+	self._setupAbilityCards()
+	self.button.connect("button_up", self._rerollAbilities)
+
+func _setupAbilityCards() -> void:
+	var rngAbilities: Array[Ability] = self._getRandomAbilities()
+
+	for idx in rngAbilities.size():
+		var card: Control = load("res://Scenes/UI/AbilityCard.tscn").instantiate()
+		card.ability = rngAbilities[idx]
+		card.position = Vector2(64 + (idx * 280), 256)
+		self._cards.push_back(card)
+		add_child(card)
+
+func _getRandomAbilities() -> Array[Ability]:
+	var abilities: Array[Ability] = []
+
+	for i in 3:
+		var ability: Ability = self._allAbilities.resource_list.filter(func(a: Ability): return !abilities.has(a)).pick_random()
+		abilities.push_back(ability)
+
+	return abilities
+
+func _rerollAbilities() -> void:
+	for card in self._cards:
+		card.queue_free()
+
+	self._cards = []
+	self._setupAbilityCards()
 
 func _buildStatControls() -> void:
 	for key in self._statNameStrings:
