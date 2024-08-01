@@ -68,8 +68,13 @@ enum ElementType {
 
 func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 	var base: int = self.damage_base
+	var statMod: float = self.getDamageFromStats(stats)
+	var weapMod: float = self.getDamageFromEquipment(equipment)
+
+	return roundi(base + statMod + weapMod)
+
+func getDamageFromStats(stats: CharacterStats) -> float:
 	var statMod: float = 0
-	var weapMod: float = 0
 	var idx: int = 0
 
 	for key in self.damage_stat_type:
@@ -85,15 +90,18 @@ func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 		
 		statMod += ((baseStat + statBonus) * (self.damage_stat_modifier[idx] / 100))
 
+	return statMod
+
+func getDamageFromEquipment(equipment: Dictionary) -> float:
+	var weapMod: float = 0
+
 	if equipment.has("mainHand") && equipment.mainHand:
 		# @todo: Support off-hand weapon?
 		var weapDmg: int = equipment.mainHand.item.physicalDamage if self.damage_type == DamageType.PHYSICAL else equipment.mainHand.item.magicalDamage
 		var weapStat: String = "strength" if self.damage_type == DamageType.PHYSICAL else "intelligence"
-		var stat: int = stats.getAdjustedStat(weapStat)
-
 		weapMod = ((self.damage_weap_modifier / 100) * weapDmg)
 	else:
 		# @todo: Support "Unarmed"
 		weapMod = ((self.damage_weap_modifier / 100) * 1.5)
 
-	return roundi(base + statMod + weapMod)
+	return weapMod

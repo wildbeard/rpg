@@ -5,12 +5,13 @@
 [resource]
 script = ExtResource("1_v7usn")
 name = "Slash"
-description = "A slash."
+description = ""
 ability_type = 0
-cooldown = 0
 target_type = 0
 damage_type = 0
 element_type = 0
+cooldown = 0
+number_of_hits = 1
 damage_base = 15
 damage_weap_modifier = 50.0
 damage_stat_type = Array[int]([0])
