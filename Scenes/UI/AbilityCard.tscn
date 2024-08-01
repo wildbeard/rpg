@@ -7,9 +7,10 @@
 
 [node name="AbilityCard" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.222
+anchor_bottom = 0.407
+offset_right = 0.255981
+offset_bottom = -7.73599
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2c7wq")
@@ -51,7 +52,7 @@ offset_bottom = 240.0
 
 [node name="Cooldown" type="Label" parent="."]
 layout_mode = 0
-offset_left = 128.0
+offset_left = 144.0
 offset_top = 216.0
 offset_right = 232.0
 offset_bottom = 240.0
