@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://btwmm8poerxxm"]
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://btwmm8poerxxm"]
 
+[ext_resource type="Texture2D" uid="uid://b21maxdc6lwb7" path="res://Assets/Attack_icon.png" id="1_ir3pj"]
 [ext_resource type="Script" path="res://Resources/Ability.gd" id="1_v7usn"]
 
 [resource]
 script = ExtResource("1_v7usn")
+icon = ExtResource("1_ir3pj")
 name = "Slash"
 description = ""
 ability_type = 0
