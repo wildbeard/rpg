@@ -34,15 +34,14 @@ horizontal_alignment = 1
 position = Vector2(128, 88)
 texture = ExtResource("3_atjhy")
 
-[node name="AbilityDescription" type="Label" parent="."]
+[node name="AbilityDescription" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 152.0
 offset_right = 232.0
 offset_bottom = 208.0
-theme_override_constants/line_spacing = 3
-theme_override_font_sizes/font_size = 12
-autowrap_mode = 3
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
 
 [node name="AbilityElement" type="Label" parent="."]
 layout_mode = 0

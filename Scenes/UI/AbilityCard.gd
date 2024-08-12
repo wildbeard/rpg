@@ -8,7 +8,6 @@ extends Control
 @onready var ability_element = $AbilityElement
 @onready var cooldown = $Cooldown
 
-
 func _ready() -> void:
 	self.ability_name.text = ability.name
 	self.ability_icon.texture = self.ability.icon
