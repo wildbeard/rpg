@@ -23,6 +23,7 @@ scale = Vector2(8, 8)
 texture = ExtResource("3_sxray")
 
 [node name="AbilityName" type="Label" parent="."]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 232.0

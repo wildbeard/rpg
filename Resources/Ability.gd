@@ -105,3 +105,29 @@ func getDamageFromEquipment(equipment: Dictionary) -> float:
 		weapMod = ((self.damage_weap_modifier / 100) * 1.5)
 
 	return weapMod
+
+func getDescription(character: Character) -> String:
+	var input: String = self.description
+
+	if !input:
+		input = 'Deals %bd(+%dmgMod) %dt damage.'
+
+	var descKeys: Dictionary = {
+		'%bd': func(): return self.damage_base,
+		'%dmgMod': func(): return \
+			roundi(\
+				self.getDamageFromStats(character.characterStats) + self.getDamageFromEquipment(character.getEquippedItems())\
+			),
+		'%dt': func(): return 'Physical' if Ability.DamageType.PHYSICAL == self.damage_type else 'Magic',
+		'%et': self.getElementType,
+		'%h': func(): return self.number_of_hits
+	}
+
+	for key in descKeys:
+		input = input.replace(key, str(descKeys[key].call()))
+
+	return input
+
+func getElementType() -> String:
+	var elType: String = Ability.ElementType.keys()[self.element_type].capitalize()
+	return elType if elType != 'None' else 'N/A'
