@@ -1,17 +1,19 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://cyng4t8odff46"]
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://cyng4t8odff46"]
 
+[ext_resource type="Texture2D" uid="uid://cuh3xjhtstpf4" path="res://Assets/Smite.png" id="1_iekby"]
 [ext_resource type="Script" path="res://Resources/Ability.gd" id="1_kag7o"]
 
 [resource]
 script = ExtResource("1_kag7o")
+icon = ExtResource("1_iekby")
 name = "Judgement"
-description = "Invoke the wrath of the gods to smite your foe."
+description = "Deals %bd(+%dmgPhys,+%dmgMag) %dt damage."
 ability_type = 0
 target_type = 0
 damage_type = 1
 element_type = 5
 cooldown = 3
-numberOfHits = 1
+number_of_hits = 1
 damage_base = 20
 damage_weap_modifier = 20.0
 damage_stat_type = Array[int]([0, 1])
