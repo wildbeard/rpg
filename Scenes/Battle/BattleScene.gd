@@ -34,9 +34,8 @@ func _setup() -> void:
 	self._startRound()
 
 func _setupPlayer() -> void:
-	var character: PlayerCharacter = playerScene.instantiate()
+	var character: PlayerCharacter = PlayerManager.player
 	character.global_position = %PlayerMarker.global_position
-	character.inventory = PlayerManager.inventory
 
 	# @todo: A better way?
 	if !PlayerManager.stats.is_connected("levelUp", self._handlePlayerLevelUp):

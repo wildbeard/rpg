@@ -2,7 +2,7 @@ class_name PlayerCharacter
 extends Character
 
 func _init() -> void:
-	self.characterStats = PlayerManager.stats
+	self.characterStats = PlayerStats.new()
 	self.characterStats.baseHp = 75
 	self.isEnemy = false
 	# Abilities
