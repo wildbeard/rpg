@@ -66,6 +66,9 @@ enum ElementType {
 ## the Damage Stat Type.
 @export var damage_stat_modifier: Array[float]
 
+var _physicalColor: String = '#eb4034'
+var _magicColor: String = '#3489eb'
+
 func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
 	var base: int = self.damage_base
 	var statMod: float = self.getDamageFromStats(stats)
@@ -118,7 +121,11 @@ func getDescription(character: Character) -> String:
 			roundi(\
 				self.getDamageFromStats(character.characterStats) + self.getDamageFromEquipment(character.getEquippedItems())\
 			),
-		'%dt': func(): return 'Physical' if Ability.DamageType.PHYSICAL == self.damage_type else 'Magic',
+		'%dmgPhys': func(): return '[color=%s]%s[/color]' % [self._physicalColor, self._getPhysicalDamage(character.characterStats)],
+		'%dmgMag': func(): return '[color=%s]%s[/color]' % [self._magicColor, self._getMagicDamage(character.characterStats)],
+		'%dt': func(): return ('[color=%s]Physical[/color]' % self._physicalColor) \
+			if Ability.DamageType.PHYSICAL == self.damage_type \
+			else ('[color=%s]Magic[/color]' % self._magicColor),
 		'%et': self.getElementType,
 		'%h': func(): return self.number_of_hits
 	}
@@ -131,3 +138,23 @@ func getDescription(character: Character) -> String:
 func getElementType() -> String:
 	var elType: String = Ability.ElementType.keys()[self.element_type].capitalize()
 	return elType if elType != 'None' else 'N/A'
+
+func _getPhysicalDamage(stats: CharacterStats) -> float:
+	var dmg: float = 0.0
+	var keys: Array = self.DamageAttribute.keys()
+
+	for idx in self.damage_stat_type.size():
+		if keys[idx] == 'PHYSICAL':
+			dmg = ((self.damage_stat_modifier[idx] / 100) * stats.getPhysicalPower())
+
+	return dmg
+
+func _getMagicDamage(stats: CharacterStats) -> float:
+	var dmg: float = 0.0
+	var keys: Array = self.DamageAttribute.keys()
+
+	for idx in self.damage_stat_type.size():
+		if keys[idx] == 'MAGIC':
+			dmg = ((self.damage_stat_modifier[idx] / 100) * stats.getMagicalPower())
+
+	return dmg
