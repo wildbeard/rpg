@@ -13,6 +13,8 @@ var currentRound: int = 1
 
 var targetIndex: int = 0
 var currentTarget: Character = null
+var isLevelingUp: bool = false
+var levelUp: LevelUpScene = null
 
 var battleStats: Dictionary = {
 	"damage_taken": 0,
@@ -46,8 +48,11 @@ func _setupPlayer() -> void:
 
 func _handlePlayerLevelUp() -> void:
 	var scene: LevelUpScene = self.levelUpScene.instantiate()
+	self.levelUp = scene
+	self.isLevelingUp = true
 
 	add_child(scene)
+	get_tree().paused = true
 	self._print("Player is now level %d!" % PlayerManager.stats.level)
 	var levelUpdates: Dictionary = await scene.confirm_choices
 
@@ -57,6 +62,9 @@ func _handlePlayerLevelUp() -> void:
 
 	PlayerManager.getAbilityBook().addAbility(levelUpdates.ability)
 	remove_child(scene)
+	get_tree().paused = false
+	self.levelUp = null
+	self.isLevelingUp = false
 
 func _setupEnemies() -> void:
 	var stats: CharacterStats = CharacterStats.new()
@@ -181,6 +189,10 @@ func _playerTurn() -> void:
 
 	if ability.cooldown:
 		self.player.abilityBook.updateAbilityCooldown(abilityId, self.currentRound + ability.cooldown)
+
+	# @TODO: Feelsbadman
+	if self.isLevelingUp:
+		await self.levelUp.confirm_choices
 
 	self._endTurn()
 
