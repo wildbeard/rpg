@@ -54,8 +54,8 @@ func _handlePlayerLevelUp() -> void:
 	for key in levelUpdates.stats:
 		print("Setting %s to %d" % [key, levelUpdates.stats[key]])
 		PlayerManager.stats[key] = levelUpdates.stats[key]
-		
 
+	PlayerManager.getAbilityBook().addAbility(levelUpdates.ability)
 	remove_child(scene)
 
 func _setupEnemies() -> void:
