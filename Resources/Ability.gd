@@ -9,6 +9,7 @@ enum DamageType {
 enum AbilityType {
 	ACTIVE,
 	PASSIVE,
+	PASSIVE_DEFENSE,
 }
 
 enum TargetType {

@@ -30,8 +30,10 @@ func getHealed(amount: int) -> void:
 
 func mitigateDamage(incoming: int, damageType: Ability.DamageType) -> int:
 	var equipment: Dictionary = self.getEquippedItems()
+	var passives: Array[Ability] = self.abilityBook.getDefensivePassives()
 	var dmg: int = incoming
 	var totalDef: float = 0
+	var outgoingDmg: float = 0
 
 	for key in equipment:
 		var item = equipment[key]
@@ -43,7 +45,16 @@ func mitigateDamage(incoming: int, damageType: Ability.DamageType) -> int:
 		if item is Armor:
 			totalDef += item.getDamageReduction(damageType == Ability.DamageType.PHYSICAL)
 
-	return floori(dmg - (dmg * totalDef))
+	outgoingDmg = (dmg - (dmg * totalDef))
+
+	for passive in passives:
+		if passive.damage_stat_type.has(damageType):
+			var key: int = passive.damage_stat_type.find(damageType)
+
+			if key >= 0:
+				outgoingDmg -= (outgoingDmg * (passive.damage_stat_modifier[key] / 100))
+	
+	return floori(outgoingDmg)
 
 func _on_health_change(health: int) -> void:
 	%HPBar.value = health

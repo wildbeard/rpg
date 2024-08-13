@@ -5,12 +5,13 @@
 [resource]
 script = ExtResource("1_juifi")
 name = "Absolute Unit"
-description = "Your sheer size reduces physical damage dealt to you by 5%."
-ability_type = 1
-cooldown = 0
+description = "Reduces %dt taken by %pdr."
+ability_type = 2
 target_type = 0
 damage_type = 0
 element_type = 0
+cooldown = 0
+number_of_hits = 1
 damage_base = 0
 damage_weap_modifier = 0.0
 damage_stat_type = Array[int]([0])

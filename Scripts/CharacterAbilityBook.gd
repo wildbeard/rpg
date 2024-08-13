@@ -22,16 +22,20 @@ func getAbility(name: String) -> Ability:
 	return self._allAbilities[name]
 
 func getActiveAbilities() -> Array[Ability]:
-	return self.getAbilities(Ability.AbilityType.ACTIVE)
+	return self.getAbilities([Ability.AbilityType.ACTIVE])
 
 func getPassiveAbilities() -> Array[Ability]:
-	return self.getAbilities(Ability.AbilityType.PASSIVE)
+	return self.getAbilities([Ability.AbilityType.PASSIVE])
 
-func getAbilities(abilityType: Ability.AbilityType) -> Array[Ability]:
+func getDefensivePassives() -> Array[Ability]:
+	return self.getAbilities([Ability.AbilityType.PASSIVE_DEFENSE])
+
+func getAbilities(abilityTypes: Array[Ability.AbilityType]) -> Array[Ability]:
 	var a: Array[Ability] = []
 
 	for name in self._abilities:
-		if self._abilities[name].ability_type == abilityType:
+		var abilityType: Ability.AbilityType = self._abilities[name].ability_type
+		if abilityTypes.has(abilityType):
 			a.push_back(self._abilities[name])
 
 	return a
