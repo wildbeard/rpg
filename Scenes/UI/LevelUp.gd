@@ -21,10 +21,12 @@ var _statNameStrings: Dictionary = {
 	"speed": "The Fast"
 }
 var _pointsAvail: int = 5
-var _cards: Array[Control] = []
+var _cards: Array[AbilityCard] = []
+var _selectedAbility: Ability = null
 
-@onready var button = $Button
+@onready var button = $CanvasLayer/Button
 @onready var _allAbilities = preload("res://Resources/Abilities.tres")
+@onready var canvas_layer = $CanvasLayer
 
 func _ready() -> void:
 	%LevelLabel.text = "Level: %d" % self.stats.level
@@ -44,24 +46,30 @@ func _setupAbilityCards() -> void:
 		var card: Control = load("res://Scenes/UI/AbilityCard.tscn").instantiate()
 		card.ability = rngAbilities[idx]
 		card.position = Vector2(64 + (idx * 280), 256)
+		card.z_index = 10
+		card.connect("select", self._handleAbilitySelect)
+		card.connect("deselect", self._deselectAbility)
 		self._cards.push_back(card)
-		add_child(card)
+		self.canvas_layer.add_child(card)
 
 func _getRandomAbilities() -> Array[Ability]:
 	var abilities: Array[Ability] = []
 
 	for i in 3:
-		var ability: Ability = self._allAbilities.resource_list.filter(func(a: Ability): return !abilities.has(a)).pick_random()
+		var ability: Ability = self._allAbilities.resource_list.filter(func(a: Ability): return !abilities.has(a) && a.name).pick_random()
 		abilities.push_back(ability)
 
 	return abilities
 
 func _rerollAbilities() -> void:
 	for card in self._cards:
+		card.disconnect("select", self._handleAbilitySelect)
+		card.disconnect("deselect", self._deselectAbility)
 		card.queue_free()
 
 	self._cards = []
 	self._setupAbilityCards()
+	self._deselectAbility()
 
 func _buildStatControls() -> void:
 	for key in self._statNameStrings:
@@ -136,7 +144,7 @@ func _getStatLabel(key: String) -> Label:
 
 func _confirmChoices() -> void:
 	var updates: Dictionary = {
-		"skills": [],
+		"skills": [self._selectedAbility],
 		"stats": {},
 	}
 
@@ -144,3 +152,13 @@ func _confirmChoices() -> void:
 		updates.stats[key] = self.stats[key] + self._statsLocal[key]
 
 	self.confirm_choices.emit(updates)
+
+func _handleAbilitySelect(ability: Ability) -> void:
+	self._selectedAbility = ability
+
+	for card in self._cards:
+		if card.ability != self._selectedAbility:
+			card.handleExit(false)
+
+func _deselectAbility() -> void:
+	self._selectedAbility = null

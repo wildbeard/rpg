@@ -11,72 +11,69 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l8rfa")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 1150.0
 offset_bottom = 646.0
+mouse_filter = 2
 color = Color(0.138698, 0.386936, 0.786164, 1)
 
-[node name="ConfirmBtn" type="Button" parent="."]
+[node name="ConfirmBtn" type="Button" parent="CanvasLayer"]
 unique_name_in_owner = true
-layout_mode = 0
 offset_left = 544.0
 offset_top = 584.0
 offset_right = 615.0
 offset_bottom = 615.0
 text = "Confirm"
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
+[node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 505.0
 offset_top = 43.0
-offset_right = 648.0
-offset_bottom = 88.0
+offset_right = 691.0
+offset_bottom = 101.0
 theme_override_font_sizes/font_size = 42
 text = "LEVEL UP"
 
-[node name="HBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 64.0
 offset_top = 128.0
 offset_right = 221.0
 offset_bottom = 211.0
 
-[node name="LevelLabel" type="Label" parent="HBoxContainer"]
+[node name="LevelLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Level:"
 
-[node name="XpLabel" type="Label" parent="HBoxContainer"]
+[node name="XpLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "EXP:"
 
-[node name="NextLevelLabel" type="Label" parent="HBoxContainer"]
+[node name="NextLevelLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Next Level:"
 
-[node name="StatsBox" type="VBoxContainer" parent="."]
+[node name="StatsBox" type="VBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-layout_mode = 0
 offset_left = 912.0
 offset_top = 128.0
 offset_right = 1087.0
 offset_bottom = 387.0
 theme_override_constants/separation = 10
 
-[node name="GridContainer" type="GridContainer" parent="StatsBox"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/StatsBox"]
 layout_mode = 2
 columns = 2
 
-[node name="PointsAvail" type="Label" parent="StatsBox/GridContainer"]
+[node name="PointsAvail" type="Label" parent="CanvasLayer/StatsBox/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Points Available: 5"
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
+[node name="Button" type="Button" parent="CanvasLayer"]
 offset_left = 64.0
 offset_top = 528.0
 offset_right = 118.0
