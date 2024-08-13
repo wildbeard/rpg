@@ -20,8 +20,15 @@ func _ready() -> void:
 	self.ability_icon.texture = self.ability.icon
 	# Ugh, globals
 	self.ability_description.text = self.ability.getDescription(PlayerManager.player)
-	self.ability_element.text = "Element: %s" % self.ability.getElementType()
-	self.cooldown.text = "CD: %d" % self.ability.cooldown
+
+	var elType: String = self.ability.getElementType()
+
+	if elType == 'N/A':
+		self.ability_element.text = 'Neutral'
+	else:
+		self.ability_element.text = "%s" % self.ability.getElementType()
+
+	self.cooldown.text = str(self.ability.cooldown)
 
 	self.connect("mouse_entered", func(): self._mouseEvent(true))
 	self.connect("mouse_exited", func(): self._mouseEvent(false))

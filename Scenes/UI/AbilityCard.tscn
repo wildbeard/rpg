@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://hum7wrx7xsqd"]
+[gd_scene load_steps=5 format=3 uid="uid://hum7wrx7xsqd"]
 
 [ext_resource type="Script" path="res://Scenes/UI/AbilityCard.gd" id="1_2c7wq"]
 [ext_resource type="Resource" uid="uid://btwmm8poerxxm" path="res://Resources/Abilities/slash.tres" id="2_hpioh"]
 [ext_resource type="Texture2D" uid="uid://bc2u4s45rlpww" path="res://Assets/fire-strike.png" id="3_atjhy"]
+[ext_resource type="Texture2D" uid="uid://drfnel5fkvlks" path="res://Assets/Circle.png" id="4_cm0gs"]
 
 [node name="AbilityCard" type="Control"]
 layout_mode = 3
@@ -49,16 +50,28 @@ text = "Description!"
 
 [node name="AbilityElement" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.0
+offset_left = 8.0
 offset_top = 216.0
-offset_right = 128.0
+offset_right = 248.0
 offset_bottom = 240.0
 text = "Element"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 1.0
+offset_right = 286.0
+offset_bottom = 65.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_cm0gs")
 
 [node name="Cooldown" type="Label" parent="."]
 layout_mode = 0
-offset_left = 144.0
-offset_top = 216.0
-offset_right = 232.0
-offset_bottom = 240.0
-text = "CD: 0"
+offset_left = 233.0
+offset_top = 5.0
+offset_right = 257.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(0.151276, 0.151276, 0.151276, 1)
+theme_override_colors/font_shadow_color = Color(0.60933, 0.60933, 0.60933, 1)
+text = "CD"
