@@ -143,8 +143,12 @@ func _getStatLabel(key: String) -> Label:
 	return label
 
 func _confirmChoices() -> void:
+	# @TODO: A better way to validate this + error messaging
+	if !self._selectedAbility || self._pointsAvail > 0:
+		return
+
 	var updates: Dictionary = {
-		"skills": [self._selectedAbility],
+		"ability": self._selectedAbility,
 		"stats": {},
 	}
 
