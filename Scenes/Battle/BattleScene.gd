@@ -67,35 +67,19 @@ func _handlePlayerLevelUp() -> void:
 	self.isLevelingUp = false
 
 func _setupEnemies() -> void:
-	var stats: CharacterStats = CharacterStats.new()
-	stats.baseHp = 1
-	stats.strength = 1
-
 	for e in 3:
 		var enemy: Character
 
 		if randi_range(0, 1) == 0:
-			enemy = load("res://Scenes/Enemies/GoblinWizard.tscn").instantiate()
-			stats.intelligence = 5
-			stats.wisdom = 5
+			enemy = preload("res://Scenes/Enemies/GoblinWizard.tscn").instantiate()
 		else:
-			enemy = characterScene.instantiate()
+			enemy = preload("res://Scenes/Enemies/Goblin.tscn").instantiate()
 			var inventory: InventoryData = load("res://Resources/Inventory/TestEnemyInv.tres")
 			enemy.inventory = inventory
 
 		var enemyPos: Vector2 = %EnemyMarker.global_position
-		enemy.characterStats = stats
-		enemy.healthComponent.health = stats.maxHp
-		enemy.healthComponent.max_health = stats.maxHp
-		enemyPos.y = enemyPos.y + (e * 64)
+		enemyPos.y = enemyPos.y + (e * 42)
 		enemy.global_position = enemyPos
-		enemy.abilityBook = CharacterAbilityBook.new(enemy)
-
-		if enemy is GoblinWizard:
-			enemy.abilityBook.addAbility(preload("res://Resources/Abilities/fireball.tres"))
-		else:
-			enemy.abilityBook.addAbility(preload("res://Resources/Abilities/slash.tres"))
-			enemy.get_node("Sprite2D").modulate = Color(0.45, 0.24, 0.033)
 
 		self.enemies.append(enemy)
 		add_child(enemy)
@@ -200,6 +184,10 @@ func _enemyTurn(attacker: Character) -> void:
 	# @todo: Pick from turn order and get a player
 	var target: Character = self.player
 	var ability: Ability = attacker.abilityBook.getActiveAbilities().pick_random()
+
+	# :) Nice bug
+	if !ability:
+		self._endTurn()
 
 	# @todo: Fix this still has a chance the ability is on cooldown
 	if attacker.abilityBook.isAbilityOnCooldown(ability.name, self.currentRound):

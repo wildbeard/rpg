@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://owimgqj0nts4"]
+[gd_scene load_steps=5 format=3 uid="uid://owimgqj0nts4"]
 
 [ext_resource type="Script" path="res://Scenes/Battle/BattleScene.gd" id="1_v6jxt"]
+[ext_resource type="Theme" uid="uid://cuis5kb05xw7j" path="res://Themes/Base.tres" id="2_kt07e"]
 [ext_resource type="PackedScene" uid="uid://b1uqd3e03sssl" path="res://Scenes/TargetIndicator.tscn" id="2_qstoe"]
 [ext_resource type="PackedScene" uid="uid://dnqpet1gb0qg3" path="res://Scenes/UI/AbilitySelect.tscn" id="3_hiuu0"]
 
@@ -10,27 +11,29 @@ script = ExtResource("1_v6jxt")
 
 [node name="PlayerMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(153, 314)
+position = Vector2(24, 64)
 
 [node name="EnemyMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(1027, 149)
+position = Vector2(288, 40)
 
 [node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 341.0
-offset_top = 28.0
-offset_right = 693.0
-offset_bottom = 78.0
+offset_left = 65.0
+offset_top = 5.0
+offset_right = 247.0
+offset_bottom = 16.0
 columns = 2
 
 [node name="Round" type="Label" parent="GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("2_kt07e")
 text = "Round:"
 
 [node name="CharacterTurn" type="Label" parent="GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("2_kt07e")
 text = "Character Turn:"
 
 [node name="AbilitySelector" parent="." instance=ExtResource("3_hiuu0")]
@@ -38,10 +41,10 @@ unique_name_in_owner = true
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 386.0
-offset_top = 528.0
-offset_right = 386.0
-offset_bottom = 528.0
+offset_left = 8.0
+offset_top = 120.0
+offset_right = 8.0
+offset_bottom = 120.0
 grow_horizontal = 1
 grow_vertical = 1
 
@@ -58,10 +61,13 @@ offset_left = 26.0
 offset_top = -43.0
 offset_right = 66.0
 offset_bottom = -3.0
+scale = Vector2(0.35, 0.35)
 
 [node name="CombatText" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
-offset_left = 712.0
-offset_top = 339.0
-offset_right = 1126.0
-offset_bottom = 622.0
+offset_left = 88.0
+offset_top = 48.0
+offset_right = 248.0
+offset_bottom = 104.0
+theme = ExtResource("2_kt07e")
+scroll_following = true

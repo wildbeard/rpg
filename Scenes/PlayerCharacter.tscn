@@ -5,15 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://c8rkr1oeb2sxi" path="res://Scenes/HealthComponent.tscn" id="3_j6120"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5m2sd"]
-size = Vector2(32, 32)
+size = Vector2(16, 16)
 
 [node name="Character" type="StaticBody2D" node_paths=PackedStringArray("healthComponent")]
 input_pickable = true
 script = ExtResource("1_4ayff")
 healthComponent = NodePath("HealthComponent")
+isInBattle = null
+isEnemy = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.275667, 0.820854, 0.354144, 1)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_1m87o")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_j6120")]
@@ -21,9 +24,9 @@ texture = ExtResource("2_1m87o")
 [node name="HPBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
 offset_left = -16.0
-offset_top = -30.0
+offset_top = -24.0
 offset_right = 16.0
-offset_bottom = 2.0
+offset_bottom = 8.0
 scale = Vector2(1, 0.25)
 max_value = 10.0
 value = 2.0

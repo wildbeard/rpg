@@ -16,7 +16,7 @@ func hoverTarget(idx: int) -> void:
 	var pos: Vector2 = self.target.global_position
 
 	# @todo: Figure out a better way to position this
-	pos.y -= 42
+	pos.y -= 24
 	global_position = pos
 
 func _input(event: InputEvent) -> void:

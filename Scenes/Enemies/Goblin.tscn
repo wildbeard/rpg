@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://76rwnwndg4eu"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/Goblin.gd" id="1_2b1pv"]
+[ext_resource type="Texture2D" uid="uid://b7dyr8p0c3lq6" path="res://Assets/white-square.png" id="3_taypm"]
+[ext_resource type="PackedScene" uid="uid://c8rkr1oeb2sxi" path="res://Scenes/HealthComponent.tscn" id="5_3vhns"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5m2sd"]
+size = Vector2(16, 16)
+
+[node name="Goblin" type="StaticBody2D" node_paths=PackedStringArray("healthComponent")]
+input_pickable = true
+script = ExtResource("1_2b1pv")
+healthComponent = NodePath("HealthComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.45, 0.24, 0.033, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_taypm")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_3vhns")]
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -12.0
+offset_top = -15.0
+offset_right = 20.0
+offset_bottom = 17.0
+scale = Vector2(0.75, 0.15)
+max_value = 10.0
+value = 2.0
+texture_under = ExtResource("3_taypm")
+texture_progress = ExtResource("3_taypm")
+tint_under = Color(0.854711, 0, 0.0941688, 1)
+tint_progress = Color(0.237216, 0.737493, 1.92523e-07, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5m2sd")

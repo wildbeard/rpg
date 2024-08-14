@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://hum7wrx7xsqd"]
+[gd_scene load_steps=6 format=3 uid="uid://hum7wrx7xsqd"]
 
 [ext_resource type="Script" path="res://Scenes/UI/AbilityCard.gd" id="1_2c7wq"]
 [ext_resource type="Resource" uid="uid://btwmm8poerxxm" path="res://Resources/Abilities/slash.tres" id="2_hpioh"]
 [ext_resource type="Texture2D" uid="uid://bc2u4s45rlpww" path="res://Assets/fire-strike.png" id="3_atjhy"]
+[ext_resource type="Theme" uid="uid://cuis5kb05xw7j" path="res://Themes/Base.tres" id="3_bfoup"]
 [ext_resource type="Texture2D" uid="uid://drfnel5fkvlks" path="res://Assets/Circle.png" id="4_cm0gs"]
 
 [node name="AbilityCard" type="Control"]
@@ -20,58 +21,61 @@ ability = ExtResource("2_hpioh")
 
 [node name="BG" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_right = 96.0
+offset_bottom = 128.0
 mouse_filter = 2
 
 [node name="AbilityName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = 232.0
-offset_bottom = 48.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 86.0
+offset_bottom = 16.0
+theme = ExtResource("3_bfoup")
 text = "Ability Name!"
 horizontal_alignment = 1
 
 [node name="AbilityIcon" type="Sprite2D" parent="."]
-position = Vector2(128, 88)
+position = Vector2(48, 32)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_atjhy")
 
 [node name="AbilityDescription" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 152.0
-offset_right = 232.0
-offset_bottom = 208.0
+offset_left = 8.0
+offset_top = 49.0
+offset_right = 88.0
+offset_bottom = 89.0
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("3_bfoup")
 bbcode_enabled = true
 text = "Description!"
 
 [node name="AbilityElement" type="Label" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 216.0
-offset_right = 248.0
-offset_bottom = 240.0
+offset_top = 104.0
+offset_right = 88.0
+offset_bottom = 120.0
+theme = ExtResource("3_bfoup")
 text = "Element"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 222.0
-offset_top = 1.0
-offset_right = 286.0
-offset_bottom = 65.0
-scale = Vector2(0.5, 0.5)
+offset_left = 80.0
+offset_right = 144.0
+offset_bottom = 64.0
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_cm0gs")
 
 [node name="Cooldown" type="Label" parent="."]
 layout_mode = 0
-offset_left = 233.0
-offset_top = 5.0
-offset_right = 257.0
-offset_bottom = 29.0
+offset_left = 84.0
+offset_top = 4.0
+offset_right = 108.0
+offset_bottom = 28.0
+theme = ExtResource("3_bfoup")
 theme_override_colors/font_color = Color(0.151276, 0.151276, 0.151276, 1)
 theme_override_colors/font_shadow_color = Color(0.60933, 0.60933, 0.60933, 1)
 text = "CD"

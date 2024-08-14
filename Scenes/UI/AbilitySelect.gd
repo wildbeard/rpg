@@ -31,6 +31,7 @@ func _addButtons(abils: Array[Ability]) -> void:
 		var btn: Button = Button.new()
 		btn.name = "ability_%s" % a.name
 		btn.text = a.name
+		btn.theme = preload("res://Themes/Base.tres")
 		btn.set_meta("ability_id", a.name)
 		btn.connect("pressed", func(): self._handle_button_click(a.name))
 		self.gridContainer.add_child(btn)

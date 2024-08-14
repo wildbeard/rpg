@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://bi8gln0j7vq4n" path="res://Assets/basic-staff.png" id="5_nhiuc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5m2sd"]
-size = Vector2(32, 32)
+size = Vector2(16, 16)
 
-[node name="Character" type="StaticBody2D" node_paths=PackedStringArray("healthComponent")]
+[node name="GoblinWizard" type="StaticBody2D" node_paths=PackedStringArray("healthComponent")]
 input_pickable = true
 script = ExtResource("1_8j4ri")
 healthComponent = NodePath("HealthComponent")
@@ -18,22 +18,23 @@ inventory = ExtResource("2_ktlnw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.193525, 0.793556, 0.749009, 1)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4x2pl")
 
 [node name="Hat" type="Sprite2D" parent="."]
-position = Vector2(1.78814e-07, -24)
-scale = Vector2(1.16304, 1.16304)
+position = Vector2(0.365501, -16.6563)
+scale = Vector2(0.61076, 0.638586)
 texture = ExtResource("3_t3a6w")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_gvtl8")]
 
 [node name="HPBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
-offset_left = -16.0
-offset_top = -30.0
-offset_right = 16.0
-offset_bottom = 2.0
-scale = Vector2(1, 0.25)
+offset_left = -12.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 12.0
+scale = Vector2(0.75, 0.15)
 max_value = 10.0
 value = 2.0
 texture_under = ExtResource("2_4x2pl")
@@ -45,5 +46,6 @@ tint_progress = Color(0.237216, 0.737493, 1.92523e-07, 1)
 shape = SubResource("RectangleShape2D_5m2sd")
 
 [node name="Weapon" type="Sprite2D" parent="."]
-position = Vector2(-13, 1)
+position = Vector2(-8, 0)
+scale = Vector2(0.342105, 0.342105)
 texture = ExtResource("5_nhiuc")

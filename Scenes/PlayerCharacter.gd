@@ -12,6 +12,10 @@ func _init() -> void:
 	self.abilityBook.addAbility(self.abilityBook.getAbility("Dawn Of A Hundred Blades"))
 	self.abilityBook.addAbility(self.abilityBook.getAbility("Fire Overload"))
 	self.abilityBook.addAbility(self.abilityBook.getAbility("Magical Affinity"))
+	self.abilityBook.addAbility(self.abilityBook.getAbility("Absolute Unit"))
+
+func _ready() -> void:
+	self._setupHealthComponent()
 
 # @todo: Load data from a resource/json file
 func _loadPlayerData() -> void:

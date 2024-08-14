@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkgmdond4ml6f"]
+[gd_scene load_steps=3 format=3 uid="uid://bkgmdond4ml6f"]
 
 [ext_resource type="Script" path="res://Scenes/UI/LevelUp.gd" id="1_l8rfa"]
+[ext_resource type="Theme" uid="uid://cuis5kb05xw7j" path="res://Themes/Base.tres" id="2_11yph"]
 
 [node name="Control" type="Control"]
 process_mode = 2
@@ -15,17 +16,18 @@ script = ExtResource("1_l8rfa")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-offset_right = 1150.0
-offset_bottom = 646.0
+offset_right = 320.0
+offset_bottom = 184.0
 mouse_filter = 2
 color = Color(0.138698, 0.386936, 0.786164, 1)
 
 [node name="ConfirmBtn" type="Button" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 544.0
-offset_top = 584.0
-offset_right = 615.0
-offset_bottom = 615.0
+offset_left = 128.0
+offset_top = 160.0
+offset_right = 192.0
+offset_bottom = 175.0
+theme = ExtResource("2_11yph")
 text = "Confirm"
 
 [node name="Label" type="Label" parent="CanvasLayer"]
@@ -37,32 +39,35 @@ theme_override_font_sizes/font_size = 42
 text = "LEVEL UP"
 
 [node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 64.0
-offset_top = 128.0
-offset_right = 221.0
-offset_bottom = 211.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 165.0
+offset_bottom = 91.0
 
 [node name="LevelLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("2_11yph")
 text = "Level:"
 
 [node name="XpLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("2_11yph")
 text = "EXP:"
 
 [node name="NextLevelLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("2_11yph")
 text = "Next Level:"
 
 [node name="StatsBox" type="VBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 912.0
-offset_top = 128.0
-offset_right = 1087.0
-offset_bottom = 387.0
+offset_left = 184.0
+offset_top = 8.0
+offset_right = 312.0
+offset_bottom = 176.0
 theme_override_constants/separation = 10
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/StatsBox"]
@@ -72,12 +77,14 @@ columns = 2
 [node name="PointsAvail" type="Label" parent="CanvasLayer/StatsBox/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("2_11yph")
 text = "Points Available: 5"
 
 [node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 64.0
-offset_top = 528.0
-offset_right = 118.0
-offset_bottom = 559.0
+offset_left = 8.0
+offset_top = 136.0
+offset_right = 53.0
+offset_bottom = 151.0
+theme = ExtResource("2_11yph")
 text = "Reroll
 "

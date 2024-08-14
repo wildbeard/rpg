@@ -45,7 +45,7 @@ func _setupAbilityCards() -> void:
 	for idx in rngAbilities.size():
 		var card: Control = load("res://Scenes/UI/AbilityCard.tscn").instantiate()
 		card.ability = rngAbilities[idx]
-		card.position = Vector2(64 + (idx * 280), 256)
+		card.position = Vector2(18 + (idx * 70), 64)
 		card.z_index = 10
 		card.connect("select", self._handleAbilitySelect)
 		card.connect("deselect", self._deselectAbility)
@@ -80,6 +80,7 @@ func _buildControlRow(key: String) -> GridContainer:
 	c.columns = 2
 	# Label
 	var l: Label = Label.new()
+	l.theme = preload("res://Themes/Base.tres")
 	l.name = "%s_label" % key
 	l.text = "%s: %d+%d" % [self._statNameStrings[key], self.stats[key], self._statsLocal[key]]
 	c.add_child(l)
