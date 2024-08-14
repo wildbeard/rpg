@@ -23,11 +23,11 @@ texture = ExtResource("2_1m87o")
 
 [node name="HPBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
-offset_left = -16.0
-offset_top = -24.0
-offset_right = 16.0
-offset_bottom = 8.0
-scale = Vector2(1, 0.25)
+offset_left = -12.0
+offset_top = -17.0
+offset_right = 20.0
+offset_bottom = 15.0
+scale = Vector2(0.75, 0.15)
 max_value = 10.0
 value = 2.0
 texture_under = ExtResource("2_1m87o")

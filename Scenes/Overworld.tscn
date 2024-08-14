@@ -537,25 +537,23 @@ shape = SubResource("CircleShape2D_yw7mw")
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_left = 136.0
-offset_top = 128.0
-offset_right = 304.0
-offset_bottom = 528.0
+offset_left = 128.0
+offset_top = 8.0
+offset_right = 296.0
+offset_bottom = 408.0
 script = ExtResource("4_b4t8v")
 
 [node name="CharacterInfo" type="Control" parent="CanvasLayer/InventoryUI"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -120.0
-offset_top = 8.0
-offset_right = 8.0
-offset_bottom = 392.0
+offset_bottom = 152.0
 script = ExtResource("6_fovy4")
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/InventoryUI/CharacterInfo"]
 layout_mode = 0
 offset_right = 120.0
-offset_bottom = 384.0
+offset_bottom = 152.0
 
 [node name="Control" type="Control" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer"]
 layout_mode = 2
@@ -563,7 +561,7 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control"]
 layout_mode = 2
 offset_right = 120.0
-offset_bottom = 384.0
+offset_bottom = 152.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -580,33 +578,38 @@ size_flags_stretch_ratio = 3.0
 [node name="Label" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Nameplate"]
 layout_mode = 0
 offset_left = 2.0
-offset_right = 106.0
+offset_right = 102.0
 offset_bottom = 18.0
+theme = ExtResource("11_wvd0o")
 theme_override_font_sizes/font_size = 12
 text = "Wild Beard"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Stats" type="Control" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
+theme = ExtResource("11_wvd0o")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats"]
 layout_mode = 0
 offset_left = -2.0
-offset_top = -7.0
+offset_top = -15.0
 offset_right = 102.0
-offset_bottom = 124.0
+offset_bottom = 25.0
+theme = ExtResource("11_wvd0o")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("11_wvd0o")
 
 [node name="PhysPower" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 text = "Phys. Damage:"
 
 [node name="PhysPowerValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer"]
@@ -614,18 +617,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 horizontal_alignment = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("11_wvd0o")
 
 [node name="PhysDef" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 text = "Phys. Defense:"
 
 [node name="PhysDefValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer2"]
@@ -633,18 +637,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 horizontal_alignment = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("11_wvd0o")
 
 [node name="MgkPower" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 text = "Mgk. Power:"
 
 [node name="MgkPowerValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer3"]
@@ -652,18 +657,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 horizontal_alignment = 2
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("11_wvd0o")
 
 [node name="MgkDef" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 text = "Mgk. Defense:"
 
 [node name="MgkDefValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Stats/VBoxContainer/HBoxContainer4"]
@@ -671,30 +677,33 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 horizontal_alignment = 2
 
 [node name="Attributes" type="Control" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
+theme = ExtResource("11_wvd0o")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes"]
 layout_mode = 0
 offset_left = -2.0
-offset_top = -7.0
+offset_top = -4.0
 offset_right = 102.0
-offset_bottom = 124.0
+offset_bottom = 52.0
+theme = ExtResource("11_wvd0o")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("11_wvd0o")
 
 [node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 text = "Vitality:"
 
 [node name="VitalityValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer"]
@@ -702,18 +711,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 horizontal_alignment = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("11_wvd0o")
 
 [node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 text = "Strength:"
 
 [node name="StrengthValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer2"]
@@ -721,18 +731,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 horizontal_alignment = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("11_wvd0o")
 
 [node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 text = "Intelligence:"
 
 [node name="IntelligenceValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer3"]
@@ -740,18 +751,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 horizontal_alignment = 2
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("11_wvd0o")
 
 [node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 text = "Wisdom:"
 
 [node name="WisdomValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer4"]
@@ -759,18 +771,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 horizontal_alignment = 2
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("11_wvd0o")
 
 [node name="Vitality" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 text = "Dexterity:"
 
 [node name="DexterityValue" type="Label" parent="CanvasLayer/InventoryUI/CharacterInfo/PanelContainer/Control/MarginContainer/VBoxContainer/Attributes/VBoxContainer/HBoxContainer5"]
@@ -778,15 +791,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
-theme_override_font_sizes/font_size = 10
+theme = ExtResource("11_wvd0o")
 horizontal_alignment = 2
 
 [node name="Inventory" parent="CanvasLayer/InventoryUI" instance=ExtResource("4_jsg3b")]
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 0
-offset_left = 8.0
-offset_top = 239.0
-offset_right = 160.0
-offset_bottom = 392.0
+offset_left = 96.0
+offset_top = -1.0
+offset_right = 184.0
+offset_bottom = 88.0
 
 [node name="GrabbedSlot" parent="CanvasLayer/InventoryUI" instance=ExtResource("5_fo1ve")]
 visible = false
@@ -797,73 +811,73 @@ layout_mode = 0
 [node name="EqupmentInventory" type="Panel" parent="CanvasLayer/InventoryUI"]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 8.0
-offset_right = 160.0
-offset_bottom = 234.0
+offset_top = -1.0
+offset_right = 88.0
+offset_bottom = 127.0
 script = ExtResource("8_ghy36")
 
 [node name="Head" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
-offset_left = 60.0
-offset_top = 17.0
-offset_right = 92.0
-offset_bottom = 49.0
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 24.0
 slotType = 0
 
 [node name="Neck" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
-offset_left = 60.0
-offset_top = 57.0
-offset_right = 92.0
-offset_bottom = 89.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 48.0
+offset_bottom = 48.0
 slotType = 1
 
 [node name="Chest" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
-offset_left = 60.0
-offset_top = 97.0
-offset_right = 92.0
-offset_bottom = 129.0
+offset_left = 32.0
+offset_top = 56.0
+offset_right = 48.0
+offset_bottom = 72.0
 slotType = 2
 
 [node name="MainHand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
-offset_left = 16.0
-offset_top = 97.0
-offset_right = 48.0
-offset_bottom = 129.0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 24.0
+offset_bottom = 48.0
 slotType = 6
 
 [node name="OffHand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
-offset_left = 104.0
-offset_top = 97.0
-offset_right = 136.0
-offset_bottom = 129.0
+offset_left = 56.0
+offset_top = 32.0
+offset_right = 72.0
+offset_bottom = 48.0
 slotType = 7
 
 [node name="Leg" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
-offset_left = 60.0
-offset_top = 137.0
-offset_right = 92.0
-offset_bottom = 169.0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 48.0
+offset_bottom = 96.0
 slotType = 4
 
 [node name="Boot" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
-offset_left = 60.0
-offset_top = 177.0
-offset_right = 92.0
-offset_bottom = 209.0
+offset_left = 32.0
+offset_top = 104.0
+offset_right = 48.0
+offset_bottom = 120.0
 slotType = 5
 
 [node name="Hand" parent="CanvasLayer/InventoryUI/EqupmentInventory" instance=ExtResource("5_fo1ve")]
 layout_mode = 2
-offset_left = 16.0
-offset_top = 177.0
-offset_right = 48.0
-offset_bottom = 209.0
+offset_left = 8.0
+offset_top = 104.0
+offset_right = 24.0
+offset_bottom = 120.0
 slotType = 3
 
 [node name="Button" type="Button" parent="."]

@@ -3,6 +3,10 @@ class_name LevelUpScene
 
 signal confirm_choices(updates: Dictionary)
 
+@onready var _allAbilities = preload("res://Resources/Abilities.tres")
+@onready var reroll = $CanvasLayer/ButtonHBox/RerollBtn
+@onready var canvas_layer = $CanvasLayer
+
 var stats: PlayerStats = PlayerManager.stats
 var _statsLocal: Dictionary = {
 	"strength": 0,
@@ -23,10 +27,8 @@ var _statNameStrings: Dictionary = {
 var _pointsAvail: int = 5
 var _cards: Array[AbilityCard] = []
 var _selectedAbility: Ability = null
+var _hasConfirmedAttrs: bool = false
 
-@onready var button = $CanvasLayer/Button
-@onready var _allAbilities = preload("res://Resources/Abilities.tres")
-@onready var canvas_layer = $CanvasLayer
 
 func _ready() -> void:
 	%LevelLabel.text = "Level: %d" % self.stats.level
@@ -35,9 +37,7 @@ func _ready() -> void:
 	self._buildStatControls()
 
 	%ConfirmBtn.connect("button_up", self._confirmChoices)
-
-	self._setupAbilityCards()
-	self.button.connect("button_up", self._rerollAbilities)
+	self.reroll.connect("button_up", self._rerollAbilities)
 
 func _setupAbilityCards() -> void:
 	var rngAbilities: Array[Ability] = self._getRandomAbilities()
@@ -45,7 +45,7 @@ func _setupAbilityCards() -> void:
 	for idx in rngAbilities.size():
 		var card: Control = load("res://Scenes/UI/AbilityCard.tscn").instantiate()
 		card.ability = rngAbilities[idx]
-		card.position = Vector2(18 + (idx * 70), 64)
+		card.position = Vector2(12 + (idx * 100), 32)
 		card.z_index = 10
 		card.connect("select", self._handleAbilitySelect)
 		card.connect("deselect", self._deselectAbility)
@@ -144,6 +144,14 @@ func _getStatLabel(key: String) -> Label:
 	return label
 
 func _confirmChoices() -> void:
+	if !self._hasConfirmedAttrs:
+		self._setupAbilityCards()
+		self.reroll.show()
+		%StatsBox.hide()
+		%ConfirmBtn.text = 'Confirm'
+		self._hasConfirmedAttrs = true
+		return
+
 	# @TODO: A better way to validate this + error messaging
 	if !self._selectedAbility || self._pointsAvail > 0:
 		return
