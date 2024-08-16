@@ -6,7 +6,7 @@ signal switch_scene(scene: Node)
 @onready var inventoryUI = $CanvasLayer/InventoryUI
 @onready var equpmentInventory = $CanvasLayer/InventoryUI/EqupmentInventory
 @onready var grabbedSlot = $CanvasLayer/InventoryUI/GrabbedSlot
-@onready var button = $Button
+@onready var button = $CanvasLayer/Button
 
 func _ready() -> void:
 	self.inventoryUI.setPlayerInventory(self.player.inventoryData)
@@ -15,6 +15,7 @@ func _ready() -> void:
 
 func togglePlayerInventory() -> void:
 	self.inventoryUI.visible = !self.inventoryUI.visible
+	self.button.visible = !self.inventoryUI.visible
 
 func _switchScene() -> void:
 	var s: Node = preload("res://Scenes/Battle/BattleScene.tscn").instantiate()

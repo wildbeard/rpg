@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 signal toggle_inventory()
 
-const ACCELERATION: float = 1000.0
-const SPEED: float = 300.0
+const ACCELERATION: float = 500.0
+const SPEED: float = 100.0
 
 @export var inventoryData: InventoryData
 

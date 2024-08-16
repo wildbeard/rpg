@@ -529,9 +529,22 @@ scale = Vector2(0.4375, 0.4375)
 texture = ExtResource("2_d7pie")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("CircleShape2D_yw7mw")
+shape = SubResource("RectangleShape2D_vafd8")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+visible = false
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 120.0
+offset_top = 16.0
+offset_right = 203.0
+offset_bottom = 31.0
+theme = ExtResource("11_wvd0o")
+text = "Enter Battle"
 
 [node name="InventoryUI" type="Control" parent="CanvasLayer"]
 visible = false
@@ -879,11 +892,3 @@ offset_top = 104.0
 offset_right = 24.0
 offset_bottom = 120.0
 slotType = 3
-
-[node name="Button" type="Button" parent="."]
-offset_left = 120.0
-offset_top = 16.0
-offset_right = 203.0
-offset_bottom = 31.0
-theme = ExtResource("11_wvd0o")
-text = "Enter Battle"
