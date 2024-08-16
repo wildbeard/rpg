@@ -1,5 +1,6 @@
 class_name CharacterAbilityBook
 
+var _abilityResourceList: ResourceList = preload("res://Resources/Abilities.tres")
 var _abilities: Dictionary
 var _cooldowns: Dictionary
 var _player: Character
@@ -8,9 +9,11 @@ var _allAbilities: Dictionary
 func _init(player: Character) -> void:
 	self._player = player
 
-	for file in DirAccess.get_files_at("res://Resources/Abilities/"):
-		var filePath: String = "res://Resources/Abilities/" + file.replace(".import", "")
-		var ability: Ability = load(filePath) as Ability
+	if !self._abilityResourceList.is_connected("resource_loaded", self._setupAbilities):
+		self._abilityResourceList.connect("resource_loaded", self._setupAbilities)
+
+func _setupAbilities(list: Array) -> void:
+	for ability in list as Array[Ability]:
 		self._allAbilities[ability.name] = ability
 
 # @todo: I think ideally abilities are loaded from somewhere but this
@@ -19,6 +22,10 @@ func addAbility(ability: Ability) -> void:
 	self._abilities[ability.name] = ability
 
 func getAbility(name: String) -> Ability:
+	if !self._allAbilities.has(name):
+		push_error("Ability (%s) not found" % name)
+		return
+
 	return self._allAbilities[name]
 
 func getActiveAbilities() -> Array[Ability]:

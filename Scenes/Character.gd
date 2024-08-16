@@ -14,9 +14,6 @@ func _init() -> void:
 	self.characterStats = CharacterStats.new()
 	self.abilityBook = CharacterAbilityBook.new(self)
 
-func _ready() -> void:
-	pass
-
 func _setupHealthComponent() -> void:
 	self.healthComponent.connect("no_health", _on_no_health)
 	self.healthComponent.connect("health_changed", _on_health_change)

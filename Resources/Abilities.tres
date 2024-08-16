@@ -5,4 +5,3 @@
 [resource]
 script = ExtResource("1_t5flb")
 resource_dir = "res://Resources/Abilities"
-test_var = "res://Resources/Abilities"

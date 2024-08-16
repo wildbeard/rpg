@@ -7,14 +7,14 @@ func _init() -> void:
 	self.isEnemy = false
 	# Abilities
 	self.abilityBook = CharacterAbilityBook.new(self)
+
+func _ready() -> void:
 	self.abilityBook.addAbility(self.abilityBook.getAbility("Slash"))
 	self.abilityBook.addAbility(self.abilityBook.getAbility("Fireball"))
 	self.abilityBook.addAbility(self.abilityBook.getAbility("Dawn Of A Hundred Blades"))
 	self.abilityBook.addAbility(self.abilityBook.getAbility("Fire Overload"))
 	self.abilityBook.addAbility(self.abilityBook.getAbility("Magical Affinity"))
 	self.abilityBook.addAbility(self.abilityBook.getAbility("Absolute Unit"))
-
-func _ready() -> void:
 	self._setupHealthComponent()
 
 # @todo: Load data from a resource/json file
