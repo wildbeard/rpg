@@ -3,7 +3,7 @@ extends Control
 signal target_changed(value: Character)
 signal target_selected(value: Character)
 
-var enemies: Array[Character]
+var enemies: Array[Enemy]
 var targetIdx: int = -1
 var target: Character = null
 
@@ -40,5 +40,5 @@ func _handleEvent(event: InputEventKey) -> void:
 
 	self.hoverTarget(idx)
 
-func _getTargetable() -> Array[Character]:
-	return self.enemies.filter(func(c: Character): return !c.isDead)
+func _getTargetable() -> Array[Enemy]:
+	return self.enemies.filter(func(c: Enemy): return !c.isDead)

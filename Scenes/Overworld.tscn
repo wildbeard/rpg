@@ -1,17 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkjwfkcpixt1k"]
+[gd_scene load_steps=10 format=3 uid="uid://bkjwfkcpixt1k"]
 
 [ext_resource type="Script" path="res://Scenes/Overworld.gd" id="1_v6y05"]
 [ext_resource type="PackedScene" uid="uid://ds8vgdb2kfoqc" path="res://Scenes/OverworldPlayer.tscn" id="2_6dtq7"]
 [ext_resource type="Resource" uid="uid://b10vlnbnwagos" path="res://Resources/Inventory/PlayerInventory.tres" id="3_bv270"]
-[ext_resource type="Texture2D" uid="uid://b7dyr8p0c3lq6" path="res://Assets/white-square.png" id="3_ug7q3"]
 [ext_resource type="PackedScene" uid="uid://bxgm25l3dfaqy" path="res://Scenes/UI/Inventory/PlayerStats.tscn" id="4_750ks"]
+[ext_resource type="PackedScene" uid="uid://dgmfk3fx0yjs" path="res://Scenes/Enemies/GoblinWizard.tscn" id="4_qoj4n"]
 [ext_resource type="PackedScene" uid="uid://nje37fe1rrsn" path="res://Scenes/UI/Inventory/PlayerEquipment.tscn" id="5_bdd1j"]
 [ext_resource type="Script" path="res://Scenes/UI/Inventory/InventoryUI.gd" id="6_fwyt2"]
 [ext_resource type="PackedScene" uid="uid://c5u0erd17k4id" path="res://Scenes/UI/Inventory/Inventory.tscn" id="6_va107"]
 [ext_resource type="PackedScene" uid="uid://ubl64gd04tjy" path="res://Scenes/UI/Inventory/InventorySlot.tscn" id="9_4halc"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_wgfgk"]
-radius = 28.2843
 
 [node name="Overworld" type="Node2D"]
 script = ExtResource("1_v6y05")
@@ -20,23 +17,17 @@ script = ExtResource("1_v6y05")
 position = Vector2(42, 47)
 inventoryData = ExtResource("3_bv270")
 
-[node name="Enemy" type="StaticBody2D" parent="."]
-position = Vector2(276, 52)
+[node name="GoblinWizard" parent="." instance=ExtResource("4_qoj4n")]
+position = Vector2(264, 56)
 
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-modulate = Color(0.193525, 0.793556, 0.749009, 1)
-scale = Vector2(0.53125, 0.53125)
-texture = ExtResource("3_ug7q3")
-
-[node name="Area2D" type="Area2D" parent="Enemy"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D"]
-shape = SubResource("CircleShape2D_wgfgk")
+[node name="HPBar" parent="GoblinWizard" index="3"]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 320.0
@@ -101,3 +92,5 @@ visible = false
 layout_mode = 2
 offset_left = 262.0
 offset_right = 278.0
+
+[editable path="GoblinWizard"]

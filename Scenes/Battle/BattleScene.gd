@@ -1,11 +1,15 @@
 extends Node2D
 class_name BattleScene
 
-signal switch_scene(scene: Node)
+signal switch_scene(scene: Node2D)
 
 @export var player: Character
-@export var enemies: Array[Character]
+@export var enemies: Array[Enemy]
 
+# DO NOT PRELOAD OVERWORLD
+# Causes the scene to act as if it were corrupt
+# See: https://github.com/godotengine/godot/issues/70985
+var overworld: PackedScene = load("res://Scenes/Overworld.tscn")
 var endBattleScene: PackedScene = preload("res://Scenes/UI/EndBattleModal.tscn")
 var levelUpScene: PackedScene = preload("res://Scenes/UI/LevelUp.tscn")
 var characterScene: PackedScene = preload("res://Scenes/Character.tscn")
@@ -250,7 +254,7 @@ func _endBattle(didPlayerDie: bool) -> void:
 		add_child(scn)
 
 func _on_resart() -> void:
-	print("restarting")
+	self.switch_scene.emit(self.overworld.instantiate())
 
 func _print(txt: String) -> void:
 	%CombatText.text = %CombatText.text + "\n%s" % txt

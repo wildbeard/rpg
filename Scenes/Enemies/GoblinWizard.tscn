@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgmfk3fx0yjs"]
+[gd_scene load_steps=9 format=3 uid="uid://dgmfk3fx0yjs"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/GoblinWizard.gd" id="1_8j4ri"]
 [ext_resource type="Texture2D" uid="uid://b7dyr8p0c3lq6" path="res://Assets/white-square.png" id="2_4x2pl"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5m2sd"]
 size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t40jj"]
+radius = 24.0
 
 [node name="GoblinWizard" type="StaticBody2D" node_paths=PackedStringArray("healthComponent")]
 input_pickable = true
@@ -49,3 +52,8 @@ shape = SubResource("RectangleShape2D_5m2sd")
 position = Vector2(-8, 0)
 scale = Vector2(0.342105, 0.342105)
 texture = ExtResource("5_nhiuc")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_t40jj")
