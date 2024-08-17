@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://nje37fe1rrsn"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Inventory/PlayerEquipment.gd" id="1_ltips"]
+[ext_resource type="PackedScene" uid="uid://ubl64gd04tjy" path="res://Scenes/UI/Inventory/InventorySlot.tscn" id="2_6x4vf"]
+
+[node name="PlayerEquipment" type="Control"]
+layout_mode = 3
+anchor_right = 0.2
+anchor_bottom = 0.622
+offset_bottom = 0.0399933
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ltips")
+
+[node name="Head" parent="." instance=ExtResource("2_6x4vf")]
+layout_mode = 0
+offset_left = 24.0
+offset_right = 40.0
+slotType = 0
+
+[node name="Neck" parent="." instance=ExtResource("2_6x4vf")]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 40.0
+offset_bottom = 40.0
+slotType = 1
+
+[node name="Chest" parent="." instance=ExtResource("2_6x4vf")]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 40.0
+offset_bottom = 64.0
+slotType = 2
+
+[node name="MainHand" parent="." instance=ExtResource("2_6x4vf")]
+layout_mode = 2
+offset_top = 48.0
+offset_bottom = 64.0
+slotType = 6
+
+[node name="OffHand" parent="." instance=ExtResource("2_6x4vf")]
+layout_mode = 2
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 64.0
+offset_bottom = 64.0
+slotType = 7
+
+[node name="Legs" parent="." instance=ExtResource("2_6x4vf")]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 72.0
+offset_right = 40.0
+offset_bottom = 88.0
+slotType = 4
+
+[node name="Boots" parent="." instance=ExtResource("2_6x4vf")]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 96.0
+offset_right = 40.0
+offset_bottom = 112.0
+slotType = 5
+
+[node name="Hands" parent="." instance=ExtResource("2_6x4vf")]
+layout_mode = 2
+offset_top = 96.0
+offset_bottom = 112.0
+slotType = 3

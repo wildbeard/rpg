@@ -6,7 +6,7 @@ class_name CharacterStats
 @export var level: int = 1
 @export var xpGiven: int:
 	get:
-		return self.level * 50
+		return self.level * 150
 
 # 10 * level HP + stats
 var maxHp: int = baseHp:

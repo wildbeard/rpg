@@ -12,7 +12,10 @@ func _init() -> void:
 
 func ready() -> void:
 	for fileName in DirAccess.get_files_at(self.resource_dir):
-		var res: Resource = load(self.resource_dir + '/' + fileName.replace('.import', ''))
+		# Regex Replace is weird.
+		fileName = fileName.replace('.import', '')
+		fileName = fileName.replace('.remap', '')
+		var res: Resource = load(self.resource_dir + '/' + fileName)
 		self.resource_list.push_back(res)
 
 	self.resource_loaded.emit(self.resource_list)

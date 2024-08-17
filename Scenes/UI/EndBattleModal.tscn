@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d06r8u8md5fah"]
+[gd_scene load_steps=3 format=3 uid="uid://d06r8u8md5fah"]
 
 [ext_resource type="Script" path="res://Scenes/UI/EndBattleModal.gd" id="1_b6ksm"]
+[ext_resource type="Theme" uid="uid://cuis5kb05xw7j" path="res://Themes/Base.tres" id="2_4gnpp"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -13,34 +14,38 @@ script = ExtResource("1_b6ksm")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 1149.0
-offset_bottom = 648.0
+offset_right = 320.0
+offset_bottom = 184.0
 color = Color(0.197937, 0.197937, 0.197937, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 488.0
-offset_top = 44.0
-offset_right = 709.0
-offset_bottom = 89.0
-theme_override_font_sizes/font_size = 32
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 312.0
+offset_bottom = 24.0
+theme = ExtResource("2_4gnpp")
 text = "Battle Success"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BattleStatsList" type="ItemList" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 367.0
-offset_top = 186.0
-offset_right = 821.0
-offset_bottom = 403.0
-theme_override_font_sizes/font_size = 16
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 312.0
+offset_bottom = 144.0
+theme = ExtResource("2_4gnpp")
+theme_override_font_sizes/font_size = 8
 same_column_width = true
 
 [node name="GoAgain" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 547.0
-offset_top = 438.0
-offset_right = 624.0
-offset_bottom = 469.0
-text = "Go Again"
+offset_left = 112.0
+offset_top = 160.0
+offset_right = 203.0
+offset_bottom = 175.0
+theme = ExtResource("2_4gnpp")
+text = "Back to World"

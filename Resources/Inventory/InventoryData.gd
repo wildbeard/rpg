@@ -28,6 +28,9 @@ var equipmentMap: Dictionary = {
 }
 
 func onSlotClicked(index: int, button: int, slot: Slot) -> void:
+	# "Picks up" the data from the slot so it is no longer in the same spot
+	if button != MOUSE_BUTTON_RIGHT:
+		slot.setDataEmpty()
 	inventory_interact.emit(self, index, button, slot)
 
 func getData(index: int) -> SlotData:
@@ -66,7 +69,6 @@ func dropSlotData(slotData: SlotData, index: int) -> SlotData:
 		existing = slotData
 	else:
 		self._setData(index, slotData)
-		# self.data[index] = slotData
 
 	inventory_updated.emit(self)
 

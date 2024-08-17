@@ -2,21 +2,28 @@ extends Node2D
 
 signal switch_scene(scene: Node)
 
-@onready var player = $CharacterBody2D
-@onready var inventoryUI = $CanvasLayer/InventoryUI
-@onready var equpmentInventory = $CanvasLayer/InventoryUI/EqupmentInventory
-@onready var grabbedSlot = $CanvasLayer/InventoryUI/GrabbedSlot
-@onready var button = $CanvasLayer/Button
+@onready var player: OverworldPlayer = $OverworldPlayer
+#@onready var equpmentInventory = $CanvasLayer/InventoryUI/EqupmentInventory
+#@onready var grabbedSlot = $CanvasLayer/InventoryUI/GrabbedSlot
+#@onready var button = $CanvasLayer/Button
+@onready var enemy: StaticBody2D = $Enemy
+@onready var playerInventory: PlayerInventory = $CanvasLayer/InventoryUI/PanelContainer/MarginContainer/Inventory
 
 func _ready() -> void:
-	self.inventoryUI.setPlayerInventory(self.player.inventoryData)
+	self.playerInventory.setPlayerInventory(self.player.inventoryData)
 	self.player.connect("toggle_inventory", togglePlayerInventory)
-	self.button.pressed.connect(_switchScene)
+	#self.button.pressed.connect(_switchScene)
+	#self.enemy.connect("start_battle", self._on_start_battle)
 
 func togglePlayerInventory() -> void:
-	self.inventoryUI.visible = !self.inventoryUI.visible
-	self.button.visible = !self.inventoryUI.visible
+	%InventoryUI.visible = !%InventoryUI.visible
+	# self.button.visible = !self.inventoryUI.visible
 
 func _switchScene() -> void:
 	var s: Node = preload("res://Scenes/Battle/BattleScene.tscn").instantiate()
-	switch_scene.emit(s)
+	self.switch_scene.emit(s)
+
+func _on_start_battle(enemies: Array[Character]) -> void:
+	var scene: BattleScene = preload("res://Scenes/Battle/BattleScene.tscn").instantiate()
+	scene.enemies = enemies
+	self.switch_scene.emit(scene)

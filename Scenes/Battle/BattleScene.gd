@@ -1,7 +1,10 @@
 extends Node2D
+class_name BattleScene
 
-@export var player : Character
-@export var enemies : Array[Character]
+signal switch_scene(scene: Node)
+
+@export var player: Character
+@export var enemies: Array[Character]
 
 var endBattleScene: PackedScene = preload("res://Scenes/UI/EndBattleModal.tscn")
 var levelUpScene: PackedScene = preload("res://Scenes/UI/LevelUp.tscn")
@@ -26,8 +29,8 @@ var battleStats: Dictionary = {
 }
 
 func _ready() -> void:
-	self._setup()
-	
+	call_deferred("_setup")
+
 func _setup() -> void:
 	self._setupPlayer()
 	self._setupEnemies()
@@ -67,21 +70,23 @@ func _handlePlayerLevelUp() -> void:
 	self.isLevelingUp = false
 
 func _setupEnemies() -> void:
-	for e in 3:
-		var enemy: Character
+	if !self.enemies.size():
+		for e in 3:
+			var enemy: Character
 
-		if randi_range(0, 1) == 0:
-			enemy = preload("res://Scenes/Enemies/GoblinWizard.tscn").instantiate()
-		else:
-			enemy = preload("res://Scenes/Enemies/Goblin.tscn").instantiate()
-			var inventory: InventoryData = load("res://Resources/Inventory/TestEnemyInv.tres")
-			enemy.inventory = inventory
+			if randi_range(0, 1) == 0:
+				enemy = preload("res://Scenes/Enemies/GoblinWizard.tscn").instantiate()
+			else:
+				enemy = preload("res://Scenes/Enemies/Goblin.tscn").instantiate()
 
+			self.enemies.push_back(enemy)
+
+	for e in self.enemies.size():
+		var enemy: Character = self.enemies[e]
 		var enemyPos: Vector2 = %EnemyMarker.global_position
 		enemyPos.y = enemyPos.y + (e * 42)
 		enemy.global_position = enemyPos
 
-		self.enemies.append(enemy)
 		add_child(enemy)
 		# Allows us to detect hover/click with the color rect in the BG
 		# Using z_index or top_level does not work
@@ -240,9 +245,12 @@ func _endBattle(didPlayerDie: bool) -> void:
 		var scn: EndBattleModal = self.endBattleScene.instantiate()
 		self.battleStats.xp_remaining = PlayerManager.stats.xpRemaining
 		scn.battleStats = self.battleStats
-		scn.connect("restart", func(): self._setup())
+		scn.connect("restart", self._on_resart)
 		%CombatText.text = ""
 		add_child(scn)
+
+func _on_resart() -> void:
+	print("restarting")
 
 func _print(txt: String) -> void:
 	%CombatText.text = %CombatText.text + "\n%s" % txt

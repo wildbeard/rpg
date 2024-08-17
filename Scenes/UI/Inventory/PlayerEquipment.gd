@@ -1,13 +1,13 @@
-extends Panel
+extends Control
 
 @onready var head: Slot = $Head # 0
 @onready var chest: Slot = $Chest
 @onready var neck: Slot = $Neck
 @onready var offHand: Slot = $OffHand
 @onready var mainHand: Slot = $MainHand
-@onready var leg: Slot = $Leg
-@onready var hand: Slot = $Hand
-@onready var boot: Slot = $Boot # 7
+@onready var leg: Slot = $Legs
+@onready var hand: Slot = $Hands
+@onready var boot: Slot = $Boots # 7
 
 var invSlots: Array[String] = [
 	"head",

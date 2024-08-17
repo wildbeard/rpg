@@ -1,0 +1,168 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxgm25l3dfaqy"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Inventory/CharacterInfoUI.gd" id="1_5c5p4"]
+[ext_resource type="Theme" uid="uid://cuis5kb05xw7j" path="res://Themes/Base.tres" id="1_o7cfv"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5c5p4")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 117.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="PhysDmgHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PhysDamLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PhysDmgHBox"]
+layout_mode = 2
+theme = ExtResource("1_o7cfv")
+text = "Phys. Damage:"
+
+[node name="PhysDamVal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PhysDmgHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o7cfv")
+horizontal_alignment = 2
+
+[node name="PhysDefHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PhysDefLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PhysDefHBox"]
+layout_mode = 2
+theme = ExtResource("1_o7cfv")
+text = "Phys. Defense:"
+
+[node name="PhysDefVal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PhysDefHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o7cfv")
+horizontal_alignment = 2
+
+[node name="MgkDmgHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MgkDmgLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MgkDmgHBox"]
+layout_mode = 2
+theme = ExtResource("1_o7cfv")
+text = "Mgk. Power:"
+
+[node name="MgkDmgVal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MgkDmgHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o7cfv")
+horizontal_alignment = 2
+
+[node name="MgkDefHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MgkDefLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MgkDefHBox"]
+layout_mode = 2
+theme = ExtResource("1_o7cfv")
+text = "Mgk. Defense:"
+
+[node name="MgkDefVal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MgkDefHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o7cfv")
+horizontal_alignment = 2
+
+[node name="AttributesContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VitalityHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer"]
+layout_mode = 2
+
+[node name="VitLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/VitalityHBox"]
+layout_mode = 2
+theme = ExtResource("1_o7cfv")
+text = "Vitality:"
+
+[node name="VitalityVal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/VitalityHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o7cfv")
+horizontal_alignment = 2
+
+[node name="StrengthHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer"]
+layout_mode = 2
+
+[node name="StrLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/StrengthHBox"]
+layout_mode = 2
+theme = ExtResource("1_o7cfv")
+text = "Strength:"
+
+[node name="StrengthVal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/StrengthHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o7cfv")
+horizontal_alignment = 2
+
+[node name="IntelligenceHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer"]
+layout_mode = 2
+
+[node name="IntLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/IntelligenceHBox"]
+layout_mode = 2
+theme = ExtResource("1_o7cfv")
+text = "Intelligence:"
+
+[node name="IntelligenceVal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/IntelligenceHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o7cfv")
+horizontal_alignment = 2
+
+[node name="WisdomHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer"]
+layout_mode = 2
+
+[node name="WisLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/WisdomHBox"]
+layout_mode = 2
+theme = ExtResource("1_o7cfv")
+text = "Wisdom:"
+
+[node name="WisdomVal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/WisdomHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o7cfv")
+horizontal_alignment = 2
+
+[node name="DexterityHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer"]
+layout_mode = 2
+
+[node name="DexLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/DexterityHBox"]
+layout_mode = 2
+theme = ExtResource("1_o7cfv")
+text = "Dexterity:"
+
+[node name="DextiertyVal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AttributesContainer/DexterityHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o7cfv")
+horizontal_alignment = 2
