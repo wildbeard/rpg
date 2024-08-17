@@ -74,9 +74,10 @@ func _handlePlayerLevelUp() -> void:
 	self.isLevelingUp = false
 
 func _setupEnemies() -> void:
+	print(self.enemies.size())
 	if !self.enemies.size():
 		for e in 3:
-			var enemy: Character
+			var enemy: Enemy
 
 			if randi_range(0, 1) == 0:
 				enemy = preload("res://Scenes/Enemies/GoblinWizard.tscn").instantiate()
