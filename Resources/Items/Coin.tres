@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://ucq43hqmvkrb"]
+
+[ext_resource type="Script" path="res://Resources/Item.gd" id="1_gh7xq"]
+[ext_resource type="Texture2D" uid="uid://dijca8wmhjyiy" path="res://Assets/coins.png" id="2_1l25k"]
+
+[resource]
+script = ExtResource("1_gh7xq")
+texture = ExtResource("2_1l25k")
+itemType = 8
+name = "Coins"
+description = "Sweet, sweet gold."
+price = 1
+rarity = 0
+maxStack = 9999
+isStackable = true

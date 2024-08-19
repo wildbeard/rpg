@@ -18,7 +18,7 @@ statModifiers = {
 }
 texture = ExtResource("2_25btq")
 itemType = 2
-name = "Leader Body"
+name = "Leather Body"
 description = "Better than nothing."
 price = 10
 rarity = 0
