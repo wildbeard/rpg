@@ -30,6 +30,9 @@ var battleStats: Dictionary = {
 	"highest_hit": 0,
 	"xp_gained": 0,
 	"xp_remaining": 0,
+	"enemies_killed": 0,
+	"gold_earned": 0,
+	"item_rewards": [],
 }
 
 func _ready() -> void:
@@ -177,9 +180,13 @@ func _playerTurn() -> void:
 				self.battleStats.highest_hit = dmg
 
 		if target.isDead:
-			remove_child(target)
+			var rewards: Dictionary = target.generateRewards()
+			self.battleStats.gold_earned += rewards.gold
+			self.battleStats.item_rewards.push_back(rewards.item)
+			self.battleStats.enemies_killed += 1
 			self.battleStats.xp_gained += target.characterStats.xpGiven
 			player.characterStats.currentXp += target.characterStats.xpGiven
+			remove_child(target)
 
 	if ability.cooldown:
 		self.player.abilityBook.updateAbilityCooldown(abilityId, self.currentRound + ability.cooldown)
