@@ -54,6 +54,9 @@ func isAbilityOnCooldown(name: String, currRound: int) -> bool:
 func updateAbilityCooldown(name: String, tillRound: int) -> void:
 	self._cooldowns[name] = tillRound
 
+func resetCooldowns() -> void:
+	self._cooldowns = {}
+
 # Returns the pre-mitigation damage or 0 if unavailable
 func useAbility(ability: Ability) -> Array[int]:
 	if !self._abilities.has(ability.name):
