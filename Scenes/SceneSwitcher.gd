@@ -10,7 +10,6 @@ func _ready() -> void:
 	add_child(self.currentScene)
 
 func _on_switch_scene(scene) -> void:
-	var nextScene = scene
 	self.currentScene.queue_free()
 	self.currentScene = scene
 
