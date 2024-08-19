@@ -255,6 +255,7 @@ func _endBattle(didPlayerDie: bool) -> void:
 		add_child(scn)
 
 func _on_resart() -> void:
+	self.remove_child(self.player)
 	self.switch_scene.emit(self.overworld.instantiate())
 
 func _print(txt: String) -> void:
