@@ -35,15 +35,15 @@ func _ready():
 		%ItemTexture.texture = item.texture
 
 		if item is Armor:
-			%ItemDescLabel.text = "Phys. Def: %d\n" % item.physicalDefense
-			%ItemDescLabel.text += "Mgk. Def: %d\n" % item.magicalDefense
+			%ItemDescLabel.text = "Phys. Def: +%d\n" % item.physicalDefense
+			%ItemDescLabel.text += "Mgk. Def: +%d\n" % item.magicalDefense
 			for modKey in item.statModifiers.keys().filter(func(k: String): return item.statModifiers[k] != 0):
-				%ItemDescLabel.text += "%s: %d\n" % [modKey.to_upper(), item.statModifiers[modKey]]
+				%ItemDescLabel.text += "%s: +%d\n" % [modKey.to_upper(), item.statModifiers[modKey]]
 		elif item is Weapon:
-			%ItemDescLabel.text = "Phys. Dmg: %d\n" % item.physicalDamage
-			%ItemDescLabel.text += "Mgk. Dmg: %d\n" % item.magicalDamage
+			%ItemDescLabel.text = "Phys. Dmg: +%d\n" % item.physicalDamage
+			%ItemDescLabel.text += "Mgk. Dmg: +%d\n" % item.magicalDamage
 			for modKey in item.statModifiers.keys().filter(func(k: String): return item.statModifiers[k] != 0):
-				%ItemDescLabel.text += "%s: %d\n" % [modKey.to_upper(), item.statModifiers[modKey]]
+				%ItemDescLabel.text += "%s: +%d\n" % [modKey.to_upper(), item.statModifiers[modKey]]
 		else:
 			%ItemDescLabel.text = item.description
 
