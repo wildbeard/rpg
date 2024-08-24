@@ -1,5 +1,7 @@
 extends Control
 
+@export var inventory_data: InventoryData
+
 @onready var head: Slot = $Head # 0
 @onready var chest: Slot = $Chest
 @onready var neck: Slot = $Neck
@@ -32,19 +34,26 @@ var equipmentMap: Dictionary = {
 }
 
 func setInventoryData(data: InventoryData) -> void:
-	data.inventory_updated.connect(populateInventory)
-	self.populateInventory(data)
+	inventory_data = data
+	self._populateInventory(data)
 
-func populateInventory(data: InventoryData) -> void:
+	if !inventory_data.inventory_updated.is_connected(_populateInventory):
+		inventory_data.inventory_updated.connect(_populateInventory)
+
+func _populateInventory(data: InventoryData) -> void:
+	inventory_data = data
+
 	for key in self.equipmentMap:
 		var slot: Slot = self._getSlot(key)
 		var sd: SlotData = data.getData(key)
 
-		if !slot.is_connected("slot_clicked", data.onSlotClicked):
-			slot.slot_clicked.connect(data.onSlotClicked)
+		if !slot.is_connected("slot_clicked", inventory_data.on_slot_clicked):
+			slot.slot_clicked.connect(inventory_data.on_slot_clicked)
 
 		if sd:
-			slot.setItem(sd)
+			slot.setSlotData(sd)
+		else:
+			slot.setDataEmpty()
 
 func _getSlot(key: int) -> Slot:
 	return self[self.equipmentMap[key]]

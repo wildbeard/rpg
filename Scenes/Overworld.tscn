@@ -1,16 +1,28 @@
-[gd_scene load_steps=12 format=4 uid="uid://bkjwfkcpixt1k"]
+[gd_scene load_steps=14 format=4 uid="uid://bkjwfkcpixt1k"]
 
 [ext_resource type="Script" path="res://Scenes/Overworld.gd" id="1_v6y05"]
 [ext_resource type="TileSet" uid="uid://cqjxxb4ui1r55" path="res://Assets/Tiles/DungeonTiles.tres" id="2_4sj57"]
 [ext_resource type="PackedScene" uid="uid://ds8vgdb2kfoqc" path="res://Scenes/OverworldPlayer.tscn" id="2_6dtq7"]
 [ext_resource type="Resource" uid="uid://b10vlnbnwagos" path="res://Resources/Inventory/PlayerInventory.tres" id="3_bv270"]
-[ext_resource type="PackedScene" uid="uid://bxgm25l3dfaqy" path="res://Scenes/UI/Inventory/PlayerStats.tscn" id="4_750ks"]
 [ext_resource type="PackedScene" uid="uid://dgmfk3fx0yjs" path="res://Scenes/Enemies/GoblinWizard.tscn" id="4_qoj4n"]
-[ext_resource type="PackedScene" uid="uid://nje37fe1rrsn" path="res://Scenes/UI/Inventory/PlayerEquipment.tscn" id="5_bdd1j"]
-[ext_resource type="Script" path="res://Scenes/UI/Inventory/InventoryUI.gd" id="6_fwyt2"]
-[ext_resource type="PackedScene" uid="uid://c5u0erd17k4id" path="res://Scenes/UI/Inventory/Inventory.tscn" id="6_va107"]
-[ext_resource type="PackedScene" uid="uid://ubl64gd04tjy" path="res://Scenes/UI/Inventory/InventorySlot.tscn" id="9_4halc"]
+[ext_resource type="PackedScene" uid="uid://4vhlbg375urc" path="res://Scenes/UI/Inventory/InventoryUI.tscn" id="8_fknny"]
 [ext_resource type="Theme" uid="uid://cuis5kb05xw7j" path="res://Themes/Base.tres" id="11_5g6im"]
+[ext_resource type="PackedScene" uid="uid://c5d1it4agie1b" path="res://Scenes/InventoryContainer.tscn" id="12_3lhuy"]
+[ext_resource type="Texture2D" uid="uid://cfg2lb5y5wpjl" path="res://Assets/Tiles/DungeonProps.png" id="14_tetnx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i7ut"]
+atlas = ExtResource("14_tetnx")
+region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_googl"]
+atlas = ExtResource("14_tetnx")
+region = Rect2(128, 192, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ruwhr"]
+size = Vector2(32, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k54q8"]
+radius = 27.0185
 
 [node name="Overworld" type="Node2D"]
 script = ExtResource("1_v6y05")
@@ -51,75 +63,62 @@ position = Vector2(264, 56)
 [node name="HPBar" parent="GoblinWizard" index="3"]
 visible = false
 
+[node name="Chest" parent="." instance=ExtResource("12_3lhuy")]
+position = Vector2(152, 64)
+collision_mask = 2
+closed_sprite = SubResource("AtlasTexture_0i7ut")
+opened_sprite = SubResource("AtlasTexture_googl")
+
+[node name="Collision" parent="Chest" index="1"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_ruwhr")
+
+[node name="InteractCollision" parent="Chest/Area2D" index="0"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_k54q8")
+
+[node name="OpenLabel" parent="Chest/CanvasLayer" index="0"]
+offset_left = 109.0
+offset_top = 44.0
+offset_right = 211.0
+offset_bottom = 52.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 320.0
-offset_bottom = 181.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/InventoryUI"]
+layout_mode = 0
+mouse_filter = 2
+color = Color(0.109804, 0.0588235, 0.188235, 0.870588)
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/InventoryUI"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 180.0
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/InventoryUI/PanelContainer"]
-layout_mode = 2
-color = Color(0.386734, 0.255187, 0.589504, 1)
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/InventoryUI/PanelContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Inventory" type="Control" parent="CanvasLayer/InventoryUI/PanelContainer/MarginContainer"]
+[node name="InventeryWrapper" parent="CanvasLayer/InventoryUI/PanelContainer/MarginContainer" instance=ExtResource("8_fknny")]
 layout_mode = 2
-script = ExtResource("6_fwyt2")
-
-[node name="PlayerStats" parent="CanvasLayer/InventoryUI/PanelContainer/MarginContainer/Inventory" instance=ExtResource("4_750ks")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 4.0
-offset_top = 28.0
-offset_right = 4.0
-offset_bottom = 200.0
-grow_horizontal = 1
-grow_vertical = 1
-size_flags_horizontal = 2
-
-[node name="PlayerEquipment" parent="CanvasLayer/InventoryUI/PanelContainer/MarginContainer/Inventory" instance=ExtResource("5_bdd1j")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 140.0
-offset_top = 28.0
-offset_right = 140.0
-offset_bottom = 200.0
-grow_horizontal = 1
-grow_vertical = 1
-size_flags_horizontal = 2
-
-[node name="Inventory" parent="CanvasLayer/InventoryUI/PanelContainer/MarginContainer/Inventory" instance=ExtResource("6_va107")]
-layout_mode = 0
-offset_left = 220.0
-offset_top = 44.0
-offset_right = 308.0
-offset_bottom = 132.0
-
-[node name="GrabbedSlot" parent="CanvasLayer/InventoryUI/PanelContainer/MarginContainer/Inventory" instance=ExtResource("9_4halc")]
-visible = false
-layout_mode = 2
-offset_left = 262.0
-offset_right = 278.0
 
 [node name="EnterBattleBtn" type="Button" parent="CanvasLayer"]
 offset_left = 128.0
@@ -130,3 +129,4 @@ theme = ExtResource("11_5g6im")
 text = "Enter Battle"
 
 [editable path="GoblinWizard"]
+[editable path="Chest"]

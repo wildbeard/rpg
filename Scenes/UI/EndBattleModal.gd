@@ -58,6 +58,7 @@ func _getTotalGold() -> int:
 
 	return total
 
+# @TODO: I don't think this should be the responsibility of this class. Move to Inventory.
 func _updatePlayerGold(income: int) -> void:
 	var remaining: int = income
 	var foundData: Array[SlotData] = PlayerManager.inventory.data.filter(func(sd: SlotData): return sd && sd.item.name == 'Coins')

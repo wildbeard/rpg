@@ -1,7 +1,7 @@
 extends PanelContainer
 class_name Slot
 
-signal slot_clicked(index: int, button: int)
+signal slot_clicked(index: int, button: int, slot: Slot)
 
 @export var slotType: InventoryTypes.SlotType = InventoryTypes.SlotType.REGULAR
 
@@ -22,9 +22,10 @@ func _on_gui_input(event: InputEvent) -> void:
 					index = index * -1 - 1
 			slot_clicked.emit(index, event.button_index, self)
 
-func setItem(data: SlotData) -> void:
+func setSlotData(data: SlotData) -> void:
 	self.slotData = data
 	self.tooltip_text = "%s\n%s" % [data.item.name, data.item.description]
+
 	%ItemIcon.texture = data.item.texture
 
 	if data.item.isStackable:
@@ -36,5 +37,6 @@ func setItem(data: SlotData) -> void:
 
 func setDataEmpty() -> void:
 	self.slotData = null
+	self.tooltip_text = ""
 	%ItemIcon.texture = null
 	%ItemQty.text = ""

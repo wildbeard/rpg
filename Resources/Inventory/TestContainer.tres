@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=10 format=3 uid="uid://4404tu14an10"]
+
+[ext_resource type="Script" path="res://Resources/Inventory/SlotData.gd" id="1_jh6ou"]
+[ext_resource type="Resource" uid="uid://ucq43hqmvkrb" path="res://Resources/Items/Coin.tres" id="2_dd614"]
+[ext_resource type="Resource" uid="uid://svqhom1qdjwv" path="res://Resources/Items/MagicHat.tres" id="3_r7cby"]
+[ext_resource type="Resource" uid="uid://qjd3iyuph2tw" path="res://Resources/Items/DragonChainbody.tres" id="4_i4lnp"]
+[ext_resource type="Script" path="res://Resources/Inventory/InventoryData.gd" id="5_pe7ka"]
+
+[sub_resource type="Resource" id="Resource_hwow1"]
+script = ExtResource("1_jh6ou")
+item = ExtResource("2_dd614")
+quantity = 25
+
+[sub_resource type="Resource" id="Resource_oipd8"]
+script = ExtResource("1_jh6ou")
+item = ExtResource("3_r7cby")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_ihoij"]
+script = ExtResource("1_jh6ou")
+item = ExtResource("4_i4lnp")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_vli64"]
+script = ExtResource("1_jh6ou")
+item = ExtResource("2_dd614")
+quantity = 25
+
+[resource]
+script = ExtResource("5_pe7ka")
+data = Array[ExtResource("1_jh6ou")]([SubResource("Resource_hwow1"), SubResource("Resource_oipd8"), SubResource("Resource_ihoij"), SubResource("Resource_vli64"), null, null, null, null, null, null, null, null, null, null, null, null])
+equipment = {
+"boot": null,
+"chest": null,
+"hand": null,
+"head": null,
+"leg": null,
+"mainHand": null,
+"neck": null,
+"offHand": null
+}

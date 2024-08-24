@@ -1,18 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5u0erd17k4id"]
+[gd_scene load_steps=3 format=3 uid="uid://ul6gwh7jcld2"]
 
 [ext_resource type="Script" path="res://Scenes/UI/Inventory/Inventory.gd" id="1_1cxht"]
+[ext_resource type="Resource" uid="uid://4404tu14an10" path="res://Resources/Inventory/TestContainer.tres" id="2_e2ino"]
 
-[node name="Inventory" type="PanelContainer"]
-offset_right = 150.0
-offset_bottom = 150.0
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 4.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_1cxht")
+inventory_data = ExtResource("2_e2ino")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="InventoryGrid" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2

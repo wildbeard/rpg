@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5d1it4agie1b"]
+
+[ext_resource type="Script" path="res://Scenes/InventoryContainer.gd" id="1_2071r"]
+[ext_resource type="Resource" uid="uid://4404tu14an10" path="res://Resources/Inventory/TestContainer.tres" id="2_qjv6f"]
+[ext_resource type="Theme" uid="uid://cuis5kb05xw7j" path="res://Themes/Base.tres" id="2_wxwh2"]
+[ext_resource type="Texture2D" uid="uid://cfg2lb5y5wpjl" path="res://Assets/Tiles/DungeonProps.png" id="3_1bqv3"]
+[ext_resource type="Texture2D" uid="uid://bds47q47cjxey" path="res://Assets/Tiles/DugeonPropsAtlas.tres" id="3_kcg6p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foeg1"]
+atlas = ExtResource("3_1bqv3")
+region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgu1k"]
+atlas = SubResource("AtlasTexture_foeg1")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cq6r"]
+size = Vector2(32, 26)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kibom"]
+radius = 30.0167
+
+[node name="Container" type="StaticBody2D"]
+script = ExtResource("1_2071r")
+inventory_data = ExtResource("2_qjv6f")
+closed_sprite = ExtResource("3_kcg6p")
+opened_sprite = ExtResource("3_kcg6p")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_rgu1k")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_2cq6r")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="InteractCollision" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_kibom")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="OpenLabel" type="Label" parent="CanvasLayer"]
+visible = false
+offset_right = 102.0
+offset_bottom = 8.0
+theme = ExtResource("2_wxwh2")
+text = "Press [e] to open"
