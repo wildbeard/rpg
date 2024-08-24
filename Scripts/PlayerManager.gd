@@ -8,15 +8,15 @@ var stats: PlayerStats
 
 func _ready():
 	# Ugh, globals
-	self.player = preload("res://Scenes/PlayerCharacter.tscn").instantiate()
-	self.inventory = preload("res://Resources/Inventory/PlayerInventory.tres")
-	self.inventory.inventory_updated.connect(func(_d): player_updated.emit())
+	player = preload("res://Scenes/PlayerCharacter.tscn").instantiate()
+	inventory = preload("res://Resources/Inventory/PlayerInventory.tres")
+	inventory.inventory_updated.connect(func(_d): player_updated.emit())
 
-	self.stats = self.player.characterStats
-	self.stats.levelUp.connect(func(): player_updated.emit())
+	stats = player.characterStats
+	stats.levelUp.connect(func(): player_updated.emit())
 
 func getEquippedItems() -> Dictionary:
-	return self.inventory.equipment
+	return inventory.equipment
 
 func getAbilityBook() -> CharacterAbilityBook:
-	return self.player.abilityBook
+	return player.abilityBook

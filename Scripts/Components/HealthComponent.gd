@@ -22,10 +22,10 @@ signal health_changed(value: int)
 			no_health.emit()
 
 func _ready() -> void:
-	self.health = self.max_health
+	health = max_health
 
 func takeDamage(dmg: int) -> void:
-	self.health -= dmg
+	health -= dmg
 
 func heal(val: int) -> void:
-	self.health = clamp(self.health + val, self.health, self.max_health)
+	health = clamp(health + val, health, max_health)

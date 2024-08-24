@@ -5,17 +5,17 @@ class_name GoblinWizard
 
 func _ready() -> void:
 	# Stats
-	self.characterStats.wisdom = 10
-	self.characterStats.intelligence = 5
-	self.characterStats.vitality = 1
+	characterStats.wisdom = 10
+	characterStats.intelligence = 5
+	characterStats.vitality = 1
 
 	# Abilities
-	self.abilityBook.addAbility(preload("res://Resources/Abilities/fireball.tres"))
-	self._setupHealthComponent()
+	abilityBook.addAbility(preload("res://Resources/Abilities/fireball.tres"))
+	_setupHealthComponent()
 	
-	self.area2D.body_entered.connect(self._on_body_entered)
+	area2D.body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is OverworldPlayer:
 		var enemies: Array[Enemy] = [self]
-		self.start_battle.emit(enemies)
+		start_battle.emit(enemies)

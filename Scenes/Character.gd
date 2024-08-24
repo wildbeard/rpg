@@ -11,27 +11,27 @@ var abilityBook: CharacterAbilityBook
 var characterStats: CharacterStats
 
 func _init() -> void:
-	self.characterStats = CharacterStats.new()
-	self.abilityBook = CharacterAbilityBook.new(self)
+	characterStats = CharacterStats.new()
+	abilityBook = CharacterAbilityBook.new(self)
 
 func _setupHealthComponent() -> void:
-	self.healthComponent.connect("no_health", _on_no_health)
-	self.healthComponent.connect("health_changed", _on_health_change)
-	self.healthComponent.max_health = self.characterStats.maxHp
-	self.healthComponent.health = self.characterStats.maxHp
+	healthComponent.connect("no_health", _on_no_health)
+	healthComponent.connect("health_changed", _on_health_change)
+	healthComponent.max_health = characterStats.maxHp
+	healthComponent.health = characterStats.maxHp
 
-	%HPBar.max_value = self.healthComponent.max_health
-	%HPBar.value = self.healthComponent.max_health
+	%HPBar.max_value = healthComponent.max_health
+	%HPBar.value = healthComponent.max_health
 
 func getHit(dmg: int) -> void:
-	self.healthComponent.takeDamage(dmg)
+	healthComponent.takeDamage(dmg)
 
 func getHealed(amount: int) -> void:
-	self.healthComponent.heal(amount)
+	healthComponent.heal(amount)
 
 func mitigateDamage(incoming: int, damageType: Ability.DamageType) -> int:
-	var equipment: Dictionary = self.getEquippedItems()
-	var passives: Array[Ability] = self.abilityBook.getDefensivePassives()
+	var equipment: Dictionary = getEquippedItems()
+	var passives: Array[Ability] = abilityBook.getDefensivePassives()
 	var dmg: int = incoming
 	var totalDef: float = 0
 	var outgoingDmg: float = 0
@@ -61,7 +61,7 @@ func _on_health_change(health: int) -> void:
 	%HPBar.value = health
 
 func _on_no_health() -> void:
-	self.isDead = true
+	isDead = true
 	"""
 		If I use queue_free() here, BattleScene:_playerTurn()'s check for alive
 		enemies always returns an empty array even if there are enemies still alive.
@@ -80,13 +80,13 @@ func getDodgeChance(dmgType: Ability.DamageType, levelDiff: int) -> float:
 
 	# @todo: Obviously not the final numbers
 	if dmgType == Ability.DamageType.PHYSICAL:
-		chance += self.characterStats.strength * 0.35
-		chance += 2 + (self.characterStats.dexterity * 0.5)
-		chance += self.characterStats.speed * 0.05
+		chance += characterStats.strength * 0.35
+		chance += 2 + (characterStats.dexterity * 0.5)
+		chance += characterStats.speed * 0.05
 	else:
-		chance += self.characterStats.intelligence * 0.35
-		chance += 2 + (self.characterStats.dexterity * 0.5)
-		chance += self.characterStats.speed * 0.05
+		chance += characterStats.intelligence * 0.35
+		chance += 2 + (characterStats.dexterity * 0.5)
+		chance += characterStats.speed * 0.05
 
 	return chance + (levelDiff * 0.25)
 
@@ -96,11 +96,11 @@ func getHitChance(dmgType: Ability.DamageType, levelDiff: int) -> float:
 
 	# @todo: Obviously not the final numbers
 	if dmgType == Ability.DamageType.PHYSICAL:
-		chance += self.characterStats.strength * 1.3
+		chance += characterStats.strength * 1.3
 	else:
-		chance += self.characterStats.intelligence * 1.3
+		chance += characterStats.intelligence * 1.3
 
 	return chance + (levelDiff * 0.5)
 
 func getEquippedItems() -> Dictionary:
-	return self.inventory.equipment
+	return inventory.equipment

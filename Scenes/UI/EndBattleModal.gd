@@ -26,11 +26,11 @@ var battleStats: Dictionary = {
 }
 
 func _ready():
-	self._updatePlayerGold(self.battleStats.gold_earned)
-	%TotalGoldLabel.text = 'Total Gold: %d' % (self._getTotalGold())
+	_updatePlayerGold(battleStats.gold_earned)
+	%TotalGoldLabel.text = 'Total Gold: %d' % (_getTotalGold())
 
-	if self.battleStats.item_rewards.size():
-		var item: Item = self.battleStats.item_rewards[0]
+	if battleStats.item_rewards.size():
+		var item: Item = battleStats.item_rewards[0]
 		%ItemNameLabel.text = item.name
 		%ItemTexture.texture = item.texture
 
@@ -47,7 +47,7 @@ func _ready():
 		else:
 			%ItemDescLabel.text = item.description
 
-	%GoAgain.connect("button_up", func(): self.restart.emit())
+	%GoAgain.connect("button_up", func(): restart.emit())
 
 func _getTotalGold() -> int:
 	var total: int = 0

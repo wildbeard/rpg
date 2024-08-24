@@ -12,23 +12,23 @@ extends Control
 
 func _ready():
 	PlayerManager.player_updated.connect(_updateUI)
-	self._updateUI()
+	_updateUI()
 
 func _updateUI() -> void:
-	self._updateStats()
-	self._updateAttributes()
+	_updateStats()
+	_updateAttributes()
 
 func _updateStats() -> void:
-	self.physPowerValue.text = str(PlayerManager.stats.getPhysicalPower())
-	self.physDefValue.text = str(PlayerManager.stats.getPhysicalDef())
-	self.mgkPowerValue.text = str(PlayerManager.stats.getMagicalPower())
-	self.mgkDefValue.text = str(PlayerManager.stats.getMagicalDef())
+	physPowerValue.text = str(PlayerManager.stats.getPhysicalPower())
+	physDefValue.text = str(PlayerManager.stats.getPhysicalDef())
+	mgkPowerValue.text = str(PlayerManager.stats.getMagicalPower())
+	mgkDefValue.text = str(PlayerManager.stats.getMagicalDef())
 
 func _updateAttributes() -> void:
 	var stats: PlayerStats = PlayerManager.stats
 
-	self.vitalityValue.text = str(stats.vitality + stats.getEquipmentAttributes("vitality"))
-	self.strengthValue.text = str(stats.strength + stats.getEquipmentAttributes("strength"))
-	self.intelligenceValue.text = str(stats.intelligence + stats.getEquipmentAttributes("intelligence"))
-	self.wisdomValue.text = str(stats.wisdom + stats.getEquipmentAttributes("wisdom"))
-	self.dexterityValue.text = str(stats.dexterity + stats.getEquipmentAttributes("dexterity"))
+	vitalityValue.text = str(stats.vitality + stats.getEquipmentAttributes("vitality"))
+	strengthValue.text = str(stats.strength + stats.getEquipmentAttributes("strength"))
+	intelligenceValue.text = str(stats.intelligence + stats.getEquipmentAttributes("intelligence"))
+	wisdomValue.text = str(stats.wisdom + stats.getEquipmentAttributes("wisdom"))
+	dexterityValue.text = str(stats.dexterity + stats.getEquipmentAttributes("dexterity"))

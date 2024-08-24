@@ -8,14 +8,14 @@ signal slot_clicked(index: int, button: int, slot: Slot)
 var slotData: SlotData
 
 func _ready() -> void:
-	self.connect("gui_input", _on_gui_input)
+	connect("gui_input", _on_gui_input)
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 		&& (event.button_index == MOUSE_BUTTON_MASK_LEFT || event.button_index == MOUSE_BUTTON_RIGHT) \
 		&& event.is_pressed():
 			var index: int = get_index()
-			if self.slotType != InventoryTypes.SlotType.REGULAR:
+			if slotType != InventoryTypes.SlotType.REGULAR:
 				if index == 0:
 					index = -1
 				else:
@@ -23,8 +23,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			slot_clicked.emit(index, event.button_index, self)
 
 func setSlotData(data: SlotData) -> void:
-	self.slotData = data
-	self.tooltip_text = "%s\n%s" % [data.item.name, data.item.description]
+	slotData = data
+	tooltip_text = "%s\n%s" % [data.item.name, data.item.description]
 
 	%ItemIcon.texture = data.item.texture
 
@@ -36,7 +36,7 @@ func setSlotData(data: SlotData) -> void:
 		%ItemQty.text = ""
 
 func setDataEmpty() -> void:
-	self.slotData = null
-	self.tooltip_text = ""
+	slotData = null
+	tooltip_text = ""
 	%ItemIcon.texture = null
 	%ItemQty.text = ""

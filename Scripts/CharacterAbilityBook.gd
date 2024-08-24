@@ -7,66 +7,66 @@ var _player: Character
 var _allAbilities: Dictionary
 
 func _init(player: Character) -> void:
-	self._player = player
+	_player = player
 
-	if !self._abilityResourceList.is_connected("resource_loaded", self._setupAbilities):
-		self._abilityResourceList.connect("resource_loaded", self._setupAbilities)
+	if !_abilityResourceList.is_connected("resource_loaded", _setupAbilities):
+		_abilityResourceList.connect("resource_loaded", _setupAbilities)
 
 func _setupAbilities(list: Array) -> void:
 	for ability in list as Array[Ability]:
-		self._allAbilities[ability.name] = ability
+		_allAbilities[ability.name] = ability
 
 # @todo: I think ideally abilities are loaded from somewhere but this
 # should work for now.
 func addAbility(ability: Ability) -> void:
-	self._abilities[ability.name] = ability
+	_abilities[ability.name] = ability
 
 func getAbility(name: String) -> Ability:
-	if !self._allAbilities.has(name):
+	if !_allAbilities.has(name):
 		push_error("Ability (%s) not found" % name)
 		return
 
-	return self._allAbilities[name]
+	return _allAbilities[name]
 
 func getActiveAbilities() -> Array[Ability]:
-	return self.getAbilities([Ability.AbilityType.ACTIVE])
+	return getAbilities([Ability.AbilityType.ACTIVE])
 
 func getPassiveAbilities() -> Array[Ability]:
-	return self.getAbilities([Ability.AbilityType.PASSIVE])
+	return getAbilities([Ability.AbilityType.PASSIVE])
 
 func getDefensivePassives() -> Array[Ability]:
-	return self.getAbilities([Ability.AbilityType.PASSIVE_DEFENSE])
+	return getAbilities([Ability.AbilityType.PASSIVE_DEFENSE])
 
 func getAbilities(abilityTypes: Array[Ability.AbilityType]) -> Array[Ability]:
 	var a: Array[Ability] = []
 
-	for name in self._abilities:
-		var abilityType: Ability.AbilityType = self._abilities[name].ability_type
+	for name in _abilities:
+		var abilityType: Ability.AbilityType = _abilities[name].ability_type
 		if abilityTypes.has(abilityType):
-			a.push_back(self._abilities[name])
+			a.push_back(_abilities[name])
 
 	return a
 
 func isAbilityOnCooldown(name: String, currRound: int) -> bool:
 	# @todo: Support cooldown reduction?
-	return self._cooldowns.has(name) && self._cooldowns[name] >= currRound
+	return _cooldowns.has(name) && _cooldowns[name] >= currRound
 
 func updateAbilityCooldown(name: String, tillRound: int) -> void:
-	self._cooldowns[name] = tillRound
+	_cooldowns[name] = tillRound
 
 func resetCooldowns() -> void:
-	self._cooldowns = {}
+	_cooldowns = {}
 
 # Returns the pre-mitigation damage or 0 if unavailable
 func useAbility(ability: Ability) -> Array[int]:
-	if !self._abilities.has(ability.name):
+	if !_abilities.has(ability.name):
 		# ???
 		return [0]
 	
 	var hits: Array[int] = []
 
 	for i in ability.number_of_hits:
-		var dmg: int = ability.getAttackDamage(self._player.characterStats, self._player.getEquippedItems())
+		var dmg: int = ability.getAttackDamage(_player.characterStats, _player.getEquippedItems())
 		var bonusDmg: float = 0
 		"""
 			This allows passives to apply to a specific element type
@@ -74,7 +74,7 @@ func useAbility(ability: Ability) -> Array[int]:
 			We can do a form of rudimentary "stacking" by simply adding more of the same
 			passive ability to their passive list.
 		"""
-		var passives: Array[Ability] = self.getPassiveAbilities()\
+		var passives: Array[Ability] = getPassiveAbilities()\
 			.filter(func(a: Ability): \
 				return a.element_type == ability.element_type \
 					|| (a.element_type == Ability.ElementType.NONE && a.damage_type == ability.damage_type)

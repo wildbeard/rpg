@@ -17,30 +17,30 @@ var is_open: bool = false:
 		is_open = open
 
 		if open:
-			self.container_opened.emit(self)
-			self.sprite.texture = self.opened_sprite
+			container_opened.emit(self)
+			sprite.texture = opened_sprite
 		else:
-			self.container_closed.emit()
-			self.sprite.texture = self.closed_sprite
+			container_closed.emit()
+			sprite.texture = closed_sprite
 
 var _in_area: bool = false
 
 func _ready() -> void:
-	self.sprite.texture = self.closed_sprite
+	sprite.texture = closed_sprite
 	#
-	self.openArea.body_entered.connect(self._on_body_entered)
-	self.openArea.body_exited.connect(self._on_body_exited)
+	openArea.body_entered.connect(_on_body_entered)
+	openArea.body_exited.connect(_on_body_exited)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("interact") && self._in_area:
-		self.is_open = !self.is_open
+	if Input.is_action_just_pressed("interact") && _in_area:
+		is_open = !is_open
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is OverworldPlayer:
-		self.openLabel.visible = true
-		self._in_area = true
+		openLabel.visible = true
+		_in_area = true
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is OverworldPlayer:
-		self.openLabel.visible = false
-		self._in_area = false
+		openLabel.visible = false
+		_in_area = false

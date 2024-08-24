@@ -5,32 +5,32 @@ signal levelUp()
 
 var currentXp: int = 0:
 	set(val):
-		if currentXp + val > self.xpRequired:
+		if currentXp + val > xpRequired:
 			currentXp = 0
-			self.level += 1
-			self.levelUp.emit()
+			level += 1
+			levelUp.emit()
 		else:
 			currentXp += val
 
 var xpRequired: int:
 	get:
 		# @todo: Pretty Simple
-		return self.level * 100
+		return level * 100
 var xpRemaining: int:
 	get:
-		return self.xpRequired - self.currentXp
+		return xpRequired - currentXp
 
 func getPhysicalPower() -> int:
-	return self._getEquipmentStats(true, false) + self.getAdjustedStat("strength")
+	return _getEquipmentStats(true, false) + getAdjustedStat("strength")
 
 func getPhysicalDef() -> int:
-	return self._getEquipmentStats(true, true) + ceili(self.getAdjustedStat("strength") * 0.75)
+	return _getEquipmentStats(true, true) + ceili(getAdjustedStat("strength") * 0.75)
 
 func getMagicalPower() -> int:
-	return self._getEquipmentStats(false, false) + self.getAdjustedStat("intelligence")
+	return _getEquipmentStats(false, false) + getAdjustedStat("intelligence")
 
 func getMagicalDef() -> int:
-	return self._getEquipmentStats(false, true) + ceili(self.getAdjustedStat("intelligence") * 0.75)
+	return _getEquipmentStats(false, true) + ceili(getAdjustedStat("intelligence") * 0.75)
 
 func _getEquipmentStats(isPhysical: bool, isDef: bool) -> int:
 	var rating: int = 0

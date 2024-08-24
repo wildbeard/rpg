@@ -2,20 +2,20 @@ class_name PlayerCharacter
 extends Character
 
 func _init() -> void:
-	self.characterStats = PlayerStats.new()
-	self.characterStats.baseHp = 75
-	self.isEnemy = false
+	characterStats = PlayerStats.new()
+	characterStats.baseHp = 75
+	isEnemy = false
 	# Abilities
-	self.abilityBook = CharacterAbilityBook.new(self)
+	abilityBook = CharacterAbilityBook.new(self)
 
 func _ready() -> void:
-	self.abilityBook.addAbility(self.abilityBook.getAbility("Slash"))
-	self.abilityBook.addAbility(self.abilityBook.getAbility("Fireball"))
-	self.abilityBook.addAbility(self.abilityBook.getAbility("Dawn Of A Hundred Blades"))
-	self.abilityBook.addAbility(self.abilityBook.getAbility("Fire Overload"))
-	self.abilityBook.addAbility(self.abilityBook.getAbility("Magical Affinity"))
-	self.abilityBook.addAbility(self.abilityBook.getAbility("Absolute Unit"))
-	self._setupHealthComponent()
+	abilityBook.addAbility(abilityBook.getAbility("Slash"))
+	abilityBook.addAbility(abilityBook.getAbility("Fireball"))
+	abilityBook.addAbility(abilityBook.getAbility("Dawn Of A Hundred Blades"))
+	abilityBook.addAbility(abilityBook.getAbility("Fire Overload"))
+	abilityBook.addAbility(abilityBook.getAbility("Magical Affinity"))
+	abilityBook.addAbility(abilityBook.getAbility("Absolute Unit"))
+	_setupHealthComponent()
 
 # @todo: Load data from a resource/json file
 func _loadPlayerData() -> void:

@@ -71,9 +71,9 @@ var _physicalColor: String = '#eb4034'
 var _magicColor: String = '#3489eb'
 
 func getAttackDamage(stats: CharacterStats, equipment: Dictionary) -> int:
-	var base: int = self.damage_base
-	var statMod: float = self.getDamageFromStats(stats)
-	var weapMod: float = self.getDamageFromEquipment(equipment)
+	var base: int = damage_base
+	var statMod: float = getDamageFromStats(stats)
+	var weapMod: float = getDamageFromEquipment(equipment)
 
 	return roundi(base + statMod + weapMod)
 
@@ -81,7 +81,7 @@ func getDamageFromStats(stats: CharacterStats) -> float:
 	var statMod: float = 0
 	var idx: int = 0
 
-	for key in self.damage_stat_type:
+	for key in damage_stat_type:
 		var dmgStat: String = DamageAttribute.keys()[key].to_upper()
 		var baseStat: int = 0
 		# @todo: Stat bonus is a part of physical/magic power
@@ -92,7 +92,7 @@ func getDamageFromStats(stats: CharacterStats) -> float:
 		else:
 			baseStat = stats.getMagicalPower()
 		
-		statMod += ((baseStat + statBonus) * (self.damage_stat_modifier[idx] / 100))
+		statMod += ((baseStat + statBonus) * (damage_stat_modifier[idx] / 100))
 
 	return statMod
 
@@ -101,34 +101,34 @@ func getDamageFromEquipment(equipment: Dictionary) -> float:
 
 	if equipment.has("mainHand") && equipment.mainHand:
 		# @todo: Support off-hand weapon?
-		var weapDmg: int = equipment.mainHand.item.physicalDamage if self.damage_type == DamageType.PHYSICAL else equipment.mainHand.item.magicalDamage
-		var weapStat: String = "strength" if self.damage_type == DamageType.PHYSICAL else "intelligence"
-		weapMod = ((self.damage_weap_modifier / 100) * weapDmg)
+		var weapDmg: int = equipment.mainHand.item.physicalDamage if damage_type == DamageType.PHYSICAL else equipment.mainHand.item.magicalDamage
+		var weapStat: String = "strength" if damage_type == DamageType.PHYSICAL else "intelligence"
+		weapMod = ((damage_weap_modifier / 100) * weapDmg)
 	else:
 		# @todo: Support "Unarmed"
-		weapMod = ((self.damage_weap_modifier / 100) * 1.5)
+		weapMod = ((damage_weap_modifier / 100) * 1.5)
 
 	return weapMod
 
 func getDescription(character: Character) -> String:
-	var input: String = self.description
+	var input: String = description
 
 	if !input:
 		input = 'Deals %bd(+%dmgMod) %dt damage.'
 
 	var descKeys: Dictionary = {
-		'%bd': func(): return self.damage_base,
+		'%bd': func(): return damage_base,
 		'%dmgMod': func(): return \
 			roundi(\
-				self.getDamageFromStats(character.characterStats) + self.getDamageFromEquipment(character.getEquippedItems())\
+				getDamageFromStats(character.characterStats) + getDamageFromEquipment(character.getEquippedItems())\
 			),
-		'%dmgPhys': func(): return '[color=%s]%s[/color]' % [self._physicalColor, self._getPhysicalDamage(character.characterStats)],
-		'%dmgMag': func(): return '[color=%s]%s[/color]' % [self._magicColor, self._getMagicDamage(character.characterStats)],
-		'%dt': func(): return ('[color=%s]Physical[/color]' % self._physicalColor) \
-			if Ability.DamageType.PHYSICAL == self.damage_type \
-			else ('[color=%s]Magic[/color]' % self._magicColor),
-		'%et': self.getElementType,
-		'%h': func(): return self.number_of_hits
+		'%dmgPhys': func(): return '[color=%s]%s[/color]' % [_physicalColor, _getPhysicalDamage(character.characterStats)],
+		'%dmgMag': func(): return '[color=%s]%s[/color]' % [_magicColor, _getMagicDamage(character.characterStats)],
+		'%dt': func(): return ('[color=%s]Physical[/color]' % _physicalColor) \
+			if Ability.DamageType.PHYSICAL == damage_type \
+			else ('[color=%s]Magic[/color]' % _magicColor),
+		'%et': getElementType,
+		'%h': func(): return number_of_hits
 	}
 
 	for key in descKeys:
@@ -137,25 +137,25 @@ func getDescription(character: Character) -> String:
 	return input
 
 func getElementType() -> String:
-	var elType: String = Ability.ElementType.keys()[self.element_type].capitalize()
+	var elType: String = Ability.ElementType.keys()[element_type].capitalize()
 	return elType if elType != 'None' else 'N/A'
 
 func _getPhysicalDamage(stats: CharacterStats) -> float:
 	var dmg: float = 0.0
-	var keys: Array = self.DamageAttribute.keys()
+	var keys: Array = DamageAttribute.keys()
 
-	for idx in self.damage_stat_type.size():
+	for idx in damage_stat_type.size():
 		if keys[idx] == 'PHYSICAL':
-			dmg = ((self.damage_stat_modifier[idx] / 100) * stats.getPhysicalPower())
+			dmg = ((damage_stat_modifier[idx] / 100) * stats.getPhysicalPower())
 
 	return dmg
 
 func _getMagicDamage(stats: CharacterStats) -> float:
 	var dmg: float = 0.0
-	var keys: Array = self.DamageAttribute.keys()
+	var keys: Array = DamageAttribute.keys()
 
-	for idx in self.damage_stat_type.size():
+	for idx in damage_stat_type.size():
 		if keys[idx] == 'MAGIC':
-			dmg = ((self.damage_stat_modifier[idx] / 100) * stats.getMagicalPower())
+			dmg = ((damage_stat_modifier[idx] / 100) * stats.getMagicalPower())
 
 	return dmg

@@ -35,7 +35,7 @@ var equipmentMap: Dictionary = {
 
 func setInventoryData(data: InventoryData) -> void:
 	inventory_data = data
-	self._populateInventory(data)
+	_populateInventory(data)
 
 	if !inventory_data.inventory_updated.is_connected(_populateInventory):
 		inventory_data.inventory_updated.connect(_populateInventory)
@@ -43,8 +43,8 @@ func setInventoryData(data: InventoryData) -> void:
 func _populateInventory(data: InventoryData) -> void:
 	inventory_data = data
 
-	for key in self.equipmentMap:
-		var slot: Slot = self._getSlot(key)
+	for key in equipmentMap:
+		var slot: Slot = _getSlot(key)
 		var sd: SlotData = data.getData(key)
 
 		if !slot.is_connected("slot_clicked", inventory_data.on_slot_clicked):
@@ -56,4 +56,4 @@ func _populateInventory(data: InventoryData) -> void:
 			slot.setDataEmpty()
 
 func _getSlot(key: int) -> Slot:
-	return self[self.equipmentMap[key]]
+	return self[equipmentMap[key]]

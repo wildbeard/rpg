@@ -11,11 +11,11 @@ func _init() -> void:
 	call_deferred("ready")
 
 func ready() -> void:
-	for fileName in DirAccess.get_files_at(self.resource_dir):
+	for fileName in DirAccess.get_files_at(resource_dir):
 		# Regex Replace is weird.
 		fileName = fileName.replace('.import', '')
 		fileName = fileName.replace('.remap', '')
-		var res: Resource = load(self.resource_dir + '/' + fileName)
-		self.resource_list.push_back(res)
+		var res: Resource = load(resource_dir + '/' + fileName)
+		resource_list.push_back(res)
 
-	self.resource_loaded.emit(self.resource_list)
+	resource_loaded.emit(resource_list)

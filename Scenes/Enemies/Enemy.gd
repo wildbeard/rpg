@@ -8,7 +8,7 @@ const ITEMS = preload("res://Resources/Items.tres")
 func generateRewards() -> Dictionary:
 	# @TODO: Generate gold based on level
 	var gold: int = 25
-	var item: Item = self.getRandomItemReward()
+	var item: Item = getRandomItemReward()
 
 	return {
 		'gold': gold,
@@ -16,4 +16,4 @@ func generateRewards() -> Dictionary:
 	}
 
 func getRandomItemReward() -> Item:
-	return self.ITEMS.resource_list.filter(func(item: Item): return item.name != 'Coins').pick_random() as Item
+	return ITEMS.resource_list.filter(func(item: Item): return item.name != 'Coins').pick_random() as Item

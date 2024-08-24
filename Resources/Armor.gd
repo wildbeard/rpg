@@ -18,10 +18,10 @@ var _defenseWeight: Dictionary = {
 }
 
 func _getItemDefenseWeight() -> float:
-	return self._defenseWeight[self.armorType]
+	return _defenseWeight[armorType]
 
 func getDamageReduction(physical: bool = true) -> float:
-	var armorVal: float = float(self.physicalDefense if physical else self.magicalDefense)
-	var weight: float = self._getItemDefenseWeight()
+	var armorVal: float = float(physicalDefense if physical else magicalDefense)
+	var weight: float = _getItemDefenseWeight()
 
-	return (armorVal / (armorVal + self._getItemDefenseWeight()))
+	return (armorVal / (armorVal + _getItemDefenseWeight()))

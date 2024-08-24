@@ -10,16 +10,16 @@ var abilities: Array[Ability]:
 		return abilities
 	set(val):
 		abilities = val
-		self._addButtons(val)
+		_addButtons(val)
 
 func _ready() -> void:
-	self.abilities = []
+	abilities = []
 
 func setAbilities(abils: Array[Ability]) -> void:
-	self.abilities = abils
+	abilities = abils
 
 func updateCooldowns(onCooldown: Array[String]) -> void:
-	for btn in self.gridContainer.get_children():
+	for btn in gridContainer.get_children():
 		if onCooldown.find(btn.get_meta("ability_id")) > -1:
 			btn.disabled = true
 		else:
@@ -33,8 +33,8 @@ func _addButtons(abils: Array[Ability]) -> void:
 		btn.text = a.name
 		btn.theme = preload("res://Themes/Base.tres")
 		btn.set_meta("ability_id", a.name)
-		btn.connect("pressed", func(): self._handle_button_click(a.name))
-		self.gridContainer.add_child(btn)
+		btn.connect("pressed", func(): _handle_button_click(a.name))
+		gridContainer.add_child(btn)
 
 func _handle_button_click(abilityId: String) -> void:
 	ability_selected.emit(abilityId)

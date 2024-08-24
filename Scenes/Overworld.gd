@@ -9,13 +9,13 @@ signal switch_scene(scene: Node)
 @onready var inventoryWrapper: InventoryUI = $CanvasLayer/InventoryUI/PanelContainer/MarginContainer/InventeryWrapper
 
 func _ready() -> void:
-	self.inventoryWrapper.setPlayerInventory(self.player.inventoryData)
-	self.player.connect("toggle_inventory", togglePlayerInventory)
-	self.enterBattleBtn.pressed.connect(_switchScene)
-	self.enemy.connect("start_battle", self._on_start_battle)
+	inventoryWrapper.setPlayerInventory(player.inventoryData)
+	player.connect("toggle_inventory", togglePlayerInventory)
+	enterBattleBtn.pressed.connect(_switchScene)
+	enemy.connect("start_battle", _on_start_battle)
 	#
-	self.chest.container_opened.connect(self._on_container_opened)
-	self.chest.container_closed.connect(self._on_container_closed)
+	chest.container_opened.connect(_on_container_opened)
+	chest.container_closed.connect(_on_container_closed)
 
 func togglePlayerInventory(inventoryOnly: bool = false) -> void:
 	enterBattleBtn.visible = !enterBattleBtn.visible
@@ -30,24 +30,24 @@ func togglePlayerInventory(inventoryOnly: bool = false) -> void:
 
 func _switchScene() -> void:
 	var s: Node = preload("res://Scenes/Battle/BattleScene.tscn").instantiate()
-	self.switch_scene.emit(s)
+	switch_scene.emit(s)
 
 func _on_start_battle(enemies: Array[Enemy]) -> void:
 	var scene: BattleScene = preload("res://Scenes/Battle/BattleScene.tscn").instantiate()
 
 	for e in enemies:
-		if self.get_children().has(e):
+		if get_children().has(e):
 			call_deferred("_remove_enemy", e)
 
 	scene.enemies = enemies
-	self.switch_scene.emit(scene)
+	switch_scene.emit(scene)
 
 func _remove_enemy(e: Enemy) -> void:
-	self.remove_child(e)
+	remove_child(e)
 
 func _on_container_opened(invContainer: InventoryContainer) -> void:
 	inventoryWrapper.setExternalInventory(invContainer.inventory_data)
-	self.togglePlayerInventory(true)
+	togglePlayerInventory(true)
 
 func _on_container_closed() -> void:
 	togglePlayerInventory(true)
