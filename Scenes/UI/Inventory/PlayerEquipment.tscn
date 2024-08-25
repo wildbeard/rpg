@@ -5,11 +5,10 @@
 
 [node name="PlayerEquipment" type="Control"]
 layout_mode = 3
-anchor_right = 0.2
-anchor_bottom = 0.622
+anchors_preset = 0
 offset_bottom = 0.0399933
-grow_horizontal = 2
-grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
 script = ExtResource("1_ltips")
 
 [node name="Head" parent="." instance=ExtResource("2_6x4vf")]

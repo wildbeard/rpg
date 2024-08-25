@@ -5,6 +5,8 @@ class_name InventoryUI
 @onready var playerInventory: Inventory = $CanvasLayer/HBoxContainer/PlayerInventory
 @onready var externalInventory: Inventory = $CanvasLayer/HBoxContainer/ExternalInventory
 @onready var playerEquipment: Control = $CanvasLayer/HBoxContainer/PlayerEquipment
+@onready var equipmentStats: Control = $CanvasLayer/HBoxContainer/EquipmentStats
+@onready var colorRect: ColorRect = $CanvasLayer/ColorRect
 
 var _grabbedSlotData: SlotData
 var _externalInventoryOwner: InventoryContainer
@@ -34,9 +36,11 @@ func clearExternalInventory(invContainer: InventoryContainer) -> void:
 
 func toggleInventory() -> void:
 	playerInventory.visible = !playerInventory.visible
+	colorRect.visible = playerInventory.visible
 
 func toggleEquipment() -> void:
 	playerEquipment.visible = !playerEquipment.visible
+	equipmentStats.visible = !equipmentStats.visible
 
 func toggleExternal() -> void:
 	externalInventory.visible = !externalInventory.visible

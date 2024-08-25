@@ -40,6 +40,37 @@ func setInventoryData(data: InventoryData) -> void:
 	if !inventory_data.inventory_updated.is_connected(_populateInventory):
 		inventory_data.inventory_updated.connect(_populateInventory)
 
+func equipItem(slotData: SlotData) -> SlotData:
+	var currentlyEquipped: SlotData
+	var slot: Slot
+
+	print(slotData.item.name)
+	# @TODO: Fix this dumb shit
+	match [slotData.item.itemType]:
+		[InventoryTypes.SlotType.HEAD]:
+			slot = head
+		[InventoryTypes.SlotType.NECK]:
+			slot = neck
+		[InventoryTypes.SlotType.BODY]:
+			slot = chest
+		[InventoryTypes.SlotType.HAND]:
+			slot = hand
+		[InventoryTypes.SlotType.MAIN_HAND]:
+			slot = mainHand
+		[InventoryTypes.SlotType.OFF_HAND]:
+			slot = offHand
+		[InventoryTypes.SlotType.LEG]:
+			slot = leg
+		[InventoryTypes.SlotType.FEET]:
+			slot = boot
+
+	if slot && slot.slotData:
+		currentlyEquipped = slot.slotData
+	elif slot:
+		slot.slotData = slotData
+
+	return currentlyEquipped
+
 func _populateInventory(data: InventoryData) -> void:
 	inventory_data = data
 

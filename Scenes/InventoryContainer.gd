@@ -44,3 +44,4 @@ func _on_body_exited(body: Node2D) -> void:
 	if body is OverworldPlayer:
 		openLabel.visible = false
 		_in_area = false
+		is_open = false
