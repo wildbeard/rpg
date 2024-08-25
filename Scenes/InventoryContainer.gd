@@ -19,11 +19,11 @@ var is_open: bool = false:
 		if open:
 			container_opened.emit(self)
 			sprite.texture = opened_sprite
-			openLabel.hide()
+			openLabel.visible = false
 		else:
 			container_closed.emit()
 			sprite.texture = closed_sprite
-			openLabel.show()
+			openLabel.visible = true
 
 var _in_area: bool = false
 
@@ -44,6 +44,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is OverworldPlayer:
-		openLabel.visible = false
 		_in_area = false
 		is_open = false
+		openLabel.visible = false

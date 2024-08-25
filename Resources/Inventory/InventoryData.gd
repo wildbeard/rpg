@@ -6,7 +6,6 @@ signal inventory_interact(data: InventoryData, index: int, button: int, slot: Sl
 
 @export var data: Array[SlotData]:
 	set(d):
-		print('setting data')
 		data = d
 		inventory_updated.emit(self)
 
