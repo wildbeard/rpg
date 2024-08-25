@@ -43,6 +43,7 @@ func toggleEquipment() -> void:
 	equipmentStats.visible = !equipmentStats.visible
 
 func toggleExternal() -> void:
+	print('external')
 	externalInventory.visible = !externalInventory.visible
 
 func _on_inventory_interact(data: InventoryData, index: int, button: int, slot: Slot) -> void:

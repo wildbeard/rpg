@@ -19,9 +19,11 @@ var is_open: bool = false:
 		if open:
 			container_opened.emit(self)
 			sprite.texture = opened_sprite
+			openLabel.hide()
 		else:
 			container_closed.emit()
 			sprite.texture = closed_sprite
+			openLabel.show()
 
 var _in_area: bool = false
 

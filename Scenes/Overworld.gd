@@ -50,4 +50,5 @@ func _on_container_opened(invContainer: InventoryContainer) -> void:
 	togglePlayerInventory(true)
 
 func _on_container_closed() -> void:
-	togglePlayerInventory(true)
+	if inventoryWrapper.externalInventory.visible:
+		togglePlayerInventory(true)
