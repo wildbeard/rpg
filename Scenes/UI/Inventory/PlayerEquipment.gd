@@ -40,36 +40,38 @@ func setInventoryData(data: InventoryData) -> void:
 	if !inventory_data.inventory_updated.is_connected(_populateInventory):
 		inventory_data.inventory_updated.connect(_populateInventory)
 
-func equipItem(slotData: SlotData) -> SlotData:
+func equipItem(slotData: SlotData) -> Dictionary:
 	var currentlyEquipped: SlotData
-	var slot: Slot
+	var slotIdx: int = 0
 
-	print(slotData.item.name)
 	# @TODO: Fix this dumb shit
 	match [slotData.item.itemType]:
 		[InventoryTypes.SlotType.HEAD]:
-			slot = head
+			currentlyEquipped = head.slotData
+			slotIdx = -1
 		[InventoryTypes.SlotType.NECK]:
-			slot = neck
+			currentlyEquipped = neck.slotData
+			slotIdx = -2
 		[InventoryTypes.SlotType.BODY]:
-			slot = chest
+			currentlyEquipped = chest.slotData
+			slotIdx = -3
 		[InventoryTypes.SlotType.HAND]:
-			slot = hand
+			currentlyEquipped = hand.slotData
+			slotIdx = -8
 		[InventoryTypes.SlotType.MAIN_HAND]:
-			slot = mainHand
+			currentlyEquipped = mainHand.slotData
+			slotIdx = -4
 		[InventoryTypes.SlotType.OFF_HAND]:
-			slot = offHand
+			currentlyEquipped = offHand.slotData
+			slotIdx = -5
 		[InventoryTypes.SlotType.LEG]:
-			slot = leg
+			currentlyEquipped = leg.slotData
+			slotIdx = -6
 		[InventoryTypes.SlotType.FEET]:
-			slot = boot
+			currentlyEquipped = boot.slotData
+			slotIdx = -7
 
-	if slot && slot.slotData:
-		currentlyEquipped = slot.slotData
-	elif slot:
-		slot.slotData = slotData
-
-	return currentlyEquipped
+	return { 'slot_idx': slotIdx, 'currently_equipped': currentlyEquipped }
 
 func _populateInventory(data: InventoryData) -> void:
 	inventory_data = data

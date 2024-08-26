@@ -43,7 +43,6 @@ func toggleEquipment() -> void:
 	equipmentStats.visible = !equipmentStats.visible
 
 func toggleExternal() -> void:
-	print('external')
 	externalInventory.visible = !externalInventory.visible
 
 func _on_inventory_interact(data: InventoryData, index: int, button: int, slot: Slot) -> void:
@@ -54,7 +53,18 @@ func _on_inventory_interact(data: InventoryData, index: int, button: int, slot: 
 		[null, MOUSE_BUTTON_RIGHT]:
 			var slotData: SlotData = data.getSlotData(index)
 
-			if slotData.item.isStackable:
+			# @TODO: Doesn't work frome external inventory
+			if slotData && slotData.item is Equipment:
+				var d: Dictionary = playerEquipment.equipItem(slotData)
+
+				if d.slot_idx != 0:
+					data.dropSlotData(slotData, d.slot_idx)
+
+					if d.currently_equipped:
+						data.dropSlotData(d.currently_equipped, index)
+				else:
+					_grabbedSlotData = slotData
+			elif slotData && slotData.item.isStackable:
 				var newData: SlotData = slotData.duplicate()
 				# Half _should_ always be the lesser amount
 				var half: int = floori(slotData.quantity / 2)
