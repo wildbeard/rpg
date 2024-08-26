@@ -22,7 +22,6 @@ func togglePlayerInventory(inventoryOnly: bool = false) -> void:
 	%InventoryUI.visible = !%InventoryUI.visible
 
 	if inventoryOnly:
-		inventoryWrapper.toggleInventory()
 		inventoryWrapper.toggleExternal()
 	else:
 		inventoryWrapper.toggleInventory()

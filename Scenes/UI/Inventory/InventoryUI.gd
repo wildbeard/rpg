@@ -7,6 +7,7 @@ class_name InventoryUI
 @onready var playerEquipment: Control = $CanvasLayer/HBoxContainer/PlayerEquipment
 @onready var equipmentStats: Control = $CanvasLayer/HBoxContainer/EquipmentStats
 @onready var colorRect: ColorRect = $CanvasLayer/ColorRect
+@onready var hBoxContainer: HBoxContainer = $CanvasLayer/HBoxContainer
 
 var _grabbedSlotData: SlotData
 var _externalInventoryOwner: InventoryContainer
@@ -16,7 +17,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if _grabbedSlotData:
-		grabbedSlot.global_position = get_global_mouse_position() + Vector2(1.5, 1.5)
+		grabbedSlot.global_position = get_global_mouse_position() + Vector2(1, 1)
 
 func setPlayerInventory(data: InventoryData) -> void:
 	playerInventory.setInventoryData(data)
@@ -43,6 +44,14 @@ func toggleEquipment() -> void:
 	equipmentStats.visible = !equipmentStats.visible
 
 func toggleExternal() -> void:
+	if playerInventory.visible:
+		playerInventory.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		hBoxContainer.add_theme_constant_override("separation", 6)
+	else:
+		playerInventory.size_flags_horizontal = Control.SIZE_EXPAND + Control.SIZE_SHRINK_CENTER
+		hBoxContainer.add_theme_constant_override("separation", 32)
+
+	toggleInventory()
 	externalInventory.visible = !externalInventory.visible
 
 func _on_inventory_interact(data: InventoryData, index: int, button: int, slot: Slot) -> void:

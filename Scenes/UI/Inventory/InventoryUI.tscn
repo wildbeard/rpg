@@ -23,7 +23,7 @@ script = ExtResource("1_a7i1o")
 visible = false
 offset_right = 320.0
 offset_bottom = 180.0
-color = Color(0, 0, 0, 0.470588)
+color = Color(0, 0, 0, 0.784314)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 offset_left = 5.0
@@ -35,26 +35,27 @@ theme_override_constants/separation = 6
 [node name="EquipmentStats" parent="CanvasLayer/HBoxContainer" instance=ExtResource("2_h0hwu")]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 
 [node name="PlayerEquipment" parent="CanvasLayer/HBoxContainer" instance=ExtResource("2_xtxin")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 1
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
 mouse_filter = 2
 
 [node name="PlayerInventory" parent="CanvasLayer/HBoxContainer" instance=ExtResource("3_e4rt2")]
 visible = false
-modulate = Color(1, 1, 1, 1)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="ExternalInventory" parent="CanvasLayer/HBoxContainer" instance=ExtResource("3_e4rt2")]
 visible = false
-modulate = Color(1, 1, 1, 1)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
+size_flags_vertical = 0
 mouse_filter = 2
 
 [node name="GrabbedSlot" parent="CanvasLayer" instance=ExtResource("4_pl20i")]

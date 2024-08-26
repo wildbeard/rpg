@@ -4,7 +4,6 @@
 [ext_resource type="Theme" uid="uid://cuis5kb05xw7j" path="res://Themes/Base.tres" id="2_h5mbp"]
 
 [node name="Slot" type="PanelContainer"]
-self_modulate = Color(0.258824, 0.258824, 0.258824, 1)
 custom_minimum_size = Vector2(16, 16)
 offset_right = 16.0
 offset_bottom = 16.0

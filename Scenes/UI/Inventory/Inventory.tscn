@@ -4,7 +4,6 @@
 [ext_resource type="Resource" uid="uid://4404tu14an10" path="res://Resources/Inventory/TestContainer.tres" id="2_e2ino"]
 
 [node name="Inventory" type="Control"]
-modulate = Color(0.277528, 0.277528, 0.277528, 1)
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 2
