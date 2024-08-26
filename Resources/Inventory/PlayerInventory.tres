@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InventoryData" load_steps=16 format=3 uid="uid://b10vlnbnwagos"]
+[gd_resource type="Resource" script_class="InventoryData" load_steps=18 format=3 uid="uid://b10vlnbnwagos"]
 
 [ext_resource type="Resource" uid="uid://svqhom1qdjwv" path="res://Resources/Items/MagicHat.tres" id="1_bqu1v"]
 [ext_resource type="Script" path="res://Resources/Inventory/InventoryData.gd" id="1_fpjgr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://0o0scdlal6by" path="res://Resources/Items/PureEssence.tres" id="3_qp4ll"]
 [ext_resource type="Resource" uid="uid://dn5q4t8w1tqop" path="res://Resources/Items/Sword.tres" id="4_guet4"]
 [ext_resource type="Resource" uid="uid://qjd3iyuph2tw" path="res://Resources/Items/DragonChainbody.tres" id="5_17onr"]
+[ext_resource type="Resource" uid="uid://b8y1vmaqna65t" path="res://Resources/Items/LeatherBody.tres" id="6_a5xpx"]
 
 [sub_resource type="Resource" id="Resource_hqm36"]
 script = ExtResource("2_rgf42")
@@ -43,6 +44,11 @@ script = ExtResource("2_rgf42")
 item = ExtResource("3_qp4ll")
 quantity = 9
 
+[sub_resource type="Resource" id="Resource_mvsfc"]
+script = ExtResource("2_rgf42")
+item = ExtResource("6_a5xpx")
+quantity = 1
+
 [sub_resource type="Resource" id="Resource_6nw4b"]
 script = ExtResource("2_rgf42")
 item = ExtResource("5_17onr")
@@ -50,7 +56,7 @@ quantity = 1
 
 [resource]
 script = ExtResource("1_fpjgr")
-data = Array[ExtResource("2_rgf42")]([SubResource("Resource_hqm36"), SubResource("Resource_5oxlq"), SubResource("Resource_0ac63"), SubResource("Resource_ijpfi"), null, null, SubResource("Resource_pranb"), SubResource("Resource_8io4c"), SubResource("Resource_p4sg3"), null, null, null, null, null, null, null])
+data = Array[ExtResource("2_rgf42")]([SubResource("Resource_hqm36"), SubResource("Resource_5oxlq"), SubResource("Resource_0ac63"), SubResource("Resource_ijpfi"), null, null, SubResource("Resource_pranb"), SubResource("Resource_8io4c"), SubResource("Resource_p4sg3"), null, null, SubResource("Resource_mvsfc"), null, null, null, null])
 equipment = {
 "boot": null,
 "chest": SubResource("Resource_6nw4b"),
