@@ -27,6 +27,7 @@ func setPlayerInventory(data: InventoryData) -> void:
 		data.inventory_interact.connect(_on_inventory_interact)
 
 func setExternalInventory(data: InventoryData) -> void:
+	data.is_external = true
 	externalInventory.setInventoryData(data)
 
 	if !data.inventory_interact.is_connected(_on_inventory_interact):
@@ -62,27 +63,52 @@ func _on_inventory_interact(data: InventoryData, index: int, button: int, slot: 
 		[null, MOUSE_BUTTON_RIGHT]:
 			var slotData: SlotData = data.getSlotData(index)
 
-			# @TODO: Doesn't work frome external inventory
-			if slotData && slotData.item is Equipment:
-				var d: Dictionary = playerEquipment.equipItem(slotData)
+			if data.is_external:
+				var intendedIdx: int
 
-				if d.slot_idx != 0:
-					data.dropSlotData(slotData, d.slot_idx)
+				"""
+					This will attempt to quickly move an item to the player's inventory.
+					If the item is stackable, look for a slot of the same item where it can stack.
+					If one exists, merge the two. If it can't, drop it in the first available slot.
+					@TODO: Fill a slot to maxStacks + drop in an empty slot
+				"""
+				if slotData.item.isStackable:
+					var opts: Array[SlotData] = playerInventory.inventory_data.data\
+						.filter(func(sd: SlotData): return sd && (sd.quantity + slotData.quantity < slotData.item.maxStack))
+					
+					if opts.size():
+						intendedIdx = playerInventory.inventory_data.data.find(opts[0])
+					else:
+						intendedIdx = playerInventory.inventory_data.data.find(null)
+				else:
+					intendedIdx = playerInventory.inventory_data.data.find(null)
 
-					if d.currently_equipped:
-						data.dropSlotData(d.currently_equipped, index)
+				if intendedIdx >= 0:
+					playerInventory.inventory_data.dropSlotData(slotData, intendedIdx)
 				else:
 					_grabbedSlotData = slotData
-			elif slotData && slotData.item.isStackable:
-				var newData: SlotData = slotData.duplicate()
-				# Half _should_ always be the lesser amount
-				var half: int = floori(slotData.quantity / 2)
-				newData.quantity = half
-				slotData.quantity = slotData.quantity - half
-				data.dropSlotData(slotData, index)
-				_grabbedSlotData = newData
 			else:
-				_grabbedSlotData = slotData
+				# @TODO: Doesn't work frome external inventory
+				if slotData && slotData.item is Equipment:
+					var d: Dictionary = playerEquipment.equipItem(slotData)
+
+					if d.slot_idx != 0:
+						data.dropSlotData(slotData, d.slot_idx)
+
+						if d.currently_equipped:
+							data.dropSlotData(d.currently_equipped, index)
+					else:
+						_grabbedSlotData = slotData
+				elif slotData && slotData.item.isStackable:
+					var newData: SlotData = slotData.duplicate()
+					# Half _should_ always be the lesser amount
+					var half: int = floori(slotData.quantity / 2)
+					newData.quantity = half
+					slotData.quantity = slotData.quantity - half
+					data.dropSlotData(slotData, index)
+					_grabbedSlotData = newData
+				else:
+					_grabbedSlotData = slotData
 		[_, MOUSE_BUTTON_LEFT]:
 			if data.canDropData(_grabbedSlotData, slot):
 				_grabbedSlotData = data.dropSlotData(_grabbedSlotData, index)

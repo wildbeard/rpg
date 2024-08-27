@@ -19,6 +19,7 @@ signal inventory_interact(data: InventoryData, index: int, button: int, slot: Sl
 	"boot": null,
 	"hand": null, # -8
 }
+@export var is_external: bool = false
 
 var equipmentMap: Dictionary = {
 	-1: "head",
