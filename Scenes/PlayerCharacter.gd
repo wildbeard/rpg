@@ -11,7 +11,6 @@ func _init() -> void:
 func _ready() -> void:
 	abilityBook.addAbility(abilityBook.getAbility("Slash"))
 	abilityBook.addAbility(abilityBook.getAbility("Fireball"))
-	abilityBook.addAbility(abilityBook.getAbility("Dawn Of A Hundred Blades"))
 	abilityBook.addAbility(abilityBook.getAbility("Fire Overload"))
 	abilityBook.addAbility(abilityBook.getAbility("Magical Affinity"))
 	abilityBook.addAbility(abilityBook.getAbility("Absolute Unit"))

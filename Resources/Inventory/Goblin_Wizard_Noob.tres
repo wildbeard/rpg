@@ -34,3 +34,4 @@ equipment = {
 "neck": null,
 "offHand": null
 }
+is_external = false
